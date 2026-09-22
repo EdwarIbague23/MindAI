@@ -1,0 +1,100 @@
+flowchart LR
+    user[Usuario / Desarrollador]
+
+    subgraph interfaces[Interfaces]
+        cli[CLI]
+        chat[Chat UI]
+        api[API layer]
+        frontend[Frontend placeholder]
+    end
+
+    subgraph config[Configuración]
+        agents_cfg[config/agents.yaml]
+        skills_cfg[config/skills.yaml]
+        env_cfg[config/environments]
+    end
+
+    subgraph core[Core framework]
+        base[core/base.py]
+        agent_base[core/agent_base]
+        skill_base[core/skill_base]
+        orchestrator[core/orchestrator]
+        memory[core/memory]
+        observability[core/observability]
+        security[core/security]
+    end
+
+    subgraph agents_layer[Agentes]
+        research[research_agent]
+        coding[coding_agent]
+    end
+
+    subgraph skills_layer[Skills]
+        web[web_search]
+        codeexec[code_executor]
+        db_query[db_query]
+        docgen[document_generator]
+    end
+
+    subgraph data[Modelos y persistencia]
+        models[models/]
+        db[(SQLAlchemy / DB schema)]
+    end
+
+    subgraph tools[Integraciones externas]
+        github[github_client.py]
+        slack[slack_client.py]
+    end
+
+    user --> cli
+    user --> chat
+    user --> frontend
+    cli --> api
+    chat --> api
+    frontend --> api
+
+    api --> orchestrator
+    orchestrator --> agents_cfg
+    orchestrator --> skills_cfg
+    orchestrator --> env_cfg
+
+    orchestrator --> research
+    orchestrator --> coding
+
+    research --> web
+    research --> docgen
+    coding --> codeexec
+    coding --> db_query
+
+    agent_base --> research
+    agent_base --> coding
+    skill_base --> web
+    skill_base --> codeexec
+    skill_base --> db_query
+    skill_base --> docgen
+
+    orchestrator --> memory
+    orchestrator --> observability
+    orchestrator --> security
+
+    models --> db
+    observability --> github
+    observability --> slack
+
+    classDef actor fill:#fff4d6,stroke:#9a6700,color:#2d2200
+    classDef interface fill:#e7f0ff,stroke:#2563eb,color:#0f172a
+    classDef config fill:#ede9fe,stroke:#7c3aed,color:#2e1065
+    classDef core fill:#e0f2fe,stroke:#0284c7,color:#082f49
+    classDef agent fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef skill fill:#fef3c7,stroke:#d97706,color:#78350f
+    classDef data fill:#fce7f3,stroke:#db2777,color:#500724
+    classDef tools fill:#f3f4f6,stroke:#374151,color:#111827
+
+    class user actor
+    class cli,chat,api,frontend interface
+    class agents_cfg,skills_cfg,env_cfg config
+    class base,agent_base,skill_base,orchestrator,memory,observability,security core
+    class research,coding agent
+    class web,codeexec,db_query,docgen skill
+    class models,db data
+    class github,slack tools

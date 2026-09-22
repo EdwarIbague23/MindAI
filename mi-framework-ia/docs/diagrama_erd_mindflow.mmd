@@ -1,0 +1,85 @@
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#EAF3FF',
+    'primaryTextColor': '#0F172A',
+    'primaryBorderColor': '#2563EB',
+    'lineColor': '#475569',
+    'secondaryColor': '#F8FAFC',
+    'tertiaryColor': '#F5F3FF',
+    'fontFamily': 'Segoe UI, Arial'
+  }
+}}%%
+erDiagram
+    USER ||--o{ CLINICAL_NOTE : registra
+    CLINICAL_NOTE ||--o{ ANALYSIS : genera
+    ANALYSIS ||--o{ EMOTION_SCORE : contiene
+    ANALYSIS ||--o{ COGNITIVE_DISTORTION : detecta
+    ANALYSIS ||--o{ GUIDING_QUESTION : sugiere
+    ANALYSIS ||--|| REPORT : genera
+
+    USER {
+        UUID id PK
+        VARCHAR email
+        VARCHAR name
+        ENUM role
+        VARCHAR hashed_password
+        BOOLEAN is_therapist
+        TIMESTAMP created_at
+        TIMESTAMP last_login
+    }
+
+    CLINICAL_NOTE {
+        UUID id PK
+        UUID therapist_id FK
+        CHAR patient_hash
+        TEXT note_text
+        VARCHAR language
+        INT word_count
+        TIMESTAMP created_at
+    }
+
+    ANALYSIS {
+        UUID id PK
+        UUID clinical_note_id FK
+        ENUM status
+        VARCHAR ia_model
+        FLOAT processing_time
+        TIMESTAMP created_at
+    }
+
+    EMOTION_SCORE {
+        UUID id PK
+        UUID analysis_id FK
+        ENUM emotion_name
+        FLOAT score
+        FLOAT confidence
+        TIMESTAMP timestamp
+    }
+
+    COGNITIVE_DISTORTION {
+        UUID id PK
+        UUID analysis_id FK
+        ENUM distortion_type
+        VARCHAR severity
+        TEXT description
+        TIMESTAMP detected_at
+    }
+
+    GUIDING_QUESTION {
+        UUID id PK
+        UUID analysis_id FK
+        TEXT question_text
+        ENUM category
+        INT priority
+        TIMESTAMP created_at
+    }
+
+    REPORT {
+        UUID id PK
+        UUID analysis_id FK
+        ENUM format
+        TEXT generated_content
+        TIMESTAMP generated_at
+        INT word_count
+    }
