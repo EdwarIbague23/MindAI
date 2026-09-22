@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # MindFlow AI — Copiloto de Triaje y Análisis Emocional para Terapeutas
 =======
 <div align="center">
@@ -127,7 +127,7 @@ mi-framework-ia/
 
 ---
 
-<<<<<<< HEAD
+
 ## 👥 Roles del Equipo
 
 - **Product Owner / Lead AI Architect** – Edwar Ibagué  
