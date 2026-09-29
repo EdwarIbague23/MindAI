@@ -1,78 +1,99 @@
-# Historias de Usuario y Criterios de Aceptación (BDD) – MindFlow AI
+# Historias de Usuario y Criterios de Aceptación – MindFlow AI Híbrido (Web + Móvil)
 
-**Origen:** Documento *Batería Maestra de Prompts* (PDF, páginas 46‑47).  
-**Bloque:** Fundación.
+## US-001: Submisión de notas clínicas
+**Como** terapeuta,  
+**quiero** subir notas clínicas en formato texto para que el sistema pueda analizar emociones y distorsiones cognitivas.
 
-## HU‑01: Registro y autenticación segura
-
-**Como** paciente nuevo,  
-**quiero** registrarme y autenticarme de forma segura para poder acceder a los servicios de la plataforma con confianza en la protección de mis datos.
-
-**Criterios de aceptación:**
-- Dado que un usuario nuevo completa el formulario de registro con datos válidos, cuando envía la solicitud, entonces el sistema crea la cuenta y envía un código de verificación en dos pasos (2FA) al correo o teléfono registrado.
-- Dado que un usuario intenta iniciar sesión, cuando ingresa credenciales incorrectas tres veces consecutivas, entonces el sistema bloquea temporalmente el intento de acceso durante 15 minutos y notifica al usuario por correo.
-
-## HU‑02: Búsqueda y filtrado de profesionales
-
-**Como** paciente,  
-**quiero** buscar y filtrar profesionales por especialidad y ubicación en Ibagué para encontrar al terapeuta que mejor se ajuste a mis necesidades.
-
-**Criterios de aceptación:**
-- Dado que el paciente accede al directorio de profesionales, cuando aplica un filtro de especialidad y zona de la ciudad, entonces el sistema muestra únicamente los perfiles verificados que cumplen ambos criterios.
-- Dado que no existen profesionales disponibles con los filtros seleccionados, cuando se ejecuta la búsqueda, entonces el sistema informa la ausencia de resultados y sugiere ampliar los criterios de búsqueda.
-
-## HU‑03: Agendamiento de cita
-
-**Como** paciente,  
-**quiero** agendar una cita con un profesional disponible para iniciar mi proceso terapéutico sin fricciones.
-
-**Criterios de aceptación:**
-- Dado que el paciente seleccionó un profesional y un horario disponible, cuando confirma la reserva, entonces el sistema bloquea ese horario para otros pacientes y envía confirmación por correo o notificación push en menos de 60 segundos.
-- Dado que dos pacientes intentan reservar el mismo horario simultáneamente, cuando el sistema procesa ambas solicitudes, entonces solo la primera transacción confirmada se acepta y la segunda recibe un mensaje de horario no disponible.
-
-## HU‑04: Registro de notas de evolución clínica (profesional)
-
-**Como** profesional tratante,  
-**quiero** registrar notas de evolución clínica cifradas después de cada sesión para mantener un historial clínico seguro y auditable.
-
-**Criterios de aceptación:**
-- Dado que el profesional finaliza una sesión, cuando registra la nota de evolución y la guarda, entonces el sistema cifra el contenido antes de almacenarlo y queda visible únicamente para el profesional tratante.
-- Dado que el profesional intenta acceder a la nota clínica de un paciente que no es de su caso, cuando realiza la solicitud, entonces el sistema deniega el acceso y registra el intento en el log de auditoría.
-
-## HU‑05: Historial de sesiones para el paciente
-
-**Como** paciente,  
-**quiero** visualizar mi historial de sesiones y notas de evolución compartidas para llevar un seguimiento activo de mi proceso terapéutico.
-
-**Criterios de aceptación:**
-- Dado que el paciente accede a su perfil, el sistema despliega la línea de tiempo de sus citas pasadas con los reportes de evolución autorizados por el profesional.
-
-## HU‑06: Alertas de riesgo en auto‑reporte
-
-**Como** paciente,  
-**quiero** recibir una alerta inmediata con líneas de ayuda en caso de detectarse una situación de riesgo, para sentirme acompañado en momentos de crisis.
-
-**Criterios de aceptación:**
-- Dado que el paciente responde un cuestionario de auto‑reporte con indicadores de riesgo alto, cuando envía las respuestas, entonces el sistema despliega de inmediato un mensaje con líneas de atención en crisis de Ibagué/Tolima y notifica al profesional tratante en tiempo real.
-- Dado que se activó una alerta de riesgo, cuando el profesional revisa la notificación, entonces el sistema le permite contactar al paciente directamente desde la plataforma, registrando el tiempo de reacción.
-
-## HU‑07: Verificación de tarjeta profesional (administrador)
-
-**Como** administrador de la plataforma,  
-**quiero** verificar la tarjeta profesional de cada psicólogo antes de publicarlo en el directorio, para garantizar la idoneidad y seguridad del servicio ofrecido a los pacientes.
-
-**Criterios de aceptación:**
-- Dado que un profesional completa su registro y carga su tarjeta profesional, cuando el administrador revisa la documentación, entonces el sistema permite aprobar o rechazar la publicación del perfil, notificando el resultado al profesional.
-- Dado que un profesional no ha sido verificado, cuando un paciente busca en el directorio, entonces su perfil no aparece visible en los resultados de búsqueda.
-
-## HU‑08: Configuración de disponibilidad semanal (profesional)
-
-**Como** profesional,  
-**quiero** configurar mi disponibilidad semanal y bloquear horarios para gestionar mi agenda de manera eficiente.
-
-**Criterios de aceptación:**
-- Dado que el profesional define sus horarios disponibles para la semana, cuando guarda la configuración, entonces el sistema actualiza el calendario visible para los pacientes en tiempo real.
-- Dado que el profesional bloquea una franja horaria ya reservada por un paciente, cuando intenta guardar el bloqueo, entonces el sistema le advierte del conflicto y no permite el bloqueo sin antes reprogramar o cancelar la cita existente.
+**Criterios de aceptación (Híbrido):**
+- **Web:** Formulario React con validación en tiempo real, POST `/api/notes` acepta texto, retorno de emociones y distorsiones en < 2s.
+- **Móvil:** Capture de texto o voz (integration con LLM gateway).
+- **Ambas plataformas:** Persistencia en PostgreSQL + Redis cache por sesión.
+- **Validación:** Scores de emoción (alegría, tristeza, ira, miedo, asco, sorpresa) con indicadores visuales.
 
 ---
-*Historias de usuario y criterios de aceptación extraídos del anexo del documento maestro. Formato BDD (Given‑When‑Then) no específicamente marcado, pero la lógica está expresada en español claro.*
+
+## US-002: Visualización de análisis emocional en tiempo real
+**Como** terapeuta,  
+**quiero** ver el análisis emocional en tiempo real en la interfaz para monitorear el estado psicológico del paciente.
+
+**Criterios de aceptación (Híbrido):**
+- **Web Dashboard:** Gráficos interactivos de scores de emoción, actualización automática cada 5s vía WebSocket.
+- **Móvil:** Lista resumida con indicadores visuales de intensidad emocional.
+- **Fuente de datos:** Redis cache (sesión actual) + PostgreSQL (histórico).
+- **Disponible en:** Ambas plataformas Web y Móvil.
+
+---
+
+## US-003: Detección de distorsiones cognitivas
+**Como** sistema IA,  
+**quiero** detectar distorsiones cognitivas comunes para sugerir consultas especializadas.
+
+**Criterios de aceptación (Híbrido):**
+- **Motor IA:** Identifica mínimo 3 de las 10 distorsiones de Beck (catastrofización, filtrado, generalización excesiva).
+- **Sugerencia de especialista:** Basándose en el perfil detectado, sugiere especialista apropiado.
+- **Disponibilidad:** En ambas plataformas (Web/Móvil).
+- **Flag de revisión:** `needs_review` para que el terapeuta valide la sugerencia.
+
+---
+
+## US-004: Historial de consultas desde la aplicación móvil
+**Como** terapeuta,  
+**quiero** acceder al historial de consultas desde la aplicación móvil.
+
+**Criterios de aceptación (Híbrido):**
+- **App móvil (React Native/Flutter):** Consume la API REST, muestra lista cronológica de notas.
+- **Filtrado:** Por fecha, emoción dominante, distorsión detectada.
+- **Offline-capable:** Última sesión sincronizada disponible offline.
+- **Exportación:** PDF/CSV de reporte de consultas.
+
+---
+
+## US-005: Contexto de sesión con memoria a corto plazo
+**Como** sistema IA,  
+**quiero** mantener contexto de sesión usando memoria a corto plazo.
+
+**Criterios de aceptación (Híbrido):**
+- **Redis:** Almacena contexto por `session_id` con TTL de 30 minutos.
+- **Propósito:** Mantiene últimas 3 interacciones sin reenviar todas las notas a cada petición.
+- **Disponible:** Para ambos frontends (Web y Móvil).
+- **Objetivo:** Reduce latencia en conversaciones continuadas.
+
+---
+
+## US-006: Perfil emocional longitudinal
+**Como** terapeuta,  
+**quiero** observar la evolución emocional del paciente a lo largo del tiempo.
+
+**Criterios de aceptación (Híbrido):**
+- **Emotion Profiles:** Tracking de tendencias (increasing/decreasing/stable) por paciente.
+- **Visualización:** Gráficos de evolución en Web y listas resumidas en Móvil.
+- **Fuente de datos:** Tabla `emotion_profiles` en PostgreSQL.
+- **Insight clínico:** Identificación de patrones a largo plazo.
+
+---
+
+## US-007: Sugerencias de consulta automatizadas
+**Como** sistema IA,  
+**quiero** sugerir especialistas basados en el análisis de notas clínicas.
+
+**Criterios de aceptación (Híbrido):**
+- **Consultation Suggestions:** Especialista sugerido con `confidence_score` (0-100).
+- **Rationale:** Razón fundamentada basada en distorsiones y emociones detectadas.
+- **Flujo:** Terapeuta revisa y acepta/rechaza la sugerencia.
+- **Disponibilidad:** Web y Móvil.
+
+---
+
+## US-008: Configuración de disponibilidad semanal
+**Como** profesional,  
+**quiero** configurar mi disponibilidad semanal y bloquear horarios.
+
+**Criterios de aceptación (Híbrido):**
+- **Configuración:** Disponibilidad semanal con horarios abiertos/bloqueados.
+- **Sincronización:** Actualización en tiempo real en ambas plataformas Web y Móvil.
+- **Prevención de conflictos:** Sistema bloquea horarios ya reservados.
+- **Notificación:** Pacientes alertados cuando disponibilidad cambia.
+
+---
+
+*Historias de usuario diseñadas para arquitectura híbrida Web + Móvil, orientadas al copiloto de IA para terapeutas enfocado en análisis de notas clínicas, extracción de emociones, detección de distorsiones cognitivas y sugerencias de consulta.*
