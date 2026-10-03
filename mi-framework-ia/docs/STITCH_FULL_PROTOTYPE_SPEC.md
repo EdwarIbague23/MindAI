@@ -10,6 +10,8 @@
 
 > **Instrucción de entrega visual a Stitch:** producir frames separados y nombrados por rol (paciente, profesional, admin cuando aplique), además de desktop y mobile. No entregar una sola plantilla genérica con cambio de título. Incluir logo/wordmark y assets de lanzamiento como entregables visuales; el repositorio no contiene todavía archivos de marca (`svg/png/ico`), por lo que el logo propuesto debe identificarse como **concepto pendiente de aprobación**, no marca oficial.
 
+> **Frame inicial obligatorio:** abrir el prototipo web en `WEB-AUTH-01 — Iniciar sesión` y el móvil en `MOB-AUTH-01 — Iniciar sesión`. No empezar en un dashboard. Incluir formulario visible (email/password), logo provisional, links de registro/recuperación y MFA como siguiente estado. Como todavía no hay API de autenticación, añadir un control separado “Solo demo — previsualizar rol” para entrar a los recorridos sintéticos de paciente, profesional y admin; nunca presentarlo como selector de permisos o autenticación real. Ver las especificaciones de plataforma `STITCH_WEB_PROTOTYPE_SPEC.md` y `STITCH_MOBILE_PROTOTYPE_SPEC.md`.
+
 ---
 
 ## 1. MAPPING GENERAL DE ROLES Y PANTALLAS

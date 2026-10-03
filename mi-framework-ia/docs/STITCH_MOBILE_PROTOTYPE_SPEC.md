@@ -7,6 +7,14 @@
 **Viewport de diseño:** 390×844 px (referencia base); validar también 360 px Android y safe areas reales.
 **Estado:** especificación de prototipo, no app ejecutable ni contrato API aprobado.
 
+## REQUIRED STITCH OUTPUT — DO NOT SKIP LOGIN
+
+Create a clickable mobile prototype. **The first/opening frame must be `MOB-AUTH-01 — Iniciar sesión` at 390×844 px**, not a home screen or splash-only frame. Include provisional MindFlow logo, email/password, password visibility, primary **Ingresar**, **¿Olvidaste tu contraseña?**, **Crear cuenta de paciente** and **Soy profesional**. `BRAND-01` is a separate launch/asset frame and never replaces login.
+
+Since the repository has no authentication API, add a visibly labeled **“Solo demo — previsualizar rol”** control after the login form. Demo choices navigate to Patient Home, Therapist Home and Admin Verification preview. The admin option is prototype-only and must show “Consola admin web; no existe app admin móvil en V1”; do not imply the patient/therapist mobile build includes admin access or real authorization. The demo switcher is not a production role selector.
+
+Minimum clickable mobile flows: login -> patient tabs Inicio/Buscar/Citas/Perfil -> Directory -> Therapist -> Slots -> Booking confirmation; login -> therapist tabs Inicio/Agenda/Pacientes/Perfil -> Patient -> Note -> Analysis -> Result; demo admin -> restricted Admin Preview -> Verification Queue -> Review -> Approve/Reject preview. Include separate registration, professional application, consent, OTP and recovery placeholder screens; do not omit them because the backend route is not implemented.
+
 > **Regla de fidelidad:** usar datos sintéticos y mostrar estados de demostración. La app móvil y la web comparten roles/entidades, no una única presentación responsive. El repo no tiene pantallas RN, controladores FastAPI, routes OpenAPI ni assets oficiales de marca. No inventar campos/endpoints como si existieran.
 
 ## 1. MOBILE SCREEN INVENTORY MATRIX

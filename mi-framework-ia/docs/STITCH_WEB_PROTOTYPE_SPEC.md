@@ -5,6 +5,14 @@
 **Target:** React + TypeScript web prototype, 1440 px primary frame; adapt down to 1024/768 without horizontal page scroll.
 **Status:** visual specification only. The repository has no React page/component source or API controllers yet. All data must be synthetic; all API integrations below are unimplemented until a route contract exists.
 
+## REQUIRED STITCH OUTPUT — DO NOT SKIP LOGIN
+
+Create a clickable web prototype. **The first/opening frame must be `WEB-AUTH-01 — Iniciar sesión`**, not a dashboard, splash-only frame or landing-page hero. Include the MindFlow logo concept at the top, email and password inputs, show-password control, primary **Ingresar** button, **¿Olvidaste tu contraseña?**, **Crear cuenta de paciente** and **Soy profesional** links. Keep `BRAND-01` as a separate splash/brand asset; it does not replace the login frame.
+
+Because no backend auth exists yet, add a clearly labeled **“Solo demo — entrar como”** preview control below the real-looking login form. Its three demo-only choices must navigate to the patient shell/home, professional shell/home and admin verification shell. Label them “Prototipo, no autenticación real”; never present this preview switcher as a production role selector, and do not imply it changes server permissions.
+
+Minimum first-pass clickable flow: Login -> demo Patient Home -> Directory -> Therapist Profile -> Availability -> Booking Confirmation; Login -> demo Professional Home -> Agenda -> Patient -> Note -> Analysis -> Result; Login -> demo Admin -> Verification Queue -> Review -> Approve/Reject. Also make register, professional application and password-recovery links visibly present; recovery is a placeholder flow because its API is unspecified. Create each role's own shell/sidebar. Do not begin by rendering the patient home as the prototype's opening screen.
+
 ## 1. Shared Web Shells and Navigation
 
 Stitch must produce three distinct authenticated shells; do not reuse one dashboard and only change the title.
