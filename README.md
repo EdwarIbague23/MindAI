@@ -158,7 +158,9 @@ MindFlow AI/
 |   |   |-- diagrama_erd_mindflow.mmd
 |   |   |-- manifest_schema.md
 |   |   |-- prompt_01_arquitectura.md
-|   |   `-- STITCH_FULL_PROTOTYPE_SPEC.md
+|   |   |-- STITCH_FULL_PROTOTYPE_SPEC.md
+|   |   |-- STITCH_MOBILE_PROTOTYPE_SPEC.md
+|   |   `-- STITCH_WEB_PROTOTYPE_SPEC.md
 |   |-- evaluations/
 |   |   |-- agent_benchmarks/
 |   |   |   |-- emotion_analysis_agent.md
