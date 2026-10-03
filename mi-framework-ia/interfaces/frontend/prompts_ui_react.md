@@ -1,5 +1,7 @@
 # Prompts 17, 18 y 19 – Componentes Frontend React
 
+> **PROMPTS HISTÓRICOS / NO EJECUTAR COMO ESPECIFICACIÓN COMPLETA:** cubren solo login, ingreso de nota y dashboard. Para los portales por rol usar `prompts_ui_roles_react.md`; para reportes usar `prompts_report_pdf.md`. No ejecutar este archivo junto con los prompts canónicos.
+
 **Origen:** Documento *Batería Maestra de Prompts* (PDF, páginas 27‑29).  
 **Bloque:** E – Frontend Components.  
 **Prioridad:** 3 (todos).  

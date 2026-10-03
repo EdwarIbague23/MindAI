@@ -1,5 +1,7 @@
 # Prompts 03 y 04 – Modelos SQLAlchemy + PostgreSQL y Alembic y Migraciones
 
+> **ARCHIVO HISTÓRICO / NO EJECUTAR:** se conserva por trazabilidad docente. Su contrato de tablas está obsoleto; usar `prompts_modelado_datos.md` y revisar `../docs/AI_CODEGEN_PLAYBOOK.md`.
+
 **Origen:** Documento *Batería Maestra de Prompts* (PDF, páginas 8‑11).  
 **Bloque:** A – Arquitectura & Datos.  
 **Prioridad:** 1 (Prompt 03) / 2 (Prompt 04).  

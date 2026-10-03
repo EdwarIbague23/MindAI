@@ -1,5 +1,26 @@
 name: db_query
 version: 0.1.0
-input_schema: {sql: string}
-output_schema: {rows: array}
-permissions: [db_read]
+description: Ejecuta operaciones de datos explícitamente permitidas; nunca SQL arbitrario de un agente.
+category: db_query
+entrypoint: skills.db_query.skill:DbQuerySkill
+sandboxed: false
+input_schema:
+	type: object
+	required: [operation, resource_id]
+	properties:
+		operation: {type: string, enum: [get_public_metadata]}
+		resource_id: {type: string, format: uuid}
+output_schema:
+	type: object
+	required: [rows]
+	properties:
+		rows: {type: array, items: {type: object}}
+permissions:
+	requires_network: false
+	pii_access: forbidden
+	data_scope: none
+	allowed_domains: []
+timeout_seconds: 5
+rate_limit_per_minute: 30
+retryable: false
+audit_level: elevated

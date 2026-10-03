@@ -1,7 +1,26 @@
 name: research_agent
 version: 0.1.0
-description: Investiga un tema y produce un resumen con fuentes
-skills_required: [web_search, document_generator]
-permissions: [network_access]
-input_schema: {}
-output_schema: {}
+description: Busca información pública no clínica y produce un resumen con referencias.
+role: research
+owner: framework-team
+input_schema:
+	type: object
+	required: [query]
+	properties:
+		query: {type: string, minLength: 1, maxLength: 500}
+output_schema:
+	type: object
+	required: [summary, sources]
+	properties:
+		summary: {type: string}
+		sources: {type: array, items: {type: string, format: uri}}
+permissions:
+	allowed_skills: [web_search, document_generator]
+	data_scope: none
+	network_access: restricted
+	pii_access: forbidden
+pii_policy: no_clinical_data
+memory_scope: session
+timeout_seconds: 30
+max_retries: 1
+tags: [framework, research]

@@ -11,59 +11,134 @@
   }
 }}%%
 erDiagram
-    USER ||--o{ CLINICAL_NOTE : registra
-    CLINICAL_NOTE ||--o{ ANALYSIS : genera
+    USER ||--o| THERAPIST_PROFILE : tiene
+    USER ||--o{ CONSENT : acepta
+    USER ||--o{ AVAILABILITY_SLOT : configura
+    USER ||--o{ APPOINTMENT : paciente
+    USER ||--o{ APPOINTMENT : terapeuta
+    USER ||--o{ CLINICAL_NOTE : paciente
+    USER ||--o{ CLINICAL_NOTE : terapeuta
+    APPOINTMENT o|--o| CLINICAL_NOTE : documenta
+    USER ||--o{ RISK_ASSESSMENT : reporta
+    USER ||--o{ NOTIFICATION : recibe
+    USER ||--o{ AUDIT_EVENT : actor
+    CLINICAL_NOTE ||--o{ ANALYSIS : analiza
     ANALYSIS ||--o{ EMOTION_SCORE : contiene
-    ANALYSIS ||--o{ COGNITIVE_DISTORTION : detecta
-    ANALYSIS ||--o{ GUIDING_QUESTION : sugiere
-    ANALYSIS ||--|| REPORT : genera
+    ANALYSIS ||--o{ COGNITIVE_DISTORTION : identifica
+    ANALYSIS ||--o{ GUIDING_QUESTION : propone
+    ANALYSIS ||--o| REPORT : genera
 
     USER {
         UUID id PK
-        VARCHAR email
-        VARCHAR name
-        ENUM role
-        VARCHAR hashed_password
-        BOOLEAN is_therapist
-        TIMESTAMP created_at
-        TIMESTAMP last_login
+        VARCHAR email UK
+        VARCHAR display_name
+        ENUM role "patient|therapist|admin"
+        VARCHAR password_hash
+        BOOLEAN is_active
+        TIMESTAMPTZ created_at
+        TIMESTAMPTZ last_login_at
+    }
+
+    THERAPIST_PROFILE {
+        UUID user_id PK,FK
+        VARCHAR license_number
+        VARCHAR specialty
+        VARCHAR modality
+        VARCHAR service_zone
+        ENUM verification_status
+        TIMESTAMPTZ verified_at
+    }
+
+    CONSENT {
+        UUID id PK
+        UUID user_id FK
+        VARCHAR policy_version
+        VARCHAR policy_hash
+        TIMESTAMPTZ accepted_at
+        TIMESTAMPTZ withdrawn_at
+    }
+
+    AVAILABILITY_SLOT {
+        UUID id PK
+        UUID therapist_id FK
+        TIMESTAMPTZ starts_at
+        TIMESTAMPTZ ends_at
+        ENUM status
+        TIMESTAMPTZ created_at
+    }
+
+    APPOINTMENT {
+        UUID id PK
+        UUID patient_id FK
+        UUID therapist_id FK
+        UUID slot_id FK
+        TIMESTAMPTZ starts_at
+        TIMESTAMPTZ ends_at
+        ENUM status
+        TIMESTAMPTZ created_at
     }
 
     CLINICAL_NOTE {
         UUID id PK
+        UUID appointment_id FK
+        UUID patient_id FK
         UUID therapist_id FK
-        CHAR patient_hash
-        TEXT note_text
+        BYTEA ciphertext
+        VARCHAR encryption_key_version
         VARCHAR language
         INT word_count
-        TIMESTAMP created_at
+        TIMESTAMPTZ created_at
+        TIMESTAMPTZ updated_at
+    }
+
+    RISK_ASSESSMENT {
+        UUID id PK
+        UUID patient_id FK
+        UUID appointment_id FK
+        ENUM source
+        ENUM self_report_level
+        ENUM status
+        TIMESTAMPTZ created_at
+        TIMESTAMPTZ acknowledged_at
+    }
+
+    NOTIFICATION {
+        UUID id PK
+        UUID user_id FK
+        UUID appointment_id FK
+        ENUM channel
+        ENUM status
+        TIMESTAMPTZ scheduled_at
+        TIMESTAMPTZ sent_at
+        TIMESTAMPTZ acknowledged_at
     }
 
     ANALYSIS {
         UUID id PK
         UUID clinical_note_id FK
         ENUM status
-        VARCHAR ia_model
-        FLOAT processing_time
-        TIMESTAMP created_at
+        VARCHAR provider_model
+        NUMERIC processing_time_seconds
+        BOOLEAN needs_review
+        TIMESTAMPTZ created_at
     }
 
     EMOTION_SCORE {
         UUID id PK
         UUID analysis_id FK
         ENUM emotion_name
-        FLOAT score
-        FLOAT confidence
-        TIMESTAMP timestamp
+        NUMERIC score_0_100
+        NUMERIC confidence_0_100
+        TIMESTAMPTZ created_at
     }
 
     COGNITIVE_DISTORTION {
         UUID id PK
         UUID analysis_id FK
         ENUM distortion_type
-        VARCHAR severity
-        TEXT description
-        TIMESTAMP detected_at
+        NUMERIC confidence_0_100
+        TEXT evidence_excerpt
+        TIMESTAMPTZ created_at
     }
 
     GUIDING_QUESTION {
@@ -72,14 +147,24 @@ erDiagram
         TEXT question_text
         ENUM category
         INT priority
-        TIMESTAMP created_at
+        TIMESTAMPTZ created_at
     }
 
     REPORT {
         UUID id PK
         UUID analysis_id FK
         ENUM format
-        TEXT generated_content
-        TIMESTAMP generated_at
-        INT word_count
+        BYTEA ciphertext
+        VARCHAR encryption_key_version
+        TIMESTAMPTZ generated_at
+    }
+
+    AUDIT_EVENT {
+        UUID id PK
+        UUID actor_user_id FK
+        VARCHAR action
+        VARCHAR resource_type
+        UUID resource_id
+        VARCHAR request_id
+        TIMESTAMPTZ occurred_at
     }

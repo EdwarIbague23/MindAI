@@ -8,7 +8,7 @@
 
 ## Tarea específica y casos borde
 
-Diseñar la arquitectura inicial de MindFlow AI con separación estricta de responsabilidades. El sistema recibe notas clínicas desestructuradas, protege/anonimiza PII, ejecuta análisis mediante LLM y devuelve resultados estructurados para revisión del terapeuta. Crear la estructura completa del repositorio (backend/app con api, core, models, schemas, services, middleware, security, ai; frontend/src con components, pages, services, hooks, types; docker-compose.yml, .env.example, README.md).
+Revisar y completar la arquitectura existente de `mi-framework-ia` sin sustituir la estructura definida por el docente. MindFlow V1 tiene cliente web React + TypeScript, cliente móvil React Native y una API FastAPI compartida; el producto incluye flujos de paciente/profesional y un copiloto para revisión exclusiva del terapeuta. No crear `backend/app`, no duplicar backend/DB/LLM por cliente y no generar todavía toda la aplicación.
 
 Consider:
 - Configuración por ambientes (dev/test/prod).
@@ -20,7 +20,7 @@ Consider:
 
 | Entrada | Salida esperada |
 |---|---|
-| Configuración vacía de un proyecto nuevo. | Estructura de carpetas + archivos base + responsabilidades de cada módulo + documento ARCHITECTURE.md. |
+| Repositorio y documentos actuales. | Informe de inconsistencias, árbol objetivo dentro de la estructura docente, decisiones pendientes, contratos entre módulos y diagramas actualizados. |
 
 ## Few‑shot examples
 
@@ -31,24 +31,21 @@ Consider:
 ## Prompt listo para ejecutar (Act as…)
 
 ```
-Act as Senior Solutions Architect specialized in Python, FastAPI, PostgreSQL, React, and SaaS
-B2B systems with AI components.
+Act as Senior Solutions Architect specialized in Python, FastAPI, PostgreSQL, React, React Native, API security, and AI-enabled healthcare software.
 
 Context:
-Architecture / General Project Structure. Design the initial architecture of MindFlow AI
-with strict separation of responsibilities. The system receives unstructured clinical notes,
-protects/anonymizes PII, runs analysis via an LLM, and returns structured results for the
-therapist to review. Create the complete repository structure (backend/app with api, core,
-models, schemas, services, middleware, security, ai; frontend/src with components, pages,
-services, hooks, types; docker-compose.yml, .env.example, README.md).
+The repository already follows the instructor-provided `mi-framework-ia` structure. Inspect
+that structure and the current requirements, stories, decision, models, manifests, prompts,
+and diagrams before proposing changes. Target clients are React + TypeScript web and React
+Native mobile; both consume the same FastAPI REST/OpenAPI contract. The server owns RBAC,
+domain rules, clinical data, the orchestrator, and LLM access.
 
 Task:
-Design the initial architecture of MindFlow AI with strict separation of responsibilities.
-The system receives unstructured clinical notes, protects/anonymizes PII, runs analysis via
-an LLM, and returns structured results for the therapist to review. Create the complete
-repository structure (backend/app with api, core, models, schemas, services, middleware,
-security, ai; frontend/src with components, pages, services, hooks, types; docker-compose.yml,
-.env.example, README.md).
+Identify contradictions and missing modules, then propose the smallest architecture changes
+inside the existing folders. Show the target tree for `interfaces/api`, `interfaces/frontend`,
+and `interfaces/mobile`; map each client to the common API and each API domain to existing
+`core/`, `agents/`, `skills/`, `models/`, `config/`, and `evaluations/` responsibilities.
+Separate V1 from deferred features. Do not claim that stubs or diagrams are implemented code.
 
 Consider:
 - Environment‑based configuration (dev/test/prod).
@@ -57,18 +54,20 @@ Consider:
 - Future scalability.
 
 Format:
-ARCHITECTURE.md document.
+Architecture decision summary, Mermaid component diagram, data-flow diagram, responsibility
+matrix, migration/implementation phases, and unresolved decisions. Keep documentation in Spanish.
 
 Examples of the expected format and level:
 - analysis_service.py, report_service.py (each with a single responsibility).
 
 Constraints:
-- Do not introduce unnecessary dependencies.
-- Do not mix business logic with endpoints.
-- Do not place API keys in the repository.
-- Do not store clinical notes in logs.
-- Configuration via environment variables.
-- Architecture prepared to replace the LLM provider without rewriting the entire app.
+- Preserve the professor's folder structure and all unrelated framework components.
+- Do not recreate the obsolete `backend/app` + `frontend/src` tree.
+- Keep web and mobile as clients only; no business logic, database credentials, or direct LLM calls in clients.
+- No diagnosis, prescription, automated specialist recommendation, real patient data, secrets, or clinical text in logs.
+- Make every new domain responsibility trace to an RF, user story and test.
+- Mark assumptions and stop if they change consent, crisis response, access policy, or clinical scope.
+- Do not write code in this architecture phase; follow `docs/AI_CODEGEN_PLAYBOOK.md` for later staged generation.
 ```
 ---
 *Estructura base para inicializar el repositorio MindFlow AI.*

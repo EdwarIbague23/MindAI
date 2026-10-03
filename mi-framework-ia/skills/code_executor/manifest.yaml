@@ -1,5 +1,28 @@
 name: code_executor
 version: 0.1.0
-input_schema: {code: string, language: string}
-output_schema: {stdout: string, stderr: string}
-permissions: [code_execution]
+description: Ejecuta fragmentos permitidos en un sandbox aislado sin red ni filesystem del host.
+category: code_executor
+entrypoint: skills.code_executor.skill:CodeExecutorSkill
+sandboxed: true
+input_schema:
+	type: object
+	required: [code, language]
+	properties:
+		code: {type: string, maxLength: 20000}
+		language: {type: string, enum: [python]}
+output_schema:
+	type: object
+	required: [stdout, stderr, exit_code]
+	properties:
+		stdout: {type: string, maxLength: 20000}
+		stderr: {type: string, maxLength: 20000}
+		exit_code: {type: integer}
+permissions:
+	requires_network: false
+	pii_access: forbidden
+	data_scope: none
+	allowed_domains: []
+timeout_seconds: 10
+rate_limit_per_minute: 10
+retryable: false
+audit_level: standard

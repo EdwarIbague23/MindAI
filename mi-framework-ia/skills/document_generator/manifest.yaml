@@ -1,4 +1,28 @@
 name: document_generator
 version: 0.1.0
-input_schema: {content: string, format: string}
-output_schema: {file_path: string}
+description: Genera documentos desde resultados tipados y aprobados sin recibir notas clínicas crudas.
+category: document_generator
+entrypoint: skills.document_generator.skill:DocumentGeneratorSkill
+sandboxed: false
+input_schema:
+  type: object
+  required: [analysis_id, content, format]
+  properties:
+    analysis_id: {type: string, format: uuid}
+    content: {type: string, maxLength: 30000}
+    format: {type: string, enum: [pdf, markdown]}
+output_schema:
+  type: object
+  required: [content, format]
+  properties:
+    content: {type: string}
+    format: {type: string, enum: [pdf, markdown]}
+permissions:
+  requires_network: false
+  pii_access: forbidden
+  data_scope: none
+  allowed_domains: []
+timeout_seconds: 15
+rate_limit_per_minute: 30
+retryable: true
+audit_level: standard

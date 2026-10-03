@@ -1,11 +1,17 @@
 flowchart LR
-    user[Usuario / Desarrollador]
+    user[Paciente / Profesional / Admin]
+    developer[Desarrollador]
 
     subgraph interfaces[Interfaces]
         cli[CLI]
         chat[Chat UI]
-        api[API layer]
-        frontend[Frontend placeholder]
+        api[API común<br/>FastAPI / OpenAPI]
+        web_client[Cliente web<br/>React + TypeScript]
+        mobile_client[Cliente móvil<br/>React Native]
+    end
+
+    subgraph application[Servicios de aplicación]
+        app_services[Auth / consentimiento / agenda / clínica]
     end
 
     subgraph config[Configuración]
@@ -27,10 +33,11 @@ flowchart LR
     subgraph agents_layer[Agentes]
         research[research_agent]
         coding[coding_agent]
+        emotion_analysis[emotion_analysis_agent<br/>planeado; no activo]
     end
 
     subgraph skills_layer[Skills]
-        web[web_search]
+        web_search_skill[web_search]
         codeexec[code_executor]
         db_query[db_query]
         docgen[document_generator]
@@ -46,29 +53,35 @@ flowchart LR
         slack[slack_client.py]
     end
 
-    user --> cli
-    user --> chat
-    user --> frontend
+    developer --> cli
+    developer --> chat
+    user --> web_client
+    user --> mobile_client
     cli --> api
     chat --> api
-    frontend --> api
+    web_client --> api
+    mobile_client --> api
 
-    api --> orchestrator
+    api --> app_services
+    app_services --> models
+    app_services --> orchestrator
+    app_services --> docgen
     orchestrator --> agents_cfg
     orchestrator --> skills_cfg
     orchestrator --> env_cfg
 
     orchestrator --> research
     orchestrator --> coding
+    orchestrator --> emotion_analysis
 
-    research --> web
+    research --> web_search_skill
     research --> docgen
     coding --> codeexec
     coding --> db_query
 
     agent_base --> research
     agent_base --> coding
-    skill_base --> web
+    skill_base --> web_search_skill
     skill_base --> codeexec
     skill_base --> db_query
     skill_base --> docgen
@@ -85,16 +98,18 @@ flowchart LR
     classDef interface fill:#e7f0ff,stroke:#2563eb,color:#0f172a
     classDef config fill:#ede9fe,stroke:#7c3aed,color:#2e1065
     classDef core fill:#e0f2fe,stroke:#0284c7,color:#082f49
+    classDef application fill:#ecfdf5,stroke:#059669,color:#064e3b
     classDef agent fill:#dcfce7,stroke:#16a34a,color:#14532d
     classDef skill fill:#fef3c7,stroke:#d97706,color:#78350f
     classDef data fill:#fce7f3,stroke:#db2777,color:#500724
     classDef tools fill:#f3f4f6,stroke:#374151,color:#111827
 
-    class user actor
-    class cli,chat,api,frontend interface
+    class user,developer actor
+    class cli,chat,api,web_client,mobile_client interface
+    class app_services application
     class agents_cfg,skills_cfg,env_cfg config
     class base,agent_base,skill_base,orchestrator,memory,observability,security core
-    class research,coding agent
-    class web,codeexec,db_query,docgen skill
+    class research,coding,emotion_analysis agent
+    class web_search_skill,codeexec,db_query,docgen skill
     class models,db data
     class github,slack tools

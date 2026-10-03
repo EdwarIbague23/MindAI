@@ -1,7 +1,25 @@
 name: coding_agent
 version: 0.1.0
-description: Escribe y ejecuta código para resolver una tarea
-skills_required: [code_executor]
-permissions: [code_execution]
-input_schema: {}
-output_schema: {}
+permissions:
+	allowed_skills: [code_executor]
+	data_scope: none
+	network_access: none
+	pii_access: forbidden
+pii_policy: no_clinical_data
+memory_scope: session
+timeout_seconds: 30
+max_retries: 0
+tags: [framework, coding]
+input_schema:
+	type: object
+	required: [task]
+	properties:
+		task: {type: string, minLength: 1, maxLength: 4000}
+output_schema:
+	type: object
+	required: [summary]
+	properties:
+		summary: {type: string}
+description: Propone cambios de código en tareas no clínicas y usa ejecución aislada para verificarlos.
+role: coding
+owner: framework-team
