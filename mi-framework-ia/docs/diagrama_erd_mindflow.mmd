@@ -1,170 +1,76 @@
-%%{init: {
-  'theme': 'base',
-  'themeVariables': {
-    'primaryColor': '#EAF3FF',
-    'primaryTextColor': '#0F172A',
-    'primaryBorderColor': '#2563EB',
-    'lineColor': '#475569',
-    'secondaryColor': '#F8FAFC',
-    'tertiaryColor': '#F5F3FF',
-    'fontFamily': 'Segoe UI, Arial'
-  }
-}}%%
 erDiagram
-    USER ||--o| THERAPIST_PROFILE : tiene
-    USER ||--o{ CONSENT : acepta
-    USER ||--o{ AVAILABILITY_SLOT : configura
-    USER ||--o{ APPOINTMENT : paciente
-    USER ||--o{ APPOINTMENT : terapeuta
-    USER ||--o{ CLINICAL_NOTE : paciente
-    USER ||--o{ CLINICAL_NOTE : terapeuta
-    APPOINTMENT o|--o| CLINICAL_NOTE : documenta
-    USER ||--o{ RISK_ASSESSMENT : reporta
-    USER ||--o{ NOTIFICATION : recibe
-    USER ||--o{ AUDIT_EVENT : actor
-    CLINICAL_NOTE ||--o{ ANALYSIS : analiza
-    ANALYSIS ||--o{ EMOTION_SCORE : contiene
-    ANALYSIS ||--o{ COGNITIVE_DISTORTION : identifica
-    ANALYSIS ||--o{ GUIDING_QUESTION : propone
-    ANALYSIS ||--o| REPORT : genera
-
-    USER {
+    %% Definición de Entidades Principales y Tablas Clínicas (PostgreSQL v16)
+    
+    users {
         UUID id PK
-        VARCHAR email UK
-        VARCHAR display_name
-        ENUM role "patient|therapist|admin"
-        VARCHAR password_hash
-        BOOLEAN is_active
-        TIMESTAMPTZ created_at
-        TIMESTAMPTZ last_login_at
+        VARCHAR email "unique"
+        VARCHAR name
+        VARCHAR role "therapist, admin"
+        VARCHAR hashed_password
+        Boolean is_therapist
+        TIMESTAMP created_at
+        TIMESTAMP last_login
     }
 
-    THERAPIST_PROFILE {
-        UUID user_id PK,FK
-        VARCHAR license_number
-        VARCHAR specialty
-        VARCHAR modality
-        VARCHAR service_zone
-        ENUM verification_status
-        TIMESTAMPTZ verified_at
-    }
-
-    CONSENT {
-        UUID id PK
-        UUID user_id FK
-        VARCHAR policy_version
-        VARCHAR policy_hash
-        TIMESTAMPTZ accepted_at
-        TIMESTAMPTZ withdrawn_at
-    }
-
-    AVAILABILITY_SLOT {
+    clinical_notes {
         UUID id PK
         UUID therapist_id FK
-        TIMESTAMPTZ starts_at
-        TIMESTAMPTZ ends_at
-        ENUM status
-        TIMESTAMPTZ created_at
+        CHAR patient_hash "SHA-256"
+        TEXT note_text
+        VARCHAR language "es"
+        INTEGER word_count
+        TIMESTAMP created_at
     }
 
-    APPOINTMENT {
-        UUID id PK
-        UUID patient_id FK
-        UUID therapist_id FK
-        UUID slot_id FK
-        TIMESTAMPTZ starts_at
-        TIMESTAMPTZ ends_at
-        ENUM status
-        TIMESTAMPTZ created_at
-    }
-
-    CLINICAL_NOTE {
-        UUID id PK
-        UUID appointment_id FK
-        UUID patient_id FK
-        UUID therapist_id FK
-        BYTEA ciphertext
-        VARCHAR encryption_key_version
-        VARCHAR language
-        INT word_count
-        TIMESTAMPTZ created_at
-        TIMESTAMPTZ updated_at
-    }
-
-    RISK_ASSESSMENT {
-        UUID id PK
-        UUID patient_id FK
-        UUID appointment_id FK
-        ENUM source
-        ENUM self_report_level
-        ENUM status
-        TIMESTAMPTZ created_at
-        TIMESTAMPTZ acknowledged_at
-    }
-
-    NOTIFICATION {
-        UUID id PK
-        UUID user_id FK
-        UUID appointment_id FK
-        ENUM channel
-        ENUM status
-        TIMESTAMPTZ scheduled_at
-        TIMESTAMPTZ sent_at
-        TIMESTAMPTZ acknowledged_at
-    }
-
-    ANALYSIS {
+    analyses {
         UUID id PK
         UUID clinical_note_id FK
-        ENUM status
-        VARCHAR provider_model
-        NUMERIC processing_time_seconds
-        BOOLEAN needs_review
-        TIMESTAMPTZ created_at
+        VARCHAR status "pending, completed, error"
+        VARCHAR ia_model
+        FLOAT processing_time
+        TIMESTAMP created_at
     }
 
-    EMOTION_SCORE {
+    emotion_scores {
         UUID id PK
         UUID analysis_id FK
-        ENUM emotion_name
-        NUMERIC score_0_100
-        NUMERIC confidence_0_100
-        TIMESTAMPTZ created_at
+        VARCHAR emotion_name
+        FLOAT score
+        FLOAT confidence
+        TIMESTAMP timestamp
     }
 
-    COGNITIVE_DISTORTION {
+    cognitive_distortions {
         UUID id PK
         UUID analysis_id FK
-        ENUM distortion_type
-        NUMERIC confidence_0_100
-        TEXT evidence_excerpt
-        TIMESTAMPTZ created_at
+        VARCHAR distortion_type
+        VARCHAR severity
+        TEXT description
+        TIMESTAMP detected_at
     }
 
-    GUIDING_QUESTION {
+    guiding_questions {
         UUID id PK
         UUID analysis_id FK
         TEXT question_text
-        ENUM category
-        INT priority
-        TIMESTAMPTZ created_at
+        VARCHAR category
+        INTEGER priority
+        TIMESTAMP created_at
     }
 
-    REPORT {
+    reports {
         UUID id PK
         UUID analysis_id FK
-        ENUM format
-        BYTEA ciphertext
-        VARCHAR encryption_key_version
-        TIMESTAMPTZ generated_at
+        VARCHAR format "pdf"
+        TEXT generated_content
+        TIMESTAMP generated_at
+        INTEGER word_count
     }
 
-    AUDIT_EVENT {
-        UUID id PK
-        UUID actor_user_id FK
-        VARCHAR action
-        VARCHAR resource_type
-        UUID resource_id
-        VARCHAR request_id
-        TIMESTAMPTZ occurred_at
-    }
+    %% Relaciones y Cardinalidades del Negocio
+    users ||--o{ clinical_notes : "1:N (crea notas)"
+    clinical_notes ||--o{ analyses : "1:N (genera análisis)"
+    analyses ||--o{ emotion_scores : "1:N (registra emociones)"
+    analyses ||--o{ cognitive_distortions : "1:N (detecta distorsiones)"
+    analyses ||--o{ guiding_questions : "1:N (sugiere preguntas)"
+    analyses ||--|| reports : "1:1 (consolida reporte)"
