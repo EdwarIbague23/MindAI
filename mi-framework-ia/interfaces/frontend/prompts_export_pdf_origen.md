@@ -1,5 +1,7 @@
 # Prompt 20 – Exportación PDF
 
+> **ARCHIVO HISTÓRICO / NO EJECUTAR:** se conserva por trazabilidad docente. Para UI usar `prompts_report_pdf.md`; la generación backend se especifica en `../../skills/document_generator/prompts_document_generator.md`.
+
 **Origen:** Documento *Batería Maestra de Prompts* (PDF, páginas 29‑31).  
 **Bloque:** E – Frontend Components.  
 **Prioridad:** 4.  

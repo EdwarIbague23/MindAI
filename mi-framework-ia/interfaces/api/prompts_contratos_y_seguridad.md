@@ -1,5 +1,7 @@
 # Prompts 02 y 07 – Schemas Pydantic y Security Middleware
 
+> **ARCHIVO DE ORIGEN / NO EJECUTAR PROMPT 02:** sus ejemplos están truncados y no cubren roles/dominio V1. Usar `prompts_schemas_openapi.md` y `prompts_api_dominio_v1.md`. El middleware del Prompt 07 también requiere revisión contra `docs/AI_CODEGEN_PLAYBOOK.md` antes de reutilizarse.
+
 **Origen:** Documento *Batería Maestra de Prompts* (PDF, páginas 7‑8 y 14‑15).  
 **Bloque:** D – Backend API REST.  
 **Prioridad:** 1 (Prompt 02) / 2 (Prompt 07).  

@@ -1,0 +1,54 @@
+name: emotion_analysis_agent
+version: 0.1.0
+description: Analiza notas anonimizadas y devuelve señales para revisión exclusiva del terapeuta.
+role: emotion_analysis
+owner: mindflow-team
+input_schema:
+  type: object
+  required: [text, anonymized]
+  properties:
+    text: {type: string, minLength: 1, maxLength: 8000}
+    anonymized: {type: boolean, const: true}
+output_schema:
+  type: object
+  required: [emotions, distortions, guiding_questions, needs_review]
+  properties:
+    emotions:
+      type: array
+      items:
+        type: object
+        required: [name, score, evidence_excerpt]
+        properties:
+          name: {type: string}
+          score: {type: integer, minimum: 0, maximum: 100}
+          evidence_excerpt: {type: string}
+    distortions:
+      type: array
+      items:
+        type: object
+        required: [type, confidence, evidence_excerpt]
+        properties:
+          type: {type: string}
+          confidence: {type: integer, minimum: 0, maximum: 100}
+          evidence_excerpt: {type: string}
+    guiding_questions:
+      type: array
+      items: {type: string}
+    needs_review: {type: boolean, const: true}
+permissions:
+  allowed_skills: []
+  data_scope: own_session
+  network_access: none
+  pii_access: anonymized_only
+model_policy:
+  provider: env:LLM_PROVIDER
+  structured_output: true
+  rate_limit_per_minute: 20
+pii_policy: anonymized_only
+memory_scope: session
+temperature: 0.2
+max_tokens: 2048
+timeout_seconds: 30
+max_retries: 2
+tags: [clinical, nlp, emotion]
+evaluation_suite: evaluations/agent_benchmarks/emotion_analysis_agent

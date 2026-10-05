@@ -1,5 +1,25 @@
 name: web_search
 version: 0.1.0
-input_schema: {query: string}
-output_schema: {results: array}
-rate_limit: 60/min
+description: Busca información pública en dominios permitidos; nunca recibe PII ni texto clínico.
+category: web_search
+entrypoint: skills.web_search.skill:WebSearchSkill
+sandboxed: false
+input_schema:
+  type: object
+  required: [query]
+  properties:
+    query: {type: string, minLength: 1, maxLength: 200}
+output_schema:
+  type: object
+  required: [results]
+  properties:
+    results: {type: array, items: {type: object}}
+permissions:
+  requires_network: true
+  pii_access: forbidden
+  data_scope: none
+  allowed_domains: [minsalud.gov.co]
+timeout_seconds: 8
+rate_limit_per_minute: 20
+retryable: true
+audit_level: standard

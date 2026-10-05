@@ -1,78 +1,112 @@
-# Historias de Usuario y Criterios de Aceptación (BDD) – MindFlow AI
+# Historias de Usuario y Criterios de Aceptación — MindFlow AI V1
 
-**Origen:** Documento *Batería Maestra de Prompts* (PDF, páginas 46‑47).  
-**Bloque:** Fundación.
+## Convenciones
 
-## HU‑01: Registro y autenticación segura
+- Roles del producto: paciente, profesional/terapeuta y administrador. Los dos clientes (web React y móvil React Native) usan la misma API FastAPI.
+- Cada criterio debe probarse con datos sintéticos. Una función no se considera entregada por aparecer en un prototipo o prompt.
+- El copiloto es solo para profesionales autorizados. Señales y preguntas guía no son diagnóstico ni recomendación de tratamiento; el profesional revisa antes de usarlas.
+- Los scores de emoción y confianza se expresan en escala 0–100 en API, persistencia y UI.
 
-**Como** paciente nuevo,  
-**quiero** registrarme y autenticarme de forma segura para poder acceder a los servicios de la plataforma con confianza en la protección de mis datos.
+| ID | Flujo principal | Trazabilidad |
+|---|---|---|
+| US-001 | Registro, autenticación y consentimiento | RF-01, RF-12, RNF-02, RNF-09 |
+| US-002 | Directorio y profesional verificado | RF-02, RF-10 |
+| US-003 | Disponibilidad y reserva de cita | RF-03, RF-13, RNF-05 |
+| US-004 | Cancelación, reprogramación e historial | RF-04, RF-08 |
+| US-005 | Notificaciones de cita | RF-05 |
+| US-006 | Notas clínicas y permisos | RF-06, RF-07, RNF-01, RNF-03 |
+| US-007 | Autorreporte de riesgo y escalamiento humano | RF-09 |
+| US-008 | Análisis asistido por IA para el terapeuta | Alcance MindFlow, RF-17, RNF-08 |
+| US-009 | Uso móvil por paciente y profesional | RNF-05, RNF-07, RNF-08 |
 
-**Criterios de aceptación:**
-- Dado que un usuario nuevo completa el formulario de registro con datos válidos, cuando envía la solicitud, entonces el sistema crea la cuenta y envía un código de verificación en dos pasos (2FA) al correo o teléfono registrado.
-- Dado que un usuario intenta iniciar sesión, cuando ingresa credenciales incorrectas tres veces consecutivas, entonces el sistema bloquea temporalmente el intento de acceso durante 15 minutos y notifica al usuario por correo.
+## US-001: Registro, autenticación y consentimiento
 
-## HU‑02: Búsqueda y filtrado de profesionales
+**Como** paciente, **quiero** crear una cuenta, verificar mi identidad y revisar el consentimiento informado, **para** usar la plataforma sabiendo cómo se tratarán mis datos.
 
-**Como** paciente,  
-**quiero** buscar y filtrar profesionales por especialidad y ubicación en Ibagué para encontrar al terapeuta que mejor se ajuste a mis necesidades.
+- El registro valida correo único y contraseña; los errores no revelan si una cuenta ajena existe.
+- El acceso clínico requiere segundo factor. El consentimiento aceptado registra usuario, fecha/hora, versión y texto/hash de la versión; sin aceptación no se crea una cita ni se captura información clínica.
+- Paciente, terapeuta y administrador tienen roles distintos; un cliente no puede elevar su rol ni consultar datos de otro usuario.
+- Web y móvil llaman al mismo endpoint de autenticación. La sesión móvil usa almacenamiento seguro del SO; la web no guarda contraseñas ni tokens en `localStorage`.
 
-**Criterios de aceptación:**
-- Dado que el paciente accede al directorio de profesionales, cuando aplica un filtro de especialidad y zona de la ciudad, entonces el sistema muestra únicamente los perfiles verificados que cumplen ambos criterios.
-- Dado que no existen profesionales disponibles con los filtros seleccionados, cuando se ejecuta la búsqueda, entonces el sistema informa la ausencia de resultados y sugiere ampliar los criterios de búsqueda.
+## US-002: Directorio y profesional verificado
 
-## HU‑03: Agendamiento de cita
+**Como** paciente, **quiero** buscar profesionales por especialidad, modalidad y zona, **para** elegir con quién solicitar una cita.
 
-**Como** paciente,  
-**quiero** agendar una cita con un profesional disponible para iniciar mi proceso terapéutico sin fricciones.
+- Solo aparecen perfiles con verificación profesional aprobada por un administrador.
+- Se puede filtrar por especialidad, modalidad presencial/virtual y zona de Ibagué; estado vacío y error de red tienen mensajes recuperables.
+- El directorio muestra información profesional aprobada, nunca notas clínicas ni datos privados de otros pacientes.
+- El MVP no recomienda un especialista usando resultados de IA; la selección la hace el paciente.
 
-**Criterios de aceptación:**
-- Dado que el paciente seleccionó un profesional y un horario disponible, cuando confirma la reserva, entonces el sistema bloquea ese horario para otros pacientes y envía confirmación por correo o notificación push en menos de 60 segundos.
-- Dado que dos pacientes intentan reservar el mismo horario simultáneamente, cuando el sistema procesa ambas solicitudes, entonces solo la primera transacción confirmada se acepta y la segunda recibe un mensaje de horario no disponible.
+## US-003: Disponibilidad y reserva de cita
 
-## HU‑04: Registro de notas de evolución clínica (profesional)
+**Como** paciente, **quiero** ver horarios disponibles y reservar una cita, **para** solicitar atención con un profesional verificado.
 
-**Como** profesional tratante,  
-**quiero** registrar notas de evolución clínica cifradas después de cada sesión para mantener un historial clínico seguro y auditable.
+- La reserva exige consentimiento vigente y muestra profesional, modalidad, fecha, hora y zona horaria `America/Bogota` antes de confirmar.
+- Dos solicitudes concurrentes para el mismo horario no pueden confirmar ambas; la API responde conflicto y ofrece horarios vigentes.
+- El flujo presenta confirmación con identificador de cita y estado; la ruta feliz cumple la meta de reserva menor a 60 segundos.
+- Web y móvil usan la misma regla de disponibilidad; ocultar un horario en UI no sustituye la validación transaccional del servidor.
 
-**Criterios de aceptación:**
-- Dado que el profesional finaliza una sesión, cuando registra la nota de evolución y la guarda, entonces el sistema cifra el contenido antes de almacenarlo y queda visible únicamente para el profesional tratante.
-- Dado que el profesional intenta acceder a la nota clínica de un paciente que no es de su caso, cuando realiza la solicitud, entonces el sistema deniega el acceso y registra el intento en el log de auditoría.
+## US-004: Cancelación, reprogramación e historial
 
-## HU‑05: Historial de sesiones para el paciente
+**Como** paciente o profesional participante, **quiero** cancelar o reprogramar una cita dentro de las reglas permitidas y consultar las citas pasadas, **para** gestionar mi agenda.
 
-**Como** paciente,  
-**quiero** visualizar mi historial de sesiones y notas de evolución compartidas para llevar un seguimiento activo de mi proceso terapéutico.
+- Solo participantes autorizados pueden ver o modificar la cita.
+- Cancelación/reprogramación respeta el mínimo de 12 horas; fuera de plazo el servidor rechaza la operación y explica la política.
+- Cambiar la cita libera el horario anterior y reserva el nuevo de forma atómica.
+- El paciente ve historial de sus citas; el terapeuta ve solo las citas de su agenda. Web y móvil muestran estados `scheduled`, `cancelled`, `completed` y el estado definido por dominio.
 
-**Criterios de aceptación:**
-- Dado que el paciente accede a su perfil, el sistema despliega la línea de tiempo de sus citas pasadas con los reportes de evolución autorizados por el profesional.
+## US-005: Notificaciones de cita
 
-## HU‑06: Alertas de riesgo en auto‑reporte
+**Como** paciente o profesional, **quiero** recibir recordatorios antes de una cita y avisos de cambios, **para** no perder información de agenda.
 
-**Como** paciente,  
-**quiero** recibir una alerta inmediata con líneas de ayuda en caso de detectarse una situación de riesgo, para sentirme acompañado en momentos de crisis.
+- Se programan recordatorios 24 horas y 1 hora antes, según zona horaria del sistema; una cita cancelada no genera recordatorios posteriores.
+- Cada envío registra estado, fecha y canal sin incluir datos clínicos en el mensaje ni en logs.
+- El canal push requiere token registrado con consentimiento; correo es el canal de fallback aprobado. Fallos y reintentos son observables y no duplican avisos.
+- No afirmar entrega inmediata de una alerta crítica sin confirmación de recepción y responsable humano definido.
 
-**Criterios de aceptación:**
-- Dado que el paciente responde un cuestionario de auto‑reporte con indicadores de riesgo alto, cuando envía las respuestas, entonces el sistema despliega de inmediato un mensaje con líneas de atención en crisis de Ibagué/Tolima y notifica al profesional tratante en tiempo real.
-- Dado que se activó una alerta de riesgo, cuando el profesional revisa la notificación, entonces el sistema le permite contactar al paciente directamente desde la plataforma, registrando el tiempo de reacción.
+## US-006: Nota clínica y autorización
 
-## HU‑07: Verificación de tarjeta profesional (administrador)
+**Como** terapeuta tratante, **quiero** crear notas estructuradas al finalizar una sesión y consultar las notas de mis pacientes asignados, **para** documentar la evolución de forma protegida.
 
-**Como** administrador de la plataforma,  
-**quiero** verificar la tarjeta profesional de cada psicólogo antes de publicarlo en el directorio, para garantizar la idoneidad y seguridad del servicio ofrecido a los pacientes.
+- Campos mínimos de nota: motivo, observaciones y plan; la API valida tamaños y campos requeridos.
+- Antes de persistir, el contenido clínico se cifra con cifrado autenticado. No aparece en logs, telemetría ni almacenamiento local no protegido.
+- Acceso, lectura, creación y modificación se autorizan en servidor según relación paciente-terapeuta y quedan en auditoría con actor, recurso, acción y fecha, sin copiar el contenido de la nota al evento.
+- Un terapeuta no asignado, otro paciente o un rol sin permiso recibe `403`/`404` sin filtrar existencia ni contenido.
 
-**Criterios de aceptación:**
-- Dado que un profesional completa su registro y carga su tarjeta profesional, cuando el administrador revisa la documentación, entonces el sistema permite aprobar o rechazar la publicación del perfil, notificando el resultado al profesional.
-- Dado que un profesional no ha sido verificado, cuando un paciente busca en el directorio, entonces su perfil no aparece visible en los resultados de búsqueda.
+## US-007: Autorreporte de riesgo y escalamiento humano
 
-## HU‑08: Configuración de disponibilidad semanal (profesional)
+**Como** paciente, **quiero** indicar que estoy en riesgo y recibir opciones claras de ayuda, **para** solicitar apoyo sin depender de un diagnóstico automatizado.
 
-**Como** profesional,  
-**quiero** configurar mi disponibilidad semanal y bloquear horarios para gestionar mi agenda de manera eficiente.
+- El flujo se inicia por respuestas explícitas del paciente; un LLM no declara que una persona tiene riesgo ni sustituye al profesional.
+- La pantalla presenta líneas de crisis de Ibagué/Tolima previamente verificadas, indica contactar emergencias cuando aplique y explica límites del servicio.
+- El profesional tratante recibe una alerta por el canal aprobado; se registra entrega/acuse y se escala a un mecanismo humano de respaldo ante fallo. No mostrar “ayuda notificada” si no existe acuse.
+- No almacenar texto libre del autoreporte si no es necesario; restringir y auditar el acceso a datos de riesgo.
 
-**Criterios de aceptación:**
-- Dado que el profesional define sus horarios disponibles para la semana, cuando guarda la configuración, entonces el sistema actualiza el calendario visible para los pacientes en tiempo real.
-- Dado que el profesional bloquea una franja horaria ya reservada por un paciente, cuando intenta guardar el bloqueo, entonces el sistema le advierte del conflicto y no permite el bloqueo sin antes reprogramar o cancelar la cita existente.
+## US-008: Análisis asistido de nota
 
----
-*Historias de usuario y criterios de aceptación extraídos del anexo del documento maestro. Formato BDD (Given‑When‑Then) no específicamente marcado, pero la lógica está expresada en español claro.*
+**Como** terapeuta autorizado, **quiero** enviar una nota para obtener señales emocionales/cognitivas con evidencia y preguntas guía, **para** apoyar mi revisión profesional.
+
+- Solo el profesional autorizado puede iniciar y consultar el análisis de su paciente; datos identificables se eliminan/minimizan antes de llamar al proveedor LLM.
+- La respuesta valida un schema fijo con score 0–100, evidencia presente en la nota anonimizada, estado de procesamiento y `needs_review=true`.
+- El cliente muestra estados pendiente/completado/error y permite reintentar sin duplicar análisis; la latencia del LLM no se promete como respuesta síncrona menor a dos segundos.
+- UI y reporte indican que es contenido asistido por IA, no diagnóstico, y requieren revisión humana. No recomienda especialistas, tratamientos o decisiones de urgencia.
+- La nota y resultados se guardan cifrados según RNF-01; solo se devuelve al usuario autorizado.
+
+## US-009: Flujos móviles y conectividad limitada
+
+**Como** paciente o profesional, **quiero** realizar en móvil las tareas prioritarias de mi rol, **para** usar la plataforma desde Android/iOS.
+
+- Paciente: registrarse/iniciar sesión, aceptar consentimiento, buscar profesionales, reservar/cancelar citas, consultar historial y ver notificaciones.
+- Profesional: iniciar sesión, revisar agenda, crear una nota y consultar análisis de pacientes asignados.
+- En pérdida de red se conserva solo estado no sensible del formulario cuando sea seguro; la app nunca afirma que una nota se guardó hasta recibir confirmación del servidor. V1 no ofrece notas clínicas offline.
+- Tokens se guardan en Keystore/Keychain mediante el almacén seguro de la plataforma; enlaces profundos y notificaciones no exponen datos clínicos.
+- Pruebas cubren pantallas pequeñas, accesibilidad, red lenta, timeout, sesión expirada y permisos denegados.
+
+## Capacidades fuera de V1
+
+- RF-11: videollamada; requiere proveedor, señalización, TURN, privacidad y estrategia de cifrado aprobados.
+- RF-14: pagos y comprobantes; requiere pasarela local, conciliación y política de reembolso.
+- RF-15: cuestionarios longitudinales e insights; requiere instrumentos y revisión profesional.
+- RF-16: calificación anónima.
+- Recomendación automatizada de especialistas, diagnóstico o prescripción: excluidos por RF-17.
+- Memoria de conversación de tres interacciones y sesión de chat paciente-IA: no son historias de usuario V1 ni se implementan salvo aprobación de alcance y evaluación de privacidad.

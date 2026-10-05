@@ -1,85 +1,76 @@
-%%{init: {
-  'theme': 'base',
-  'themeVariables': {
-    'primaryColor': '#EAF3FF',
-    'primaryTextColor': '#0F172A',
-    'primaryBorderColor': '#2563EB',
-    'lineColor': '#475569',
-    'secondaryColor': '#F8FAFC',
-    'tertiaryColor': '#F5F3FF',
-    'fontFamily': 'Segoe UI, Arial'
-  }
-}}%%
 erDiagram
-    USER ||--o{ CLINICAL_NOTE : registra
-    CLINICAL_NOTE ||--o{ ANALYSIS : genera
-    ANALYSIS ||--o{ EMOTION_SCORE : contiene
-    ANALYSIS ||--o{ COGNITIVE_DISTORTION : detecta
-    ANALYSIS ||--o{ GUIDING_QUESTION : sugiere
-    ANALYSIS ||--|| REPORT : genera
-
-    USER {
+    %% Definición de Entidades Principales y Tablas Clínicas (PostgreSQL v16)
+    
+    users {
         UUID id PK
-        VARCHAR email
+        VARCHAR email "unique"
         VARCHAR name
-        ENUM role
+        VARCHAR role "therapist, admin"
         VARCHAR hashed_password
-        BOOLEAN is_therapist
+        Boolean is_therapist
         TIMESTAMP created_at
         TIMESTAMP last_login
     }
 
-    CLINICAL_NOTE {
+    clinical_notes {
         UUID id PK
         UUID therapist_id FK
-        CHAR patient_hash
+        CHAR patient_hash "SHA-256"
         TEXT note_text
-        VARCHAR language
-        INT word_count
+        VARCHAR language "es"
+        INTEGER word_count
         TIMESTAMP created_at
     }
 
-    ANALYSIS {
+    analyses {
         UUID id PK
         UUID clinical_note_id FK
-        ENUM status
+        VARCHAR status "pending, completed, error"
         VARCHAR ia_model
         FLOAT processing_time
         TIMESTAMP created_at
     }
 
-    EMOTION_SCORE {
+    emotion_scores {
         UUID id PK
         UUID analysis_id FK
-        ENUM emotion_name
+        VARCHAR emotion_name
         FLOAT score
         FLOAT confidence
         TIMESTAMP timestamp
     }
 
-    COGNITIVE_DISTORTION {
+    cognitive_distortions {
         UUID id PK
         UUID analysis_id FK
-        ENUM distortion_type
+        VARCHAR distortion_type
         VARCHAR severity
         TEXT description
         TIMESTAMP detected_at
     }
 
-    GUIDING_QUESTION {
+    guiding_questions {
         UUID id PK
         UUID analysis_id FK
         TEXT question_text
-        ENUM category
-        INT priority
+        VARCHAR category
+        INTEGER priority
         TIMESTAMP created_at
     }
 
-    REPORT {
+    reports {
         UUID id PK
         UUID analysis_id FK
-        ENUM format
+        VARCHAR format "pdf"
         TEXT generated_content
         TIMESTAMP generated_at
-        INT word_count
+        INTEGER word_count
     }
+
+    %% Relaciones y Cardinalidades del Negocio
+    users ||--o{ clinical_notes : "1:N (crea notas)"
+    clinical_notes ||--o{ analyses : "1:N (genera análisis)"
+    analyses ||--o{ emotion_scores : "1:N (registra emociones)"
+    analyses ||--o{ cognitive_distortions : "1:N (detecta distorsiones)"
+    analyses ||--o{ guiding_questions : "1:N (sugiere preguntas)"
+    analyses ||--|| reports : "1:1 (consolida reporte)"

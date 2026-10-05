@@ -1,100 +1,43 @@
-flowchart LR
-    user[Usuario / Desarrollador]
+graph TD
+    classDef clientStyle fill:#e0f7fa,stroke:#006064,stroke-width:2px,color:#006064,font-weight:bold;
+    classDef apiStyle fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20,font-weight:bold;
+    classDef coreStyle fill:#ede7f6,stroke:#512da8,stroke-width:2px,color:#311b92,font-weight:bold;
+    classDef dataStyle fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1,font-weight:bold;
+    classDef aiStyle fill:#fff3e0,stroke:#ef6c00,stroke-width:2px,color:#e65100,font-weight:bold;
 
-    subgraph interfaces[Interfaces]
-        cli[CLI]
-        chat[Chat UI]
-        api[API layer]
-        frontend[Frontend placeholder]
+    subgraph subg_client ["Capa de Presentación (Frontend Híbrido)"]
+        web_client["💻 Portal Web<br/>React + TypeScript"]:::clientStyle
+        mobile_client["📱 App Móvil<br/>React Native"]:::clientStyle
     end
 
-    subgraph config[Configuración]
-        agents_cfg[config/agents.yaml]
-        skills_cfg[config/skills.yaml]
-        env_cfg[config/environments]
+    subgraph subg_api ["Capa de API y Servidor"]
+        fastapi_server["⚡ API REST FastAPI<br/>Python 3.11+ / Pydantic"]:::apiStyle
     end
 
-    subgraph core[Core framework]
-        base[core/base.py]
-        agent_base[core/agent_base]
-        skill_base[core/skill_base]
-        orchestrator[core/orchestrator]
-        memory[core/memory]
-        observability[core/observability]
-        security[core/security]
+    subgraph subg_core ["Capa de Orquestación y Lógica (Orchestrator Core)"]
+        agent_registry["Registry & Router"]:::coreStyle
+        planner_exec["Planner & Executor"]:::coreStyle
+        llm_gateway["LLM Gateway<br/>(Claude 3.5 Sonnet)"]:::aiStyle
     end
 
-    subgraph agents_layer[Agentes]
-        research[research_agent]
-        coding[coding_agent]
+    subgraph subg_security ["Capa de Privacidad"]
+        pii_pipeline["🔒 Pipeline PII<br/>SpaCy + Regex + AES-256"]:::aiStyle
     end
 
-    subgraph skills_layer[Skills]
-        web[web_search]
-        codeexec[code_executor]
-        db_query[db_query]
-        docgen[document_generator]
+    subgraph subg_data ["Capa de Persistencia Híbrida (Datos y Caché)"]
+        postgres[(🗄 PostgreSQL v16<br/>SQLAlchemy & Alembic<br/>7 Tablas Clínicas)]:::dataStyle
+        redis[(⚡ Redis v7<br/>Caché de Sesiones & TTL)]:::dataStyle
     end
 
-    subgraph data[Modelos y persistencia]
-        models[models/]
-        db[(SQLAlchemy / DB schema)]
-    end
-
-    subgraph tools[Integraciones externas]
-        github[github_client.py]
-        slack[slack_client.py]
-    end
-
-    user --> cli
-    user --> chat
-    user --> frontend
-    cli --> api
-    chat --> api
-    frontend --> api
-
-    api --> orchestrator
-    orchestrator --> agents_cfg
-    orchestrator --> skills_cfg
-    orchestrator --> env_cfg
-
-    orchestrator --> research
-    orchestrator --> coding
-
-    research --> web
-    research --> docgen
-    coding --> codeexec
-    coding --> db_query
-
-    agent_base --> research
-    agent_base --> coding
-    skill_base --> web
-    skill_base --> codeexec
-    skill_base --> db_query
-    skill_base --> docgen
-
-    orchestrator --> memory
-    orchestrator --> observability
-    orchestrator --> security
-
-    models --> db
-    observability --> github
-    observability --> slack
-
-    classDef actor fill:#fff4d6,stroke:#9a6700,color:#2d2200
-    classDef interface fill:#e7f0ff,stroke:#2563eb,color:#0f172a
-    classDef config fill:#ede9fe,stroke:#7c3aed,color:#2e1065
-    classDef core fill:#e0f2fe,stroke:#0284c7,color:#082f49
-    classDef agent fill:#dcfce7,stroke:#16a34a,color:#14532d
-    classDef skill fill:#fef3c7,stroke:#d97706,color:#78350f
-    classDef data fill:#fce7f3,stroke:#db2777,color:#500724
-    classDef tools fill:#f3f4f6,stroke:#374151,color:#111827
-
-    class user actor
-    class cli,chat,api,frontend interface
-    class agents_cfg,skills_cfg,env_cfg config
-    class base,agent_base,skill_base,orchestrator,memory,observability,security core
-    class research,coding agent
-    class web,codeexec,db_query,docgen skill
-    class models,db data
-    class github,slack tools
+    %% Conexiones Arquitectónicas Principales
+    web_client -->|HTTPS / REST / OpenAPI| fastapi_server
+    mobile_client -->|HTTPS / REST / OpenAPI| fastapi_server
+    
+    fastapi_server -->|Controlador y Peticiones| agent_registry
+    agent_registry --> planner_exec
+    
+    planner_exec -->|Anonimización Obligatoria| pii_pipeline
+    pii_pipeline -->|Inferencia Segura| llm_gateway
+    
+    planner_exec -->|ORM Queries & Migraciones| postgres
+    fastapi_server -->|Gestión de Sesiones & Rate Limit| redis

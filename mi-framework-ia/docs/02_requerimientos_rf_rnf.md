@@ -18,12 +18,13 @@
 | RF‑09 | RF | Must | El sistema activa un protocolo de alerta ante indicadores de riesgo (ideación suicida/autolesión) detectados en un formulario de auto‑reporte, notificando de inmediato al profesional tratante y mostrando líneas de atención en crisis de Ibagué/Tolima. |
 | RF‑10 | RF | Must | El sistema requiere la verificación de la tarjeta profesional (registro oficial) antes de publicar el perfil de un psicólogo en el directorio visible para pacientes. |
 | RF‑11 | RF | Should | El sistema ofrece videollamada integrada y cifrada para sesiones virtuales, sin depender de enlaces de terceros. *[SUPUESTO: proveedor de videollamada no confirmado]* |
-| RF‑12 | RF | Should | El sistema permite al paciente registrar y consultar la autorización de tratamiento de datos personales (consentimiento informado), con fecha y versión aceptada. |
+| RF‑12 | RF | Must | El sistema obtiene y registra el consentimiento informado antes de tratar datos sensibles, con usuario, fecha/hora y versión aceptada; permite consultar y retirar el consentimiento conforme a la política aprobada. |
 | RF‑13 | RF | Should | El sistema permite al profesional configurar su disponibilidad semanal y bloquear franjas horarias específicas. |
 | RF‑14 | RF | Should | El sistema genera un comprobante electrónico tras el pago de cada sesión mediante pasarela de pago local. *[SUPUESTO: método de pago específico no confirmado]* |
 | RF‑15 | RF | Could | El sistema permite al paciente completar cuestionarios de seguimiento periódico (ej. escalas de ansiedad/depresión) y visualizar su evolución. |
 | RF‑16 | RF | Could | El sistema permite calificar la sesión de forma anónima al finalizar, sin exponer comentarios directamente al profesional en tiempo real. |
-| RF‑17 | RF | Won't (v1) | El sistema no incluirá diagnóstico automatizado ni recomendaciones clínicas generadas por IA en esta primera versión. |
+| RF‑17 | RF | Won't (v1) | El sistema no incluirá diagnóstico, prescripción ni recomendaciones clínicas/especialistas generadas automáticamente por IA. |
+| RF‑18 | RF | Must | El profesional tratante autorizado puede solicitar análisis asistido sobre una nota anonimizada y recibir señales emocionales/cognitivas con evidencia textual y preguntas guía, marcadas `needs_review`; no son diagnóstico ni recomendación de tratamiento y requieren validación profesional. |
 
 ## Requisitos No Funcionales (RNF)
 
@@ -32,13 +33,16 @@
 | RNF‑01 | RNF | Must | La plataforma cifra las historias clínicas y notas de sesión en reposo con AES‑256 y en tránsito con TLS 1.3. |
 | RNF‑02 | RNF | Must | El sistema cumple con la Ley 1581 de 2012 y el Decreto 1377 de 2013 de Colombia sobre protección de datos personales y datos sensibles de salud. |
 | RNF‑03 | RNF | Must | El sistema mantiene un registro de auditoría inmutable de todo acceso, modificación o consulta a una historia clínica (usuario, fecha/hora, acción realizada). |
-| RNF‑04 | RNF | Must | La plataforma garantiza una disponibilidad mínima del 99.5 % mensual para los módulos de agenda y videollamada. |
+| RNF‑04 | RNF | Must | Objetivo de disponibilidad productiva: mínimo 99.5% mensual para agenda y, cuando se incorpore, videollamada. No es criterio verificable del prototipo académico ni una garantía sin despliegue/monitorización. |
 | RNF‑05 | RNF | Must | El sistema responde las operaciones críticas (inicio de sesión, agendar cita) en menos de 3 segundos bajo condiciones normales de red móvil 4G. |
 | RNF‑06 | RNF | Should | La arquitectura soporta escalabilidad horizontal para atender el crecimiento de usuarios en Ibagué sin degradar el rendimiento. *[SUPUESTO: volumen exacto no definido]* |
 | RNF‑07 | RNF | Should | El sistema optimiza el consumo de datos móviles para funcionar adecuadamente en zonas de conectividad limitada en la periferia de Ibagué. |
 | RNF‑08 | RNF | Should | La plataforma cumple con pautas de accesibilidad WCAG 2.1 Nivel AA en sus interfaces principales. |
 | RNF‑09 | RNF | Must | Las contraseñas se almacenan utilizando un algoritmo de hashing con sal (ej. bcrypt/Argon2), nunca en texto plano. |
 | RNF‑10 | RNF | Should | El sistema realiza copias de seguridad cifradas diarias de la base de datos clínica, con retención mínima de 30 días. *[SUPUESTO: política de retención no definida]* |
+| RNF‑11 | RNF | Must | Los clientes web y móvil consumen el mismo contrato API versionado; ninguno accede directamente a PostgreSQL, Redis ni a proveedores LLM. La autorización se valida en servidor en cada operación. |
+| RNF‑12 | RNF | Must | La app móvil almacena tokens solo mediante almacenamiento seguro del sistema operativo; no persiste notas, resultados clínicos ni respuestas de riesgo en almacenamiento local común, logs o notificaciones. V1 no ofrece notas clínicas offline. |
+| RNF‑13 | RNF | Must | La plataforma evita incluir notas, PII, credenciales o tokens en logs, métricas, mensajes push y reportes operativos; los eventos de auditoría guardan metadata mínima y trazable. |
 
 ---
-*Resumen de requisitos extraído del anexo del documento maestro.*
+*Requisitos base del anexo maestro, aclarados para el alcance híbrido V1. RF-12 se promueve a Must por ser precondición del tratamiento de datos sensibles. RF-18 explicita el copiloto definido en README/arquitectura y no modifica la prohibición de RF-17.*

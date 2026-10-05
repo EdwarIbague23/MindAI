@@ -1,5 +1,7 @@
 # Prompts 08, 09 y 10 – Análisis Emocional y Validación JSON
 
+> **ARCHIVO HISTÓRICO / NO EJECUTAR:** conservado por trazabilidad de la batería académica. Sus ejemplos y contratos son antiguos/inconsistentes. Usar `analisis_emocional.md`, `../manifest.yaml` y `../../../evaluations/agent_benchmarks/emotion_analysis_agent.md`.
+
 **Origen:** Documento *Batería Maestra de Prompts* (PDF, páginas 16‑19).  
 **Bloque:** C – Pipeline IA / LangChain.  
 **Prioridad:** 2 (todos).  

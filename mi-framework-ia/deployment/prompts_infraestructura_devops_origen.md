@@ -1,5 +1,7 @@
 # Prompts 23, 24 y 25 – Docker, CI/CD y DevOps
 
+> **ARCHIVO HISTÓRICO / NO EJECUTAR:** se conserva por trazabilidad docente. Para instrucciones vigentes usar `prompts_devops.md`, que separa API/web en Compose de los builds móviles.
+
 **Origen:** Documento *Batería Maestra de Prompts* (PDF, páginas 34‑37).  
 **Bloque:** F – Testing & DevOps.  
 **Prioridad:** 4 (todos).  

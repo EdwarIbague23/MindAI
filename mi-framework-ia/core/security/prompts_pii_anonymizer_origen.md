@@ -1,5 +1,7 @@
 # Prompt 05 – Pipeline de Detección PII con Regex + SpaCy
 
+> **ARCHIVO HISTÓRICO / NO EJECUTAR:** se conserva por trazabilidad docente. Usar `prompts_anonimizacion_pii.md`; PII es middleware obligatorio, no una skill opcional.
+
 **Origen:** Documento *Batería Maestra de Prompts* (PDF, páginas 12‑13).  
 **Bloque:** B – Seguridad & PII.  
 **Prioridad:** 1.  

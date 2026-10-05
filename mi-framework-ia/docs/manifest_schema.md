@@ -1,315 +1,80 @@
-# Especificación de Manifiestos — MindFlow AI (`mi-framework-ia`)
+# Contrato de manifests — MindFlow AI
 
-**Versión de la especificación:** 2.0.0
-**Archivos cubiertos:** `config/agents.yaml`, `config/skills.yaml`
-**Estado:** Vigente — validación obligatoria en tiempo de carga del Orquestador (`core/`)
+**Versión:** 3.0.0
+**Alcance:** activación de agentes/skills y manifests individuales
+**Estado:** contrato objetivo; el repositorio aún no implementa un loader/validador de manifests en runtime.
 
-> **Nota de versión:** Se ajustan las categorías válidas de `skills.yaml` a las cuatro carpetas reales de `skills/` (`code_executor`, `db_query`, `document_generator`, `web_search`). Los servicios de PII y cifrado **no** se modelan como skills en esta versión: viven en `core/security/` como middleware obligatorio del Orquestador (ver `architecture.md`, sección 4.2).
+## 1. Fuente y ubicación
 
----
+`config/agents.yaml` y `config/skills.yaml` contienen listas de activación, no las definiciones completas. Cada componente mantiene su manifest junto al código:
 
-## 1. Propósito
+```text
+config/agents.yaml             # active_agents: [nombre, ...]
+config/skills.yaml             # active_skills: [nombre, ...]
+agents/<nombre>/manifest.yaml
+skills/<nombre>/manifest.yaml
+```
 
-Este documento define el esquema formal que debe cumplir todo manifiesto de **agente** o **skill** dentro de `mi-framework-ia`. El Orquestador rechaza en tiempo de arranque cualquier manifiesto que no valide contra este esquema, y rechaza en tiempo de ejecución cualquier acción que exceda lo declarado en `permissions`.
+La estructura de activación coincide con los archivos actuales. El código actual solo registra clases mediante decoradores; antes de afirmar que permisos/schema se hacen cumplir, se debe implementar y probar el loader descrito abajo.
 
----
+## 2. Configuración de activación
 
-## 2. Esquema de `config/agents.yaml`
-
-### 2.1 Estructura general
-
-`agents.yaml` contiene una lista bajo la clave raíz `agents`, donde cada elemento define un agente que vive en `agents/`.
-
-### 2.2 Campos obligatorios
-
-| Campo | Tipo | Descripción |
-|---|---|---|
-| `name` | `string` | Identificador único en `snake_case` (p. ej. `emotion_analysis_agent`), debe coincidir con el nombre de su carpeta en `agents/`. |
-| `version` | `string (semver)` | `MAJOR.MINOR.PATCH`. Cambios en `output_schema` exigen incremento de `MAJOR`. |
-| `description` | `string` | Descripción funcional en una o dos frases, sin PII de ejemplo. |
-| `role` | `enum` | `triage` \| `emotion_analysis` \| `report_generation` \| `system_audit`. |
-| `input_schema` | `JSON Schema` | Esquema del payload de entrada. Debe exigir `anonymized: true` cuando el agente procese texto clínico. |
-| `output_schema` | `JSON Schema` | Esquema de salida. **Prohibido** declarar `diagnosis`, `prescription` o campos que impliquen juicio clínico definitivo. |
-| `permissions` | `object` | Ver [2.4](#24-objeto-permissions-agentes). |
-| `model_policy` | `object` | Ver [2.5](#25-objeto-model_policy). |
-| `pii_policy` | `enum` | `anonymized_only` (obligatorio si procesa texto clínico) \| `no_clinical_data` (agentes de sistema, p. ej. `audit_agent`). |
-| `owner` | `string` | Equipo/persona responsable, para trazabilidad de cambios. |
-
-### 2.3 Campos opcionales
-
-| Campo | Tipo | Valor por defecto | Descripción |
-|---|---|---|---|
-| `temperature` | `float` | `0.2` | Temperatura de muestreo del LLM. |
-| `max_tokens` | `integer` | `2048` | Límite de tokens de salida por invocación. |
-| `timeout_seconds` | `integer` | `30` | Tiempo máximo de ejecución antes de que el Orquestador aborte. |
-| `max_retries` | `integer` | `2` | Reintentos ante `ProviderUnavailableError`. |
-| `fallback_agent` | `string` | `null` | Agente alterno si este falla de forma irrecuperable. |
-| `memory_scope` | `enum` | `session` | `session` \| `analysis_history` (requiere `ownership` validado en `core/`). |
-| `notify_on_failure` | `object` | `null` | Config de alertas vía `tools/slack_client.py` (solo metadata técnica, nunca contenido clínico). |
-| `tags` | `array<string>` | `[]` | Etiquetas para clasificación en `evaluations/`. |
-| `evaluation_suite` | `string` | `null` | Ruta al conjunto de casos de prueba en `evaluations/`. |
-
-### 2.4 Objeto `permissions` (Agentes)
-
-| Subcampo | Tipo | Descripción |
-|---|---|---|
-| `allowed_skills` | `array<string>` | Lista cerrada de `name` de skills (`skills/`) que este agente puede invocar. Fuera de esta lista → `PermissionDeniedError`. |
-| `data_scope` | `enum` | `own_session` \| `own_therapist_patients` \| `none`. Alcance de datos vía `skills/db_query`. |
-| `network_access` | `enum` | `none` \| `restricted` (allowlist) \| `full` (prohibido si el agente procesa texto clínico). |
-| `pii_access` | `enum` | `forbidden` \| `anonymized_only`. Un agente con `forbidden` no puede recibir campos marcados como sensibles en `input_schema`. |
-
-### 2.5 Objeto `model_policy`
-
-| Subcampo | Tipo | Descripción |
-|---|---|---|
-| `provider` | `string` | Identificador lógico resuelto desde `config/environments/` (p. ej. `env:LLM_PROVIDER`). Nunca un valor hardcodeado. |
-| `structured_output` | `boolean` | Si `true`, el LLM Gateway (`core/`) exige y valida salida JSON contra `output_schema`. |
-| `rate_limit_per_minute` | `integer` | Límite de invocaciones al Gateway por minuto. |
-
-### 2.6 Ejemplo completo
+Formato esperado:
 
 ```yaml
 # config/agents.yaml
-agents:
-  - name: emotion_analysis_agent
-    version: "1.2.0"
-    description: >
-      Analiza texto clínico anonimizado para identificar emociones, intensidad,
-      evidencia textual y distorsiones cognitivas, sin emitir diagnóstico.
-    role: emotion_analysis
-    owner: team-clinical-ai
+active_agents:
+  - research_agent
+  - coding_agent
 
-    input_schema:
-      type: object
-      required: [text, anonymized]
-      properties:
-        text: { type: string, maxLength: 8000 }
-        anonymized: { type: boolean, const: true }
-
-    output_schema:
-      type: object
-      required: [emotions, distortions, guiding_questions]
-      properties:
-        emotions:
-          type: array
-          items:
-            type: object
-            required: [name, score, evidence]
-            properties:
-              name: { type: string }
-              score: { type: integer, minimum: 0, maximum: 100 }
-              evidence: { type: string }
-        distortions:
-          type: array
-          items:
-            type: object
-            properties: { type: { type: string } }
-        guiding_questions:
-          type: array
-          items: { type: string }
-
-    permissions:
-      allowed_skills: [document_generator, db_query]
-      data_scope: own_session
-      network_access: none
-      pii_access: anonymized_only
-
-    model_policy:
-      provider: "env:LLM_PROVIDER"
-      structured_output: true
-      rate_limit_per_minute: 30
-
-    pii_policy: anonymized_only
-    memory_scope: analysis_history
-
-    temperature: 0.2
-    max_tokens: 2048
-    timeout_seconds: 20
-    max_retries: 2
-    fallback_agent: null
-    notify_on_failure:
-      channel: "#mindflow-alerts"
-      severity_threshold: HIGH
-    tags: [clinical, nlp, emotion]
-    evaluation_suite: evaluations/emotion_analysis_agent/
-```
-
----
-
-## 3. Esquema de `config/skills.yaml`
-
-### 3.1 Estructura general
-
-`skills.yaml` contiene una lista bajo la clave raíz `skills`. Cada skill corresponde a una subcarpeta física dentro de `skills/`.
-
-### 3.2 Campos obligatorios
-
-| Campo | Tipo | Descripción |
-|---|---|---|
-| `name` | `string` | Identificador único en `snake_case`. |
-| `version` | `string (semver)` | Versión de la skill. |
-| `description` | `string` | Descripción funcional concreta. |
-| `category` | `enum` | **`code_executor` \| `db_query` \| `document_generator` \| `web_search`** — debe coincidir exactamente con una subcarpeta existente en `skills/`. |
-| `entrypoint` | `string` | Ruta de importación de la función/clase ejecutable (p. ej. `skills.document_generator:generate`). |
-| `input_schema` | `JSON Schema` | Esquema formal de entrada. |
-| `output_schema` | `JSON Schema` | Esquema formal de salida. |
-| `permissions` | `object` | Ver [3.4](#34-objeto-permissions-skills). |
-| `sandboxed` | `boolean` | Obligatorio `true` para `category: code_executor`. |
-
-> **Nota:** `pii_pipeline` y `encryption_service` **no se declaran en `skills.yaml`**. Son middleware fijo de `core/security/`, invocado automáticamente por el Orquestador y no removible ni sustituible desde un manifiesto de agente.
-
-### 3.3 Campos opcionales
-
-| Campo | Tipo | Valor por defecto | Descripción |
-|---|---|---|---|
-| `timeout_seconds` | `integer` | `10` | Tiempo máximo de ejecución. |
-| `rate_limit_per_minute` | `integer` | `60` | Límite de invocaciones por minuto por agente invocador. |
-| `retryable` | `boolean` | `true` | Si el Orquestador puede reintentar ante fallo transitorio. |
-| `audit_level` | `enum` | `standard` | `standard` \| `elevated` (para skills con acceso a datos, p. ej. `db_query`). |
-
-### 3.4 Objeto `permissions` (Skills)
-
-| Subcampo | Tipo | Descripción |
-|---|---|---|
-| `requires_network` | `boolean` | `true` únicamente para `web_search`. Debe ser `false` para cualquier skill que procese texto clínico. |
-| `pii_access` | `enum` | `forbidden` (valor obligatorio para las 4 categorías de skill; el manejo de PII está reservado a `core/security/`). |
-| `data_scope` | `enum` | `none` \| `own_session` \| `own_therapist_patients`. Aplica a `db_query`. |
-| `allowed_domains` | `array<string>` | Lista blanca de dominios externos. Obligatorio y no vacío si `requires_network: true`. |
-
-### 3.5 Ejemplo completo
-
-```yaml
 # config/skills.yaml
-skills:
-  - name: document_generator
-    version: "1.0.0"
-    description: >
-      Genera reportes clínicos en PDF/Markdown a partir de datos ya
-      estructurados y validados; nunca recibe texto clínico sin procesar.
-    category: document_generator
-    entrypoint: "skills.document_generator:generate"
-    sandboxed: false
-
-    input_schema:
-      type: object
-      required: [analysis_id, emotions, distortions, guiding_questions]
-      properties:
-        analysis_id: { type: string, format: uuid }
-        emotions: { type: array }
-        distortions: { type: array }
-        guiding_questions: { type: array }
-
-    output_schema:
-      type: object
-      required: [file_path, format]
-      properties:
-        file_path: { type: string }
-        format: { type: string, enum: [pdf, markdown] }
-
-    permissions:
-      requires_network: false
-      pii_access: forbidden
-      data_scope: own_session
-      allowed_domains: []
-
-    timeout_seconds: 15
-    rate_limit_per_minute: 30
-    retryable: true
-    audit_level: standard
-
-  - name: web_search
-    version: "1.0.0"
-    description: >
-      Búsqueda de referencias públicas no clínicas (p. ej. líneas de atención
-      en crisis). Prohibido transmitir PII o texto clínico en las consultas.
-    category: web_search
-    entrypoint: "skills.web_search:search"
-    sandboxed: false
-
-    input_schema:
-      type: object
-      required: [query]
-      properties:
-        query: { type: string, maxLength: 200 }
-
-    output_schema:
-      type: object
-      required: [results]
-      properties:
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              title: { type: string }
-              url: { type: string }
-
-    permissions:
-      requires_network: true
-      pii_access: forbidden
-      data_scope: none
-      allowed_domains:
-        - "minsalud.gov.co"
-        - "lineasdeatencion.gov.co"
-
-    timeout_seconds: 8
-    rate_limit_per_minute: 20
-    retryable: true
-    audit_level: standard
-
-  - name: db_query
-    version: "1.0.0"
-    description: >
-      Consultas estructuradas de solo lectura/escritura controlada sobre
-      la base de datos cifrada, con validación de ownership obligatoria.
-    category: db_query
-    entrypoint: "skills.db_query:execute"
-    sandboxed: false
-
-    input_schema:
-      type: object
-      required: [query_type, session_id]
-      properties:
-        query_type: { type: string, enum: [read_analysis, write_analysis, list_reports] }
-        session_id: { type: string, format: uuid }
-
-    output_schema:
-      type: object
-      required: [rows]
-      properties:
-        rows: { type: array }
-
-    permissions:
-      requires_network: false
-      pii_access: forbidden
-      data_scope: own_session
-      allowed_domains: []
-
-    timeout_seconds: 5
-    rate_limit_per_minute: 120
-    retryable: true
-    audit_level: elevated
+active_skills:
+  - web_search
+  - code_executor
+  - db_query
+  - document_generator
 ```
 
----
+Cada nombre debe ser único, corresponder a una carpeta y tener un manifest válido. Un componente clínico no se activa hasta tener implementación, schema, pruebas y revisión; el manifest spec-only de `emotion_analysis_agent` no lo activa por sí mismo.
 
-## 4. Reglas de Validación del Orquestador
+## 3. Agent manifest
 
-1. **Unicidad:** no puede existir más de un agente o skill con el mismo `name`.
-2. **Semver estricto:** `version` debe cumplir `MAJOR.MINOR.PATCH`.
-3. **Coherencia PII:** si `input_schema` de un agente incluye texto libre proveniente de una nota clínica, `pii_policy` no puede ser distinto de `anonymized_only`.
-4. **Coherencia de permisos:** toda skill listada en `permissions.allowed_skills` de un agente debe existir en `config/skills.yaml`; referencias inexistentes bloquean el arranque.
-5. **Prohibición de campos diagnósticos:** `output_schema` de cualquier agente no puede contener `diagnosis`, `prescription`, `treatment_plan` ni sinónimos equivalentes.
-6. **Sandbox obligatorio:** toda skill con `category: code_executor` debe declarar `sandboxed: true`.
-7. **Dominios explícitos:** toda skill con `requires_network: true` debe declarar `allowed_domains` no vacío.
-8. **Categoría válida:** `category` debe ser exactamente una de `code_executor | db_query | document_generator | web_search`; cualquier otro valor (incluyendo variantes como `tool` o `pii`) es rechazado, ya que esas responsabilidades pertenecen a `core/security/`, no a `skills/`.
-9. **`pii_access` de skills:** las 4 categorías de skill deben declarar `permissions.pii_access: forbidden`; ninguna skill puede solicitar acceso a PII.
+Ruta: `agents/<name>/manifest.yaml`.
 
----
+Campos obligatorios:
 
-## 5. Referencias Cruzadas
+| Campo | Tipo/regla |
+|---|---|
+| `name`, `version`, `description`, `owner` | Identificador snake_case igual a carpeta; SemVer; descripción sin datos reales; responsable. |
+| `role` | `coding`, `research`, `triage`, `emotion_analysis`, `report_generation` o `system_audit`. |
+| `input_schema`, `output_schema` | JSON Schema estricto; `additionalProperties: false` para DTOs de dominio. Texto clínico requiere `anonymized: true`. |
+| `permissions` | Objeto descrito abajo. |
+| `pii_policy` | `anonymized_only` para agente clínico o `no_clinical_data` para los demás. |
+| `model_policy` | Obligatorio para agente que invoque LLM; en otros roles se omite. |
 
-- Descripción de capas y flujo de datos: [`architecture.md`](./architecture.md)
-- Definiciones activas: `config/agents.yaml`, `config/skills.yaml`, `config/environments/`
-- Middleware de seguridad (fuera del sistema de manifiestos): `core/security/pii_pipeline`, `core/security/encryption_service`
-- Validador de esquema (implementación): `core/manifest_validator.py` *(a implementar según esta especificación)*
+`permissions` incluye `allowed_skills` (allowlist), `data_scope` (`none`, `own_session`, `own_therapist_patients`), `network_access` (`none`, `restricted`, `full`) y `pii_access` (`forbidden`, `anonymized_only`). Un agente que procese texto clínico nunca usa `full` ni recibe PII.
+
+`model_policy` incluye proveedor por referencia a ambiente (`env:LLM_PROVIDER`, no secreto literal), `structured_output: true` y límite de llamadas. `temperature`, `max_tokens`, timeout, reintentos, evaluación y memoria son opcionales con límites. No incluir prompts con casos clínicos reales.
+
+El schema de salida clínico no admite `diagnosis`, `prescription`, `specialist_recommendation` ni juicio clínico definitivo. Para MindFlow V1 usar `needs_review: true`, scores 0–100, evidencia literal y listas vacías cuando no haya señal suficiente.
+
+## 4. Skill manifest
+
+Ruta: `skills/<name>/manifest.yaml`.
+
+Campos obligatorios: `name`, `version`, `description`, `category`, `entrypoint`, `input_schema`, `output_schema`, `permissions`, `sandboxed`. La categoría debe coincidir con `code_executor`, `db_query`, `document_generator` o `web_search`. `permissions` declara `requires_network`, `pii_access`, `data_scope` y dominios permitidos. PII queda prohibida en skills; consultas clínicas se resuelven en capa de dominio con autorización, no por SQL arbitrario de un agente. `code_executor` requiere sandbox real sin red ni filesystem del host.
+
+PII, anonimización y cifrado no son skills: son controles transversales obligatorios de `core/security/` antes/después del orquestador según el flujo.
+
+## 5. Validaciones requeridas al implementar el loader
+
+1. Parsear YAML seguro; rechazar claves desconocidas, duplicados y tipos incorrectos.
+2. Resolver activaciones a carpeta, manifest, entrypoint/clase registrada y versión.
+3. Validar schemas de entrada/salida y permisos antes de registrar el componente.
+4. Bloquear agente clínico si `pii_policy`, schema, anonimización o salida estructurada no cumplen.
+5. Bloquear skill con red/PII fuera de allowlist; no tratar permisos declarativos como sustituto de aislamiento real.
+6. Probar manifiesto inválido, componente faltante, skill no permitida, PII en entrada y salida clínica prohibida.
+
+## 6. Estado de migración
+
+Los manifests preexistentes de `coding_agent`, `research_agent` y skills son esquemáticos y no cumplen todavía todos estos campos. Actualizarlos y escribir el loader es una fase de generación pendiente; no modificar activaciones para incluir un agente incompleto. Revisar este contrato junto con `docs/AI_CODEGEN_PLAYBOOK.md` antes de generar código.

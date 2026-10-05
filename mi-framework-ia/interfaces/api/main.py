@@ -1,1 +1,1 @@
-"""Punto de entrada HTTP (FastAPI/Express) hacia el orquestador."""
+"""Stub pendiente: punto de entrada FastAPI para el API común web/móvil."""
