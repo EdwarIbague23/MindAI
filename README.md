@@ -42,7 +42,7 @@ La plataforma emplea una arquitectura **hibrida Web + Móvil** con las siguiente
 | **Presentación móvil** | React Native | Aplicación Android/iOS para tareas prioritarias de paciente y profesional |
 | **Aplicación** | FastAPI (Python) | Servidor API REST con async/await, validación Pydantic |
 | **Orquestación** | Orchestrator Core | Router/Planner/Executor que coordina skills y agents |
-| **Infraestructura** | PostgreSQL + Redis | Base de datos relacional + caché de sesiones en memoria |
+| **Infraestructura** | **PostgreSQL v16 + SQLAlchemy 2.x + Alembic | Redis v7** | Base de datos relacional + caché de sesiones en memoria. PostgreSQL garantiza transacciones ACID, integridad referencial y aislamiento de tenant. Redis proporciona acceso O(1) para sesiones activas, TTL automático y reduce latencia en respuestas del copiloto. |
 
 ---
 
@@ -51,7 +51,7 @@ La plataforma emplea una arquitectura **hibrida Web + Móvil** con las siguiente
 | Categoría | Tecnología | Justificación |
 |-----------|------------|---------------|
 | **Lenguaje / Servidor** | **Python + FastAPI** | Async nativo para LLM calls y DB I/O, validación automática con Pydantic, documentación Swagger automática, mejor rendimiento en cargas de IA vs Node.js |
-| **Base de Datos** | **PostgreSQL (SQL relacional)** | Transacciones ACID para datos sensibles, consultas complejas para análisis clínico, ya configurado via Alembic |
+| **Base de Datos** | **PostgreSQL v16 + SQLAlchemy 2.x + Alembic** | Transacciones ACID para datos sensibles, consultas complejas para análisis clínico, integridad referencial, aislamiento de tenant (schemas/RLS), y migraciones versionadas. Configurado via Alembic con soporte pgcrypto para cifrado AES-256-GCM de notas clínicas. |
 | **Caché** | **Redis** | Acceso O(1) para sesiones activas, TTL automático para contexto de conversación, reduce latencia en respuestas del copiloto |
 | **Móvil** | **React Native** | Aplicación Android/iOS que consume la misma API REST/OpenAPI que la web |
 | **IA / LLM** | **Claude 3.5 Sonnet** | Proveedor principal a través del LLM Gateway |

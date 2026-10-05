@@ -60,7 +60,9 @@ mi-framework-ia/
 | Principio | Aplicación en MindFlow AI |
 |---|---|
 | **Aislamiento de PII por defecto** | La anonimización vive en `core/` como middleware **no omitible**, no como una `skill` que un agente pudiera decidir saltarse. Ningún agente recibe texto clínico sin anonimizar. |
+| **Caché con TTL optimizado** | Redis v7 para sesiones activas, TTL automático y cache de disponibilidad; O(1) access para respuestas del copiloto y reducción de latencia en contexto de conversación. | |
 | **Soporte, no sustitución clínica** | Los manifests objetivo prohíben diagnóstico/prescripción; el loader y enforcement runtime siguen pendientes. |
+| **Aislamiento de datos (tenant isolation)** | PostgreSQL garantiza aislamiento por medio de schemas y roles; cada tenant (profesional/paciente) tiene acceso controlado a sus propios datos a través de políticas de RLS (Row Level Security). | |
 | **Proveedor de LLM reemplazable** | Toda invocación a un modelo pasa por el LLM Gateway en `core/`; ningún agente ni skill llama directamente a un proveedor externo. |
 | **Trazabilidad total** | Toda ejecución queda registrada en el bus de observabilidad de `core/` con `request_id`, sin persistir contenido clínico. |
 | **Mínimo privilegio** | Cada agente/skill tendrá permisos en su manifest individual; el loader y enforcement del orquestador deben implementarse y probarse antes de considerar esos límites efectivos. |
@@ -91,7 +93,7 @@ Es el corazón de control de `mi-framework-ia`. Agrupa cuatro responsabilidades 
    - No afirmar permisos efectivos hasta que existan loader, enforcement y pruebas negativas.
 2. **Gestión de memoria**
    - Memoria de sesión (corto plazo, TTL corto, sin PII persistida).
-   - Memoria de análisis (largo plazo, PostgreSQL cifrado, indexada por `analysis_id`/`note_id`), con `ownership` validado antes de cualquier lectura.
+   - Memoria de análisis (largo plazo, PostgreSQL v16 cifrado, indexada por `analysis_id`/`note_id`), con `ownership` validado antes de cualquier lectura. ORM: SQLAlchemy 2.x. Migraciones: Alembic. Cumplimiento: transacciones ACID, integridad referencial, restricciones de exclusión para agenda y auditoría append-only.
 3. **LLM Gateway**
    - Abstracción única (`analyze(text) -> AnalysisResponse`) independiente del proveedor, configurado por variable de entorno en `config/environments/`.
    - Aplica timeout, reintentos con backoff, rate limiting por agente y validación obligatoria de salida contra `output_schema`.
@@ -151,7 +153,7 @@ flowchart TD
    W -->|HTTPS REST / OpenAPI común| API[interfaces/api<br/>FastAPI]
    M -->|HTTPS REST / OpenAPI común| API
    API --> S[Servicios de aplicación<br/>auth, consentimiento, agenda, clínica]
-   S -->|CRUD autorizado| DB[(PostgreSQL<br/>datos cifrados y relaciones)]
+   S -->|CRUD autorizado| DB[(PostgreSQL v16 + SQLAlchemy 2.x + Alembic)<br/>datos cifrados y relaciones)]
    S -->|Solo análisis solicitado y autorizado| C{Orquestador<br/>core/ planeado}
    C -->|Anonimización obligatoria| D[[core/security<br/>PII pipeline planeado]]
    D -->|Texto anonimizado| E[emotion_analysis_agent<br/>planeado; no activo]

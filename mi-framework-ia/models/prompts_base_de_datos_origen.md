@@ -32,27 +32,32 @@ Diseñar los modelos `User`, `ClinicalNote`, `Analysis`, `EmotionScore`, `Cognit
 
 - Usar SQLAlchemy 2.x.
 - Evitar SQL por concatenación.
-- Preparar PostgreSQL.
+- Preparar PostgreSQL v16.
 - Índices sobre IDs y timestamps.
 - No almacenar tokens.
-- Preparar el modelo para cifrado de notas.
+- Preparar el modelo para cifrado de notas con pgcrypto/AES-256-GCM.
+- Usar Alembic para migraciones versionadas; migraciones reversibles cuando sea viable.
+- No introducir credenciales en scripts.
+- Probar migraciones desde una BD limpia.
 
 ### Prompt listo para ejecutar (Act as…)
 
 ```
-Act as Senior Database Architect specialized in PostgreSQL, SQLAlchemy 2.x, and multi‑tenant SaaS applications.
+Act as Senior Database Architect specialized in PostgreSQL v16, SQLAlchemy 2.x, Alembic, and multi‑tenant SaaS applications.
 
 Context:
-Backend / ORM and Data Model. Design the User, ClinicalNote, Analysis, EmotionScore, CognitiveDistortion, GuidingQuestion, and Report models, with the hierarchical relationship User‑Question, timestamps and UUIDs, indexes and foreign keys, controlled deletion, and referential integrity.
+Backend / ORM and Data Model. Design the User, ClinicalNote, Analysis, EmotionScore, CognitiveDistortion, GuidingQuestion, and Report models, with the hierarchical relationship User‑Question, timestamps and UUIDs, indexes and foreign keys, controlled deletion, and referential integrity. The system uses a dual storage approach: PostgreSQL as the relational database for clinical data with ACID compliance, referential integrity, and tenant isolation via schemas/RLS; Alembic for versioned migrations. Redis v7 is used for session cache and latency optimization of the copilot.
 
 Task:
-Design the User, ClinicalNote, Analysis, EmotionScore, CognitiveDistortion, GuidingQuestion, and Report models, with the hierarchical relationship User‑Question, timestamps and UUIDs, indexes and foreign keys, controlled deletion, and referential integrity.
+Design the User, ClinicalNote, Analysis, EmotionScore, CognitiveDistortion, GuidingQuestion, and Report models, with the hierarchical relationship User‑Question, timestamps and UUIDs, indexes and foreign keys, controlled deletion, and referential integrity. The system uses a dual storage approach: PostgreSQL as the relational database for clinical data with ACID compliance, referential integrity, and tenant isolation via schemas/RLS; Alembic for versioned migrations. Redis v7 is used for session cache and latency optimization of the copilot.
 
 Consider:
 - Timestamps and UUIDs.
 - Indexes and foreign keys.
 - Controlled deletion.
 - Referential integrity.
+- Dual storage: PostgreSQL for persistent clinical data with ACID/tenant isolation; Redis for session cache.
+- Prepare model for note encryption with pgcrypto/AES-256-GCM.
 
 Format:
 -mapped columns (e.g. note_id: Mapped, status: Mapped).
@@ -60,7 +65,7 @@ Examples of the expected format and level:
 - questions. Deleting a user must not accidentally delete information without an explicit policy.
 
 Constraints:
-- Use SQLAlchemy 2.x; avoid SQL built by string concatenation; target PostgreSQL; indexes on IDs and timestamps; do not store tokens; prepare the model for note encryption.
+- Use SQLAlchemy 2.x; avoid SQL built by string concatenation; target PostgreSQL v16; indexes on IDs and timestamps; do not store tokens; prepare the model for note encryption with pgcrypto; use Alembic for migrations; Redis v7 for session cache.
 ```
 ---
 

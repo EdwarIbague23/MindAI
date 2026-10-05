@@ -6,7 +6,7 @@
 
 ## Prompt
 
-Actúa como arquitecto de datos SQLAlchemy 2.x/PostgreSQL para una plataforma de salud mental. Inspecciona los modelos y migraciones existentes. Conserva el framework docente y entrega primero un diff lógico (entidades, claves, cardinalidades, restricciones) comparado con el ERD antes de editar.
+Actúa como arquitecto de datos SQLAlchemy 2.x/PostgreSQL v16 para una plataforma de salud mental. Inspecciona los modelos y migraciones existentes. Conserva el framework docente y entrega primero un diff lógico (entidades, claves, cardinalidades, restricciones) comparado con el ERD antes de editar.
 
 Implementa, solo después de aprobación, entidades V1: `User` con roles patient/therapist/admin; `TherapistProfile` con verificación; `Consent`; `AvailabilitySlot`; `Appointment`; `ClinicalNote`; `Analysis`; `EmotionScore`; `CognitiveDistortion`; `GuidingQuestion`; `Report`; `RiskAssessment`; `Notification`; `AuditEvent`.
 
@@ -18,5 +18,6 @@ Reglas obligatorias:
 - La agenda impide solapamientos en concurrencia mediante transacción y restricción apropiada de PostgreSQL; no depender solo de una consulta previa en la aplicación.
 - Auditoría es append-only y no guarda nota, PII, token ni respuesta libre. Datos de riesgo se minimizan y restringen.
 - Evitar cascadas que borren historia clínica/auditoría sin política explícita. Definir retención/anonimización como decisión pendiente si falta aprobación.
+- **Dual storage:** PostgreSQL v16 + SQLAlchemy 2.x + Alembic para datos relacionales con transacciones ACID, integridad referencial y aislamiento de tenant (schemas/RLS). Redis v7 para caché de sesiones del copiloto, TTL automático y O(1) access para reducir latencia en respuestas.
 
 Actualiza todos los modelos relacionados, exports de `models/__init__.py`, migración(es), schemas afectados y tests en un mismo cambio coherente. Si la migración inicial ya fue aplicada/compartida, crea una migración nueva en vez de reescribir historia. Ejecuta revisión Alembic, upgrade desde DB limpia, downgrade cuando sea viable y pruebas de constraints. Reporta incertidumbres; no añadas tablas de pagos/videollamada en V1.

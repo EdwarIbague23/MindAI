@@ -4,7 +4,7 @@
 **Bloque:** A – Arquitectura & Datos.  
 **Prioridad:** 1.  
 **Área / Submódulo:** Arquitectura / Estructura General del Proyecto.  
-**Rol Senior:** Senior Solutions Architect especializado en Python, FastAPI, PostgreSQL, React y sistemas SaaS B2B con componentes de IA.
+**Rol Senior:** Senior Solutions Architect specialized in Python, FastAPI, PostgreSQL v16 + SQLAlchemy 2.x + Alembic (relational), Redis v7 (cache/sessions), React, React Native, API security, and AI-enabled healthcare software.
 
 ## Tarea específica y casos borde
 
@@ -48,10 +48,11 @@ and `interfaces/mobile`; map each client to the common API and each API domain t
 Separate V1 from deferred features. Do not claim that stubs or diagrams are implemented code.
 
 Consider:
-- Environment‑based configuration (dev/test/prod).
+- Configuration by environments (dev/test/prod).
 - Secure error handling and logging.
 - Clear dependencies between modules.
 - Future scalability.
+- **Dual storage: PostgreSQL v16 + SQLAlchemy 2.x + Alembic for relational data with ACID/tenant isolation, Redis v7 for sessions and latency optimization.**
 
 Format:
 Architecture decision summary, Mermaid component diagram, data-flow diagram, responsibility

@@ -13,14 +13,28 @@ Se recomienda un **monolito modular con FastAPI** para el MVP, organizado por do
 | Identidad | JWT de corta duracion, refresh token rotatorio, segundo factor por correo en V1 (proveedor desacoplado), Argon2id | Cubre RF-01, RF-12 y RNF-09 con minimo privilegio; nunca confiar en el rol enviado por un cliente. |
 | Dominio V1 | Usuarios/roles, consentimiento, perfiles/verificación profesional, directorio, disponibilidad, citas, notas, riesgo, notificaciones y auditoría | Cubre RF-01 a RF-10, RF-12, RF-13 y RF-18 según historias; pagos y videollamada quedan fuera de V1. |
 | IA | Orquestador + agentes + LLM Gateway existentes | Mantiene anonimización obligatoria, esquemas estructurados y proveedor reemplazable. |
-| Base de datos | PostgreSQL 16 administrado + `pgcrypto` | Transacciones, claves foraneas, restricciones de solapamiento para agenda, auditoria y crecimiento horizontal de lectura. |
-| Cache y tiempo real | Redis | Sesiones, rate limiting, locks breves de agenda, cache de disponibilidad y canales de notificacion. No almacena historia clinica. |
+| Base de datos | PostgreSQL 16 administrado + SQLAlchemy 2.x + Alembic | Transacciones ACID, integridad referencial, restricciones de solapamiento para agenda, auditoría append-only. SQLAlchemy ORM para mapeo objeto-relacional; Alembic para migraciones versionadas y reversibles cuando sea viable. Soporte pgcrypto para cifrado AES-256-GCM de notas clínicas. | |
+| Cache y tiempo real | Redis v7 | Sesiones, rate limiting, locks breves de agenda, cache de disponibilidad y canales de notificación. No almacena historia clínica. Acceso O(1) para sesiones activas, TTL automático, optimización de latencia en respuestas del copiloto. |
 | Documentos | S3 compatible con cifrado administrado por claves | Tarjetas profesionales, comprobantes y reportes; en PostgreSQL solo se guardan metadatos y referencias. |
 | Eventos | Redis Streams inicialmente; RabbitMQ si crece el volumen | Notificaciones, alertas, auditoria y tareas de reportes sin bloquear la API. |
 | Videollamada | WebRTC con servidor de señalizacion propio y TURN administrado | Evita enlaces expuestos de terceros; validar proveedor y cifrado extremo a extremo antes de produccion. |
 | Despliegue | Docker, PostgreSQL administrado, CDN/WAF y CI/CD | Facilita RNF-04, RNF-06, backups y despliegues repetibles. |
 
 La PWA puede evaluarse como complemento de la web, pero no sustituye la aplicación React Native definida para el canal móvil. Los dos clientes deben reutilizar los contratos de API; no se deben duplicar agentes, persistencia ni reglas clínicas en los dispositivos.
+
+## Justificación de la doble capa de almacenamiento
+
+**PostgreSQL v16 + SQLAlchemy 2.x + Alembic:**
+- **Cumplimiento ACID:** Garantiza transacciones seguras para datos clínicos sensibles (historias, citas, auditoría). Ningún dato se pierde o corrompe en operaciones concurrentes.
+- **Integridad referencial:** Restricciones de clave foránea en citas, disponibilidad y relaciones terapeuta-paciente. Las restricciones de exclusión evitan solapamientos de agenda a nivel de BD.
+- **Aislamiento de tenant (tenant isolation):** Cada profesional/paciente tiene acceso controlado a sus propios datos mediante schemas de PostgreSQL y políticas de RLS (Row Level Security). Los roles (patient/therapist/admin) se modelan una sola vez; no se crea `is_therapist` redundante.
+- **pgcrypto:** Cifrado AES-256-GCM para notas clínicas en reposo. Las claves de cifrado nunca se almacenan en el propio texto de la nota.
+- **Alembic:** Migraciones versionadas, reversibles cuando es viable. Probar siempre desde BD limpia. No se introducen credenciales en scripts.
+
+**Redis v7:**
+- **Gestión de sesiones:** Almacena sesiones activas del copiloto con TTL automático; O(1) access time reduce latencia en respuestas del copiloto.
+- **Rate limiting y locks:** Locks breves de agenda y rate limiting no bloquean la API principal.
+- **Redis Streams:** Para eventos y notificaciones sin bloquear la API. No almacena historia clínica ni PII.
 
 ## Alcance y fases
 
