@@ -1,8 +1,8 @@
-# MindFlow AI — Plataforma Híbrida de Salud Mental con Copiloto Profesional
+# MindFlow AI — Hybrid Mental Health Platform with Professional Copilot
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Estado](https://img.shields.io/badge/Estado-En_Desarrollo-yellow)](https://github.com/EdwarIbague23/Electiva_IA-/graphs/activity)
-[![Curso](https://img.shields.io/badge/UNIMINUTO-Electiva_IA_2026--2-green)](https://uniminuto.edu)
+[![Status](https://img.shields.io/badge/Status-In_Development-yellow)](https://github.com/EdwarIbague23/Electiva_IA-/graphs/activity)
+[![Course](https://img.shields.io/badge/UNIMINUTO-Electiva_IA_2026--2-green)](https://uniminuto.edu)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115.0-009688.svg)](https://fastapi.tiangolo.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1.svg)](https://www.postgresql.org/)
@@ -12,65 +12,63 @@
 
 ---
 
-## 📋 Tabla de contenido
+## 📋 Table of Contents
 
-- [Visión del proyecto](#-visión-del-proyecto)
-- [Arquitectura del sistema](#-arquitectura-del-sistema)
-- [Stack tecnológico](#-stack-tecnológico)
-- [Alcance del MVP](#-alcance-del-mvp)
-- [Estructura del repositorio](#-estructura-del-repositorio)
-- [Documentación técnica](#-documentación-técnica)
-- [Equipo](#-equipo)
-- [Disclaimer ético](#-disclaimer-ético)
-- [Soporte](#-soporte)
+- [Project Vision](#-project-vision)
+- [System Architecture](#-system-architecture)
+- [Tech Stack](#-tech-stack)
+- [MVP Scope](#-mvp-scope)
+- [Repository Structure](#-repository-structure)
+- [Technical Documentation](#-technical-documentation)
+- [Team](#-team)
+- [Ethical Disclaimer](#-ethical-disclaimer)
+- [Support](#-support)
 
----
+## 📌 Project Vision
 
-## 📌 Visión del Proyecto
-
-MindFlow AI es una plataforma híbrida para pacientes y profesionales de salud mental, con un copiloto de análisis de notas de uso exclusivo del terapeuta. Los clientes web y móvil comparten una API. El copiloto presenta señales y evidencia para revisión profesional; no genera diagnósticos ni decisiones clínicas. Proyecto desarrollado para la **Electiva CPC Integración IA** (UNIMINUTO Ibagué, 2026‑2). El repositorio contiene actualmente el framework y documentación de preparación; no representa todavía una aplicación lista para uso clínico.
+MindFlow AI is a hybrid platform for mental health patients and professionals, with a therapist-use-only analysis copilot. Web and mobile clients share an API. The copilot presents signals and evidence for professional review; it does not generate diagnoses or clinical decisions. Developed for the **Electiva CPC Integración IA** (UNIMINUTO Ibagué, 2026‑2). The repository currently contains the framework and preparation documentation; it does not yet represent a clinical-use application.
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+## 🏗️ System Architecture
 
-La plataforma emplea una arquitectura **hibrida Web + Móvil** con las siguientes capas:
+The platform employs a **Hybrid Web + Mobile** architecture with the following layers:
 
-| Capa | Tecnología | Descripción |
-|------|------------|-------------|
-| **Presentación web** | React + TypeScript | Portal web de paciente y profesional |
-| **Presentación móvil** | React Native | Aplicación Android/iOS para tareas prioritarias de paciente y profesional |
-| **Aplicación** | FastAPI (Python) | Servidor API REST con async/await, validación Pydantic |
-| **Orquestación** | Orchestrator Core | Router/Planner/Executor que coordina skills y agents |
-| **Infraestructura** | **PostgreSQL v16 + SQLAlchemy 2.x + Alembic | Redis v7** | Base de datos relacional + caché de sesiones en memoria. PostgreSQL garantiza transacciones ACID, integridad referencial y aislamiento de tenant. Redis proporciona acceso O(1) para sesiones activas, TTL automático y reduce latencia en respuestas del copiloto. |
-
----
-
-## 🛠️ Stack Tecnológico (Validación 8vo Semestre)
-
-| Categoría | Tecnología | Justificación |
-|-----------|------------|---------------|
-| **Lenguaje / Servidor** | **Python + FastAPI** | Async nativo para LLM calls y DB I/O, validación automática con Pydantic, documentación Swagger automática, mejor rendimiento en cargas de IA vs Node.js |
-| **Base de Datos** | **PostgreSQL v16 + SQLAlchemy 2.x + Alembic** | Transacciones ACID para datos sensibles, consultas complejas para análisis clínico, integridad referencial, aislamiento de tenant (schemas/RLS), y migraciones versionadas. Configurado via Alembic con soporte pgcrypto para cifrado AES-256-GCM de notas clínicas. |
-| **Caché** | **Redis** | Acceso O(1) para sesiones activas, TTL automático para contexto de conversación, reduce latencia en respuestas del copiloto |
-| **Móvil** | **React Native** | Aplicación Android/iOS que consume la misma API REST/OpenAPI que la web |
-| **IA / LLM** | **Claude 3.5 Sonnet** | Proveedor principal a través del LLM Gateway |
-| **Procesamiento** | **SpaCy + LLM Gateway** | Anonimización y análisis estructurado; LangChain queda sujeto a necesidad comprobada |
+| Layer | Technology | Description |
+|-------|------------|-------------|
+| **Web Frontend** | React + TypeScript | Patient and professional web portal |
+| **Mobile Frontend** | React Native | Android/iOS app for priority patient and professional tasks |
+| **Application** | FastAPI (Python) | REST API server with async/await, Pydantic validation |
+| **Orchestration** | Orchestrator Core | Router/Planner/Executor coordinating skills and agents |
+| **Infrastructure** | PostgreSQL v16 + SQLAlchemy 2.x + Alembic + Redis v7 | Relational DB with ACID guarantees, session caching, pgcrypto for AES-256-GCM encryption of clinical notes |
 
 ---
 
-## 🎯 Alcance funcional objetivo V1
+## 🛠️ Tech Stack (Validated 8th Semester)
 
-| **Incluido en V1** | **Posterior a V1 / prohibido** |
+| Category | Technology | Justification |
+|----------|------------|---------------|
+| **Language / Server** | **Python + FastAPI** | Native async for LLM calls and DB I/O, automatic Pydantic validation, automatic Swagger documentation, better performance in AI loads vs Node.js |
+| **Database** | **PostgreSQL v16 + SQLAlchemy 2.x + Alembic** | ACID transactions for sensitive data, complex queries for clinical analysis, referential integrity, tenant isolation (schemas/RLS), versioned migrations. Configured via Alembic with pgcrypto support for AES-256-GCM encryption of clinical notes. |
+| **Cache** | **Redis** | O(1) access for active sessions, automatic TTL for conversation context, reduces copilot response latency |
+| **Mobile** | **React Native** | Android/iOS app that consumes the same REST/OpenAPI API as the web |
+| **IA / LLM** | **Claude 3.5 Sonnet** | Primary provider through the LLM Gateway |
+| **Processing** | **SpaCy + LLM Gateway** | Structured anonymization and analysis; LangChain subject to verified need |
+
+---
+
+## 🎯 Functional Scope Target V1
+
+| **Included in V1** | **Post V1 / Prohibited** |
 | :--- | :--- |
-| Registro/consentimiento, búsqueda de profesionales verificados, disponibilidad y agenda; notas con acceso restringido. | Videollamada, pagos, cuestionarios longitudinales e integración EHR. |
-| Copiloto profesional: señales emocionales/cognitivas, evidencia textual y preguntas guía para revisión. | Diagnóstico, prescripción, recomendación automática de especialistas o decisiones clínicas autónomas. |
+| Registration/consent, verified professional search, availability and agenda; restricted-access notes. | Video call, payments, longitudinal questionnaires and EHR integration. |
+| Professional copilot: emotional/cognitive signals, textual evidence and guiding questions for review. | Diagnosis, prescribing, automatic specialist recommendation or autonomous clinical decisions. |
 
 ---
 
-## 🗂️ Estructura del Repositorio (`mi-framework-ia`)
+## 🗂️ Repository Structure (`mi-framework-ia`)
 
-El inventario siguiente se regenera localmente al crear, modificar, renombrar o eliminar archivos del repositorio:
+The following inventory is regenerated locally upon creating, modifying, renaming, or deleting repository files:
 
 <!-- README-AUTO:START -->
 ```text
@@ -85,8 +83,8 @@ MindFlow AI/
 |   |   |   `-- manifest.yaml
 |   |   |-- emotion_analysis_agent/
 |   |   |   |-- prompts/
-|   |   |   |   |-- analisis_emocional.md
-|   |   |   |   `-- legacy_bateria_08_10.md
+|   |   |   |   |-- emotional_analysis.md
+|   |   |   |   `-- legacy_battery_08_10.md
 |   |   |   `-- manifest.yaml
 |   |   |-- research_agent/
 |   |   |   |-- prompts/
@@ -98,7 +96,8 @@ MindFlow AI/
 |   |   |   `-- versions/
 |   |   |-- versions/
 |   |   |   `-- 20260921_initial_schema.py
-|   |   `-- env.py
+|   |   |-- env.py
+|   |   `-- __init__.py
 |   |-- config/
 |   |   |-- environments/
 |   |   |   |-- dev.yaml
@@ -132,8 +131,8 @@ MindFlow AI/
 |   |   |   |-- __init__.py
 |   |   |   |-- guardrails.py
 |   |   |   |-- permissions.py
-|   |   |   |-- prompts_anonimizacion_pii.md
-|   |   |   `-- prompts_pii_anonymizer_origen.md
+|   |   |   |-- prompts_anonymization_pii.md
+|   |   |   `-- prompts_pii_anonymizer_origin.md
 |   |   |-- skill_base/
 |   |   |   |-- __init__.py
 |   |   |   |-- base_skill.py
@@ -141,23 +140,24 @@ MindFlow AI/
 |   |   |-- __init__.py
 |   |   |-- base.py
 |   |   |-- prompt_llm_gateway.md
-|   |   `-- prompts_seguridad_cripto.md
+|   |   `-- prompts_security_crypto.md
 |   |-- deployment/
 |   |   |-- prompts_devops.md
-|   |   `-- prompts_infraestructura_devops_origen.md
+|   |   `-- prompts_infrastructure_devops_origin.md
 |   |-- docs/
-|   |   |-- 01_contexto_y_entrevista.md
-|   |   |-- 02_requerimientos_rf_rnf.md
-|   |   |-- 03_historias_de_usuario.md
-|   |   |-- AI_CODEGEN_PLAYBOOK.md
+|   |   |-- 01_context_and_interview.md
+|   |   |-- 02_requirements_rf_rnf.md
+|   |   |-- 03_user_stories.md
 |   |   |-- architecture.md
-|   |   |-- decision_tecnologica.md
-|   |   |-- diagrama_componentes_mindflow.drawio
-|   |   |-- diagrama_componentes_mindflow.mmd
-|   |   |-- diagrama_erd_mindflow.drawio
-|   |   |-- diagrama_erd_mindflow.mmd
+|   |   |-- decision_technology.md
+|   |   |-- Diagram_cases_mindflow.mmd
+|   |   |-- Diagram_cases_mindflow.png
+|   |   |-- Component_diagram_mindflow.drawio
+|   |   |-- Component_diagram_mindflow.mmd
+|   |   |-- ER_diagram_mindflow.drawio
+|   |   |-- ER_diagram_mindflow.mmd
 |   |   |-- manifest_schema.md
-|   |   |-- prompt_01_arquitectura.md
+|   |   |-- prompt_01_architecture.md
 |   |   |-- STITCH_FULL_PROTOTYPE_SPEC.md
 |   |   |-- STITCH_MOBILE_PROTOTYPE_SPEC.md
 |   |   `-- STITCH_WEB_PROTOTYPE_SPEC.md
@@ -168,25 +168,25 @@ MindFlow AI/
 |   |   |-- skill_tests/
 |   |   |   `-- README.md
 |   |   |-- prompts_client_testing.md
-|   |   `-- prompts_testing_unitario_mock.md
+|   |   `-- prompts_unitary_testing_mock.md
 |   |-- interfaces/
 |   |   |-- api/
 |   |   |   |-- main.py
-|   |   |   |-- prompts_api_dominio_v1.md
-|   |   |   |-- prompts_contratos_y_seguridad.md
-|   |   |   |-- prompts_schemas_openapi.md
-|   |   |   `-- prompts_seguridad_api.md
+|   |   |   |-- prompts_api_domain_v1.md
+|   |   |   |-- prompts_contracts_and_security.md
+|   |   |   `-- prompts_openapi_schemas.md
+|   |   |   `-- prompts_security_api.md
 |   |   |-- chat_ui/
 |   |   |   `-- README.md
 |   |   |-- cli/
 |   |   |   `-- main.py
 |   |   |-- frontend/
-|   |   |   |-- prompts_export_pdf_origen.md
+|   |   |   |-- prompts_pdf_export_origin.md
 |   |   |   |-- prompts_report_pdf.md
 |   |   |   |-- prompts_ui_react.md
 |   |   |   `-- prompts_ui_roles_react.md
 |   |   `-- mobile/
-|   |       `-- prompts_mobile_react_native.md
+|       `-- prompts_mobile_react_native.md
 |   |-- models/
 |   |   |-- __init__.py
 |   |   |-- analyses.py
@@ -194,8 +194,8 @@ MindFlow AI/
 |   |   |-- cognitive_distortions.py
 |   |   |-- emotion_scores.py
 |   |   |-- guiding_questions.py
-|   |   |-- prompts_base_de_datos_origen.md
-|   |   |-- prompts_modelado_datos.md
+|   |   |-- prompts_database_origin.md
+|   |   |-- prompts_data_modeling.md
 |   |   |-- reports.py
 |   |   `-- users.py
 |   |-- skills/
@@ -222,44 +222,44 @@ MindFlow AI/
 |-- scripts/
 |   |-- update_readme.ps1
 |   `-- watch_readme.ps1
-`-- README.md
+-- README.md
 ```
-_Este inventario se genera localmente desde los archivos del repositorio._
 <!-- README-AUTO:END -->
+_This inventory is generated locally from the repository files._
 
 ---
 
-## 👥 Roles del Equipo
+## 👥 Team Roles
 
-- **Product Owner / Lead AI Architect** – Edwar Ibagué
-- **Full‑Stack Developer** – Daniel Felipe Andrade
+- **Product Owner / Lead AI Architect** – Edwar Ibagué
+- **Full-Stack Developer** – Daniel Felipe Andrade
 - **NLP Engineer** – Nicol Sneider Murillo
-- **Frontend Developer** – Interfaz React / React Native
-- **QA / Tester** – Validación de prompts y casos clínicos
-- **DevOps** – Despliegue Docker, Render
+- **Frontend Developer** – React / React Native Interface
+- **QA / Tester** – Prompt and clinical case validation
+- **DevOps** – Docker Deployment, Render
 
 ---
 
-## ⚠️ Disclaimer Ético y de Estado
+## ⚠️ Ethical and State Disclaimer
 
-**MindFlow AI es una herramienta de apoyo analítico para profesionales de la salud mental.**
+**MindFlow AI is a supportive analytical tool for mental health professionals.**
 
-- **No emite diagnósticos clínicos** ni sustituye la evaluación profesional.
-- El tratamiento de datos sensibles requiere consentimiento explícito y cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013 de Colombia.
-- Los resultados (emociones, distorsiones cognitivas, preguntas sugeridas) deben ser **validados y reinterpretados por el terapeuta** antes de ser incorporados a la historia clínica.
-- El uso indebido de la herramienta para tomar decisiones médicas por cuenta propia está **estrictamente prohibido**.
-- El prototipo y las pruebas deben usar datos sintéticos. La existencia de un diagrama o prompt no significa que la función esté implementada.
+- **Does not issue clinical diagnoses** or substitute professional evaluation.
+- Sensitive data treatment requires explicit consent and compliance with Law 1581 of 2012 and Decree 1377 of 2013 of Colombia.
+- Results (emotions, cognitive distortions, suggested questions) must be **validated and reinterpreted by the therapist** before being incorporated into the clinical history.
+- Misuse of the tool to make medical decisions on one's own account is **strictly prohibited**.
+- Prototype and tests must use synthetic data. The existence of a diagram or prompt does not mean the function is implemented.
 
 ---
 
-## 💬 Soporte
+## 💬 Support
 
-¿Tienes dudas? Revisa la sección de [**Issues**](https://github.com/EdwarIbague23/Electiva_IA-/issues) o abre un nuevo reporte.
+Having doubts? Review the [**Issues**](https://github.com/EdwarIbague23/Electiva_IA-/issues) section or open a new report.
 
 ---
 
 <div align="center">
 
-Distribuido bajo licencia **MIT**. Ver [`LICENSE`](./LICENSE) para más información.
+Distributed under **MIT** license. See [`LICENSE`](./LICENSE) for more information.
 
 </div>

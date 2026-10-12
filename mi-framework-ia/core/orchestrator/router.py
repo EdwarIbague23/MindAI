@@ -1,1 +1,1 @@
-"""Decide qué agente atiende una tarea entrante."""
+"""Routes incoming tasks to the appropriate agent."""

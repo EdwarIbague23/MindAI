@@ -1,6 +1,6 @@
 name: emotion_analysis_agent
 version: 0.1.0
-description: Analiza notas anonimizadas y devuelve señales para revisión exclusiva del terapeuta.
+description: Analyzes anonymized notes and returns signals for therapist-exclusive review.
 role: emotion_analysis
 owner: mindflow-team
 input_schema:

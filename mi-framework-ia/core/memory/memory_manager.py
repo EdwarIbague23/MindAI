@@ -1,5 +1,4 @@
-"""API única de lectura/escritura de memoria que usan los agentes.
+"""Unified read/write memory API used by all agents.
 
-Ningún agente ni skill debe acceder a short_term/long_term directamente:
-todo pasa por aquí para mantener trazabilidad y composabilidad.
-"""
+No agent or skill should access short_term/long_term directly:
+all interactions go through this module for traceability and composability."""

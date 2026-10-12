@@ -1,6 +1,6 @@
 name: research_agent
 version: 0.1.0
-description: Busca información pública no clínica y produce un resumen con referencias.
+description: Searches public non-clinical information and produces a summary with references.
 role: research
 owner: framework-team
 input_schema:

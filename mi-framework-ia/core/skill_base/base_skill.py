@@ -1,4 +1,4 @@
-"""Contrato que toda skill debe cumplir: input/output schema y run()."""
+"""Contract that all skills must implement: input/output schema and run()."""
 
 from abc import ABC, abstractmethod
 
@@ -8,5 +8,5 @@ class BaseSkill(ABC):
 
     @abstractmethod
     def run(self, params: dict) -> dict:
-        """Ejecuta la skill de forma determinística, sin estado propio."""
+        """Executes the skill deterministically, without own state."""
         raise NotImplementedError

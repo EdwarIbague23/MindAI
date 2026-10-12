@@ -1,1 +1,1 @@
-"""Validación de entradas/salidas y filtros de seguridad."""
+"""Input/output validation and security filters."""
