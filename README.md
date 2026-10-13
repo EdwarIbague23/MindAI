@@ -1,78 +1,48 @@
-# MindFlow AI — Hybrid Mental Health Platform with Professional Copilot
+# HealthFlow AI — Global Clinical Copilot & Integrated Healthcare Platform
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Status](https://img.shields.io/badge/Status-In_Development-yellow)](https://github.com/EdwarIbague23/Electiva_IA-/graphs/activity)
-[![Course](https://img.shields.io/badge/UNIMINUTO-Electiva_IA_2026--2-green)](https://uniminuto.edu)
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115.0-009688.svg)](https://fastapi.tiangolo.com/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1.svg)](https://www.postgresql.org/)
-[![Redis](https://img.shields.io/badge/Redis-7-MIREDIS-FF4438.svg)](https://redis.io/)
-[![React](https://img.shields.io/badge/React-18.3-61DAFB.svg)](https://reactjs.org/)
-[![React Native](https://img.shields.io/badge/React_Native-0.73-61DAFB.svg)](https://reactnative.dev/)
+📋 Table of Contents
+- Project Vision
+- System Architecture
+- Tech Stack
+- MVP Scope
+- Repository Structure
+- Technical Documentation
+- Team
+- Ethical Disclaimer
+- Support
 
----
+📌 Project Vision
+HealthFlow AI es una plataforma híbrida orientada a pacientes y profesionales de la salud en todas las ramas de la medicina y la atención primaria, integrada con un copiloto de análisis exclusivo para médicos. El sistema permite el seguimiento continuo, la prevención, el diagnóstico temprano y el manejo integral de patologías y enfermedades crónicas (hipertensión, diabetes, riesgo cardiovascular y afecciones multisistémicas) conectando el entorno clínico, físico y social del paciente. Las interfaces Web y Mobile comparten una API unificada. El copiloto presenta evidencias, patrones sintomáticos y alertas clínicas tempranas para revisión profesional; no genera diagnósticos automatizados ni decisiones clínicas autónomas. Desarrollado para la Electiva CPC Integración IA (UNIMINUTO Ibagué, 2026‑2).
 
-## 📋 Table of Contents
+🏗️ System Architecture
+La plataforma emplea una arquitectura Híbrida Web + Mobile con las siguientes capas:
+Layer | Technology | Description
+--- | --- | ---
+Web Frontend | React + TypeScript | Portal web para médicos generales, especialistas, personal de enfermería y gestión administrativa.
+Mobile Frontend | React Native | App Android/iOS para pacientes (seguimiento de tratamiento, citas) y profesionales de la salud (alertas prioritarias).
+Application | FastAPI (Python) | Servidor REST API asíncrono con validación Pydantic y documentación OpenAPI.
+Orchestration | Orchestrator Core | Router/Planner/Executor coordinando agentes y skills de evaluación médica multidisciplinaria.
+Infrastructure | PostgreSQL v16 + SQLAlchemy 2.x + Alembic + Redis v7 | BD relacional con garantías ACID, caché de sesiones y pgcrypto (AES-256-GCM) para cifrado de historias clínicas.
 
-- [Project Vision](#-project-vision)
-- [System Architecture](#-system-architecture)
-- [Tech Stack](#-tech-stack)
-- [MVP Scope](#-mvp-scope)
-- [Repository Structure](#-repository-structure)
-- [Technical Documentation](#-technical-documentation)
-- [Team](#-team)
-- [Ethical Disclaimer](#-ethical-disclaimer)
-- [Support](#-support)
+🛠️ Tech Stack (Validated 8th Semester)
+Category | Technology | Justification
+--- | --- | ---
+Language / Server | Python + FastAPI | Asincronía nativa para llamadas a LLM y I/O de BD, validación Pydantic y documentación Swagger implícita.
+Database | PostgreSQL v16 + SQLAlchemy 2.x + Alembic | Transacciones ACID para datos clínicos sensibles, RLS/schemas para aislamiento y cifrado pgcrypto AES-256-GCM.
+Cache | Redis | Acceso O(1) para sesiones activas y almacenamiento de contexto conversacional en tiempo real.
+Mobile | React Native | Aplicación multiplataforma (Android/iOS) consumiendo la misma API REST/OpenAPI.
+IA / LLM | Claude 3.5 Sonnet | Proveedor principal a través de LLM Gateway para extracción de factores de riesgo y análisis pragmático general.
+Processing | SpaCy + LLM Gateway | Anonimización estructurada PII y procesamiento sintomático inicial para cualquier especialidad médica.
 
-## 📌 Project Vision
+🎯 Functional Scope Target V1
+Included in V1 | Post V1 / Prohibited
+--- | ---
+Registro/consentimiento informado, agenda y búsqueda unificada de profesionales de la salud. | Videollamadas integradas, pasarela de pagos, interoperabilidad EHR/HL7 FHIR compleja.
+Copiloto Clínico: Alertas de riesgo cardiovascular, metabólico o general, análisis de fichas de seguimiento y preguntas guía. | Diagnóstico automatizado, prescripción farmacológica directa o decisiones médicas autónomas.
+Cuestionarios de hábitos/prevención y registro de síntomas prevalentes transversales. | Recomendación automática de especialistas sin validación del médico tratante.
 
-MindFlow AI is a hybrid platform for mental health patients and professionals, with a therapist-use-only analysis copilot. Web and mobile clients share an API. The copilot presents signals and evidence for professional review; it does not generate diagnoses or clinical decisions. Developed for the **Electiva CPC Integración IA** (UNIMINUTO Ibagué, 2026‑2). The repository currently contains the framework and preparation documentation; it does not yet represent a clinical-use application.
-
----
-
-## 🏗️ System Architecture
-
-The platform employs a **Hybrid Web + Mobile** architecture with the following layers:
-
-| Layer | Technology | Description |
-|-------|------------|-------------|
-| **Web Frontend** | React + TypeScript | Patient and professional web portal |
-| **Mobile Frontend** | React Native | Android/iOS app for priority patient and professional tasks |
-| **Application** | FastAPI (Python) | REST API server with async/await, Pydantic validation |
-| **Orchestration** | Orchestrator Core | Router/Planner/Executor coordinating skills and agents |
-| **Infrastructure** | PostgreSQL v16 + SQLAlchemy 2.x + Alembic + Redis v7 | Relational DB with ACID guarantees, session caching, pgcrypto for AES-256-GCM encryption of clinical notes |
-
----
-
-## 🛠️ Tech Stack (Validated 8th Semester)
-
-| Category | Technology | Justification |
-|----------|------------|---------------|
-| **Language / Server** | **Python + FastAPI** | Native async for LLM calls and DB I/O, automatic Pydantic validation, automatic Swagger documentation, better performance in AI loads vs Node.js |
-| **Database** | **PostgreSQL v16 + SQLAlchemy 2.x + Alembic** | ACID transactions for sensitive data, complex queries for clinical analysis, referential integrity, tenant isolation (schemas/RLS), versioned migrations. Configured via Alembic with pgcrypto support for AES-256-GCM encryption of clinical notes. |
-| **Cache** | **Redis** | O(1) access for active sessions, automatic TTL for conversation context, reduces copilot response latency |
-| **Mobile** | **React Native** | Android/iOS app that consumes the same REST/OpenAPI API as the web |
-| **IA / LLM** | **Claude 3.5 Sonnet** | Primary provider through the LLM Gateway |
-| **Processing** | **SpaCy + LLM Gateway** | Structured anonymization and analysis; LangChain subject to verified need |
-
----
-
-## 🎯 Functional Scope Target V1
-
-| **Included in V1** | **Post V1 / Prohibited** |
-| :--- | :--- |
-| Registration/consent, verified professional search, availability and agenda; restricted-access notes. | Video call, payments, longitudinal questionnaires and EHR integration. |
-| Professional copilot: emotional/cognitive signals, textual evidence and guiding questions for review. | Diagnosis, prescribing, automatic specialist recommendation or autonomous clinical decisions. |
-
----
-
-## 🗂️ Repository Structure (`mi-framework-ia`)
-
-The following inventory is regenerated locally upon creating, modifying, renaming, or deleting repository files:
-
-<!-- README-AUTO:START -->
-```text
-MindFlow AI/
+🗂️ Repository Structure (healthflow-framework-ia)
+HealthFlow AI/
 |-- .vscode/
 |   `-- tasks.json
 |-- mi-framework-ia/
@@ -81,15 +51,15 @@ MindFlow AI/
 |   |   |   |-- prompts/
 |   |   |   |-- agent.py
 |   |   |   `-- manifest.yaml
-|   |   |-- emotion_analysis_agent/
+|   |   |-- clinical_analysis_agent/
 |   |   |   |-- prompts/
-|   |   |   |   |-- emotional_analysis.md
-|   |   |   |   `-- legacy_battery_08_10.md
+|   |   |   |   |-- general_risk_analysis.md
+|   |   |   |   `-- clinical_prevention_guide.md
 |   |   |   `-- manifest.yaml
-|   |   |-- research_agent/
-|   |   |   |-- prompts/
-|   |   |   |-- agent.py
-|   |   |   `-- manifest.yaml
+|   |   `-- research_agent/
+|   |       |-- prompts/
+|   |       |   |-- agent.py
+|   |       |   `-- manifest.yaml
 |   |   `-- __init__.py
 |   |-- alembic/
 |   |   |-- alembic/
@@ -126,7 +96,7 @@ MindFlow AI/
 |   |   |   |-- __init__.py
 |   |   |   |-- executor.py
 |   |   |   |-- planner.py
-|   |   |   `-- router.py
+|   |   `-- router.py
 |   |   |-- security/
 |   |   |   |-- __init__.py
 |   |   |   |-- guardrails.py
@@ -150,12 +120,12 @@ MindFlow AI/
 |   |   |-- 03_user_stories.md
 |   |   |-- architecture.md
 |   |   |-- decision_technology.md
-|   |   |-- Diagram_cases_mindflow.mmd
-|   |   |-- Diagram_cases_mindflow.png
-|   |   |-- Component_diagram_mindflow.drawio
-|   |   |-- Component_diagram_mindflow.mmd
-|   |   |-- ER_diagram_mindflow.drawio
-|   |   |-- ER_diagram_mindflow.mmd
+|   |   |-- Diagram_cases_healthflow.mmd
+|   |   |-- Diagram_cases_healthflow.png
+|   |   |-- Component_diagram_healthflow.drawio
+|   |   |-- Component_diagram_healthflow.mmd
+|   |   |-- ER_diagram_healthflow.drawio
+|   |   |-- ER_diagram_healthflow.mmd
 |   |   |-- manifest_schema.md
 |   |   |-- prompt_01_architecture.md
 |   |   |-- STITCH_FULL_PROTOTYPE_SPEC.md
@@ -163,7 +133,7 @@ MindFlow AI/
 |   |   `-- STITCH_WEB_PROTOTYPE_SPEC.md
 |   |-- evaluations/
 |   |   |-- agent_benchmarks/
-|   |   |   |-- emotion_analysis_agent.md
+|   |   |   |-- clinical_analysis_agent.md
 |   |   |   `-- README.md
 |   |   |-- skill_tests/
 |   |   |   `-- README.md
@@ -174,30 +144,29 @@ MindFlow AI/
 |   |   |   |-- main.py
 |   |   |   |-- prompts_api_domain_v1.md
 |   |   |   |-- prompts_contracts_and_security.md
-|   |   |   `-- prompts_openapi_schemas.md
-|   |   |   `-- prompts_security_api.md
+|   |   |   |-- prompts_openapi_schemas.md
+|   |   `-- prompts_security_api.md
 |   |   |-- chat_ui/
 |   |   |   `-- README.md
 |   |   |-- cli/
-|   |   |   `-- main.py
-|   |   |-- frontend/
-|   |   |   |-- prompts_pdf_export_origin.md
-|   |   |   |-- prompts_report_pdf.md
-|   |   |   |-- prompts_ui_react.md
-|   |   |   `-- prompts_ui_roles_react.md
-|   |   `-- mobile/
+|   |   |   |-- main.py
+|   |   `-- frontend/
+|   |       |-- prompts_pdf_export_origin.md
+|   |       |-- prompts_report_pdf.md
+|   |       |-- prompts_ui_react.md
+|   |       `-- prompts_ui_roles_react.md
+|   |-- mobile/
 |       `-- prompts_mobile_react_native.md
 |   |-- models/
 |   |   |-- __init__.py
 |   |   |-- analyses.py
 |   |   |-- clinical_notes.py
-|   |   |-- cognitive_distortions.py
-|   |   |-- emotion_scores.py
+|   |   |-- clinical_followup.py
 |   |   |-- guiding_questions.py
 |   |   |-- prompts_database_origin.md
 |   |   |-- prompts_data_modeling.md
 |   |   |-- reports.py
-|   |   `-- users.py
+|   `-- users.py
 |   |-- skills/
 |   |   |-- code_executor/
 |   |   |   |-- manifest.yaml
@@ -211,7 +180,6 @@ MindFlow AI/
 |   |   |   `-- skill.py
 |   |   |-- web_search/
 |   |   |   |-- manifest.yaml
-|   |   |   `-- skill.py
 |   |   `-- __init__.py
 |   |-- tools/
 |   |   |-- __init__.py
@@ -223,43 +191,22 @@ MindFlow AI/
 |   |-- update_readme.ps1
 |   `-- watch_readme.ps1
 -- README.md
-```
-<!-- README-AUTO:END -->
-_This inventory is generated locally from the repository files._
 
----
+👥 Team Roles
+- Product Owner / Lead AI Architect – Edwar Ibagué
+- Full-Stack Developer – Daniel Felipe Andrade
+- Medical AI Engineer – Nicol Sneider Murillo
+- Frontend Developer – React / React Native Interface
+- QA / Tester – Validation of Clinical Cases and Prompts
+- DevOps – Docker Deployment, Render
 
-## 👥 Team Roles
+⚠️ Ethical and Legal Disclaimer
+HealthFlow AI es una herramienta analítica de soporte para profesionales de la salud en general.
+- No emite diagnósticos clínicos autónomos ni sustituye la evaluación y criterio del profesional médico.
+- El tratamiento de datos de salud requiere consentimiento explícito y cumplimiento estricto de la Ley 1581 de 2012 y el Decreto 1377 de 2013 de Colombia.
+- Todos los indicadores y métricas de soporte deben ser revalidados por el médico antes de registrarse en la historia clínica oficial.
+- Queda prohibido el uso autónomo por parte de pacientes para automedicación o toma de decisiones clínicas.
+- El repositorio opera con datos sintéticos para pruebas de desarrollo.
 
-- **Product Owner / Lead AI Architect** – Edwar Ibagué
-- **Full-Stack Developer** – Daniel Felipe Andrade
-- **NLP Engineer** – Nicol Sneider Murillo
-- **Frontend Developer** – React / React Native Interface
-- **QA / Tester** – Prompt and clinical case validation
-- **DevOps** – Docker Deployment, Render
-
----
-
-## ⚠️ Ethical and State Disclaimer
-
-**MindFlow AI is a supportive analytical tool for mental health professionals.**
-
-- **Does not issue clinical diagnoses** or substitute professional evaluation.
-- Sensitive data treatment requires explicit consent and compliance with Law 1581 of 2012 and Decree 1377 of 2013 of Colombia.
-- Results (emotions, cognitive distortions, suggested questions) must be **validated and reinterpreted by the therapist** before being incorporated into the clinical history.
-- Misuse of the tool to make medical decisions on one's own account is **strictly prohibited**.
-- Prototype and tests must use synthetic data. The existence of a diagram or prompt does not mean the function is implemented.
-
----
-
-## 💬 Support
-
-Having doubts? Review the [**Issues**](https://github.com/EdwarIbague23/Electiva_IA-/issues) section or open a new report.
-
----
-
-<div align="center">
-
-Distributed under **MIT** license. See [`LICENSE`](./LICENSE) for more information.
-
-</div>
+💬 Support
+¿Tienes dudas o sugerencias de integración? Revisa la sección de Issues o abre un nuevo reporte. , rectifica que tenga la estrcutura de este proyecto y el nombre el proyecto es: HealthFlow AI
