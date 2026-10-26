@@ -1,0 +1,6 @@
+{
+  "name": "MindFlow Clinical Portal",
+  "description": "Portal clínico profesional para psicólogos y terapeutas. Gestión integral de pacientes, agenda clínica, notas SOAP, copilot IA y monitoreo de alertas de riesgo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
