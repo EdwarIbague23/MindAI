@@ -1,5 +1,14 @@
 __pycache__/
 *.pyc
 .env
+.env.*
+!.env.example
 .venv/
 MindFlow AI/
+*.db
+reports/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+dist/

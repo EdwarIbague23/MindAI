@@ -312,4 +312,4 @@ skills:
 - Descripción de capas y flujo de datos: [`architecture.md`](./architecture.md)
 - Definiciones activas: `config/agents.yaml`, `config/skills.yaml`, `config/environments/`
 - Middleware de seguridad (fuera del sistema de manifiestos): `core/security/pii_pipeline`, `core/security/encryption_service`
-- Validador de esquema (implementación): `core/manifest_validator.py` *(a implementar según esta especificación)*
+- Validador de esquema (implementado): `core/manifest_validator.py` — `validate_manifests()` y `load_and_validate()` aplican estas reglas; cubierto por `tests/test_manifest_validator.py`.

@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: mindia
+      POSTGRES_PASSWORD: mindia
+      POSTGRES_DB: mindia
+    ports:
+      - "5432:5432"
+    volumes:
+      - mindia_db:/var/lib/postgresql/data
+volumes:
+  mindia_db:

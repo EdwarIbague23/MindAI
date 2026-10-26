@@ -1,3 +1,213 @@
-active_agents:
-  - research_agent
-  - coding_agent
+agents:
+  - name: emotion_analysis_agent
+    version: "1.0.0"
+    description: >
+      Analiza texto clinico anonimizado para identificar emociones, intensidad,
+      evidencia textual y distorsiones cognitivas, sin emitir diagnostico.
+    role: emotion_analysis
+    owner: team-clinical-ai
+    input_schema:
+      type: object
+      required: [text, anonymized]
+      properties:
+        text: { type: string, maxLength: 8000 }
+        anonymized: { type: boolean, const: true }
+    output_schema:
+      type: object
+      required: [emotions, distortions, guiding_questions, triage_level, summary]
+      properties:
+        emotions:
+          type: array
+          items:
+            type: object
+            required: [name, score, evidence]
+            properties:
+              name: { type: string }
+              score: { type: integer, minimum: 0, maximum: 100 }
+              evidence: { type: string }
+        distortions:
+          type: array
+          items:
+            type: object
+            properties:
+              type: { type: string }
+              evidence: { type: string }
+              explanation: { type: string }
+        guiding_questions:
+          type: array
+          items:
+            type: object
+            properties:
+              question: { type: string }
+              rationale: { type: string }
+        triage_level: { type: string, enum: [low, medium, high] }
+        summary: { type: string }
+    permissions:
+      allowed_skills: [document_generator, db_query]
+      data_scope: own_session
+      network_access: none
+      pii_access: anonymized_only
+    model_policy:
+      provider: "env:LLM_PROVIDER"
+      structured_output: true
+      rate_limit_per_minute: 30
+    pii_policy: anonymized_only
+    memory_scope: analysis_history
+    temperature: 0.2
+    max_tokens: 2048
+    timeout_seconds: 20
+    max_retries: 2
+    fallback_agent: null
+    notify_on_failure:
+      channel: "#mindflow-alerts"
+      severity_threshold: HIGH
+    tags: [clinical, nlp, emotion]
+    evaluation_suite: evaluations/emotion_analysis_agent/
+
+  - name: cognitive_distortion_agent
+    version: "1.0.0"
+    description: >
+      Especializa la deteccion de distorsiones cognitivas sobre el analisis
+      anonimizado, citando evidencia textual sin afirmar causalidad clinica.
+    role: emotion_analysis
+    owner: team-clinical-ai
+    input_schema:
+      type: object
+      required: [analysis, anonymized]
+      properties:
+        analysis: { type: object }
+        anonymized: { type: boolean, const: true }
+    output_schema:
+      type: object
+      required: [distortions]
+      properties:
+        distortions:
+          type: array
+          items:
+            type: object
+            properties:
+              type: { type: string }
+              evidence: { type: string }
+              explanation: { type: string }
+    permissions:
+      allowed_skills: []
+      data_scope: own_session
+      network_access: none
+      pii_access: anonymized_only
+    model_policy:
+      provider: "env:LLM_PROVIDER"
+      structured_output: true
+      rate_limit_per_minute: 30
+    pii_policy: anonymized_only
+    memory_scope: session
+    temperature: 0.1
+    max_tokens: 1024
+    timeout_seconds: 15
+    max_retries: 2
+    tags: [clinical, nlp, distortion]
+
+  - name: triage_agent
+    version: "1.0.0"
+    description: >
+      Clasifica el nivel de atencion sugerido a partir de senales de riesgo y
+      carga emocional, sin emitir diagnostico ni prescripcion.
+    role: triage
+    owner: team-clinical-ai
+    input_schema:
+      type: object
+      required: [analysis, anonymized]
+      properties:
+        analysis: { type: object }
+        anonymized: { type: boolean, const: true }
+    output_schema:
+      type: object
+      required: [triage_level, justification]
+      properties:
+        triage_level: { type: string, enum: [low, medium, high] }
+        justification: { type: string }
+    permissions:
+      allowed_skills: []
+      data_scope: own_session
+      network_access: none
+      pii_access: anonymized_only
+    model_policy:
+      provider: "env:LLM_PROVIDER"
+      structured_output: true
+      rate_limit_per_minute: 60
+    pii_policy: anonymized_only
+    memory_scope: session
+    temperature: 0.0
+    max_tokens: 512
+    timeout_seconds: 10
+    max_retries: 2
+    tags: [clinical, triage]
+
+  - name: report_agent
+    version: "1.0.0"
+    description: >
+      Compone un reporte profesional en Markdown a partir del analisis
+      estructurado, con aviso explicito de revision por el profesional.
+    role: report_generation
+    owner: team-clinical-ai
+    input_schema:
+      type: object
+      required: [analysis]
+      properties:
+        analysis: { type: object }
+        session_id: { type: string }
+    output_schema:
+      type: object
+      required: [file_path, format]
+      properties:
+        file_path: { type: string }
+        format: { type: string, enum: [markdown] }
+    permissions:
+      allowed_skills: [document_generator]
+      data_scope: own_session
+      network_access: none
+      pii_access: anonymized_only
+    model_policy:
+      provider: "env:LLM_PROVIDER"
+      structured_output: false
+      rate_limit_per_minute: 30
+    pii_policy: anonymized_only
+    memory_scope: analysis_history
+    temperature: 0.2
+    max_tokens: 2048
+    timeout_seconds: 20
+    max_retries: 1
+    tags: [clinical, report]
+
+  - name: audit_agent
+    version: "1.0.0"
+    description: >
+      Revisa consistencia entre manifiestos y ejecuciones reales. No recibe
+      texto clinico ni PII; solo metadata tecnica.
+    role: system_audit
+    owner: team-platform
+    input_schema:
+      type: object
+      required: [events]
+      properties:
+        events: { type: array }
+    output_schema:
+      type: object
+      required: [findings]
+      properties:
+        findings: { type: array }
+    permissions:
+      allowed_skills: [db_query]
+      data_scope: none
+      network_access: none
+      pii_access: forbidden
+    model_policy:
+      provider: "env:LLM_PROVIDER"
+      structured_output: false
+      rate_limit_per_minute: 10
+    pii_policy: no_clinical_data
+    memory_scope: session
+    temperature: 0.0
+    max_tokens: 512
+    timeout_seconds: 10
+    max_retries: 1
+    tags: [system, audit]

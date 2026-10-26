@@ -1,0 +1,170 @@
+{"timestamp": "2026-10-26T03:21:12.342946+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "439fad07-127e-4aac-ba3c-a0b604c9834d", "method": "POST", "path": "/auth/register", "status_code": 422, "duration_ms": 12.19}
+INFO:     127.0.0.1:53528 - "POST /auth/register HTTP/1.1" 422 Unprocessable Entity
+{"timestamp": "2026-10-26T03:21:12.443045+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "0daafc99-e505-47fd-a9bd-9bb0afdf375e", "method": "POST", "path": "/auth/login", "status_code": 422, "duration_ms": 7.63}
+INFO:     127.0.0.1:53528 - "POST /auth/login HTTP/1.1" 422 Unprocessable Entity
+{"timestamp": "2026-10-26T03:21:12.847477+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "0031650a-8bb2-47d0-92b6-2e5f010fc9fd", "method": "POST", "path": "/analysis/analyze", "status_code": 401, "duration_ms": 2.4}
+INFO:     127.0.0.1:53528 - "POST /analysis/analyze HTTP/1.1" 401 Unauthorized
+{"timestamp": "2026-10-26T03:21:12.968075+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "f9b0cd46-aa76-4477-bf85-ac2f0383ce01", "method": "GET", "path": "/", "status_code": 200, "duration_ms": 0.54}
+INFO:     127.0.0.1:53528 - "GET / HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:21:24.955064+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "fea6aa18-a837-4162-a8f1-ad2902603077", "method": "POST", "path": "/auth/register", "status_code": 201, "duration_ms": 486.42}
+INFO:     127.0.0.1:53529 - "POST /auth/register HTTP/1.1" 201 Created
+{"timestamp": "2026-10-26T03:21:25.482527+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "41dfe6d1-f24c-4be9-9dcf-fd2338ef1bc3", "method": "POST", "path": "/auth/login", "status_code": 200, "duration_ms": 461.98}
+INFO:     127.0.0.1:53529 - "POST /auth/login HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:21:28.981228+00:00", "level": "INFO", "logger": "mindflow.orchestrator", "event": "pipeline.begin", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "agents": "['cognitive_distortion_agent', 'emotion_analysis_agent', 'report_agent', 'triage_agent']"}
+{"timestamp": "2026-10-26T03:21:28.983241+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.start", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "agent": "emotion_analysis_agent", "stage": "emotion"}
+{"timestamp": "2026-10-26T03:21:28.984643+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.end", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "agent": "emotion_analysis_agent", "stage": "emotion", "duration_ms": 3.49}
+{"timestamp": "2026-10-26T03:21:28.984643+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.start", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "analysis_id": "fd863ff0-c678-4218-af9f-17c856af3d5f", "agent": "cognitive_distortion_agent", "stage": "distortion"}
+{"timestamp": "2026-10-26T03:21:28.989256+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.end", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "analysis_id": "fd863ff0-c678-4218-af9f-17c856af3d5f", "agent": "cognitive_distortion_agent", "stage": "distortion", "duration_ms": 1.35}
+{"timestamp": "2026-10-26T03:21:28.989256+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.start", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "analysis_id": "fd863ff0-c678-4218-af9f-17c856af3d5f", "agent": "triage_agent", "stage": "triage"}
+{"timestamp": "2026-10-26T03:21:28.989256+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.end", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "analysis_id": "fd863ff0-c678-4218-af9f-17c856af3d5f", "agent": "triage_agent", "stage": "triage", "duration_ms": 0.36}
+{"timestamp": "2026-10-26T03:21:28.989256+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.start", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "analysis_id": "fd863ff0-c678-4218-af9f-17c856af3d5f", "agent": "report_agent", "stage": "report"}
+{"timestamp": "2026-10-26T03:21:28.993874+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.end", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "analysis_id": "fd863ff0-c678-4218-af9f-17c856af3d5f", "agent": "report_agent", "stage": "report", "duration_ms": 5.63}
+{"timestamp": "2026-10-26T03:21:28.993874+00:00", "level": "INFO", "logger": "mindflow.orchestrator", "event": "pipeline.end", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "analysis_id": "fd863ff0-c678-4218-af9f-17c856af3d5f", "triage_level": "medium", "report_format": "markdown"}
+{"timestamp": "2026-10-26T03:21:29.074950+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "2bb46d70-81d3-4a3f-a7e2-557b6f3d2b6c", "method": "POST", "path": "/analysis/analyze", "status_code": 201, "duration_ms": 3575.72}
+INFO:     127.0.0.1:53529 - "POST /analysis/analyze HTTP/1.1" 201 Created
+{"timestamp": "2026-10-26T03:21:29.254562+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "8736bc07-538e-4cf0-891f-c5490d3d1d2a", "method": "GET", "path": "/reports/fd863ff0-c678-4218-af9f-17c856af3d5f", "status_code": 200, "duration_ms": 31.63}
+INFO:     127.0.0.1:53529 - "GET /reports/fd863ff0-c678-4218-af9f-17c856af3d5f HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:21:43.725887+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "9a1c35a5-3ead-44a5-916c-9108b804c9fc", "method": "GET", "path": "/health", "status_code": 200, "duration_ms": 7.36}
+INFO:     127.0.0.1:53534 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:22:39.695678+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "3bf4100e-2139-4c60-9477-c600f371e8e4", "method": "POST", "path": "/auth/register", "status_code": 201, "duration_ms": 996.59}
+INFO:     127.0.0.1:50546 - "POST /auth/register HTTP/1.1" 201 Created
+{"timestamp": "2026-10-26T03:22:40.599010+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "d5f863b8-696c-41ce-aba6-4873fb00b19f", "method": "POST", "path": "/auth/login", "status_code": 200, "duration_ms": 879.16}
+INFO:     127.0.0.1:53774 - "POST /auth/login HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:22:40.747257+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "50064c1c-68cd-4735-869e-b85a6cb9f633", "method": "GET", "path": "/auth/me", "status_code": 200, "duration_ms": 23.8}
+INFO:     127.0.0.1:60401 - "GET /auth/me HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:22:40.766496+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "f84ecab6-05a6-485e-bf48-09f9ee084183", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 34.81}
+INFO:     127.0.0.1:50928 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:22:52.900311+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "673661cd-2db2-410e-a885-49500b785b92", "method": "GET", "path": "/health", "status_code": 200, "duration_ms": 17.63}
+INFO:     127.0.0.1:50934 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:22:53.893026+00:00", "level": "INFO", "logger": "mindflow.orchestrator", "event": "pipeline.begin", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "agents": "['cognitive_distortion_agent', 'emotion_analysis_agent', 'report_agent', 'triage_agent']"}
+{"timestamp": "2026-10-26T03:22:53.895022+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.start", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "agent": "emotion_analysis_agent", "stage": "emotion"}
+{"timestamp": "2026-10-26T03:22:53.896018+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.end", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "agent": "emotion_analysis_agent", "stage": "emotion", "duration_ms": 1.61}
+{"timestamp": "2026-10-26T03:22:53.899127+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.start", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "analysis_id": "18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "agent": "cognitive_distortion_agent", "stage": "distortion"}
+{"timestamp": "2026-10-26T03:22:53.899127+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.end", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "analysis_id": "18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "agent": "cognitive_distortion_agent", "stage": "distortion", "duration_ms": 3.15}
+{"timestamp": "2026-10-26T03:22:53.903373+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.start", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "analysis_id": "18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "agent": "triage_agent", "stage": "triage"}
+{"timestamp": "2026-10-26T03:22:53.903373+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.end", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "analysis_id": "18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "agent": "triage_agent", "stage": "triage", "duration_ms": 1.75}
+{"timestamp": "2026-10-26T03:22:53.907395+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.start", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "analysis_id": "18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "agent": "report_agent", "stage": "report"}
+{"timestamp": "2026-10-26T03:22:53.915715+00:00", "level": "INFO", "logger": "mindflow.pipeline", "event": "agent.run.end", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "analysis_id": "18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "agent": "report_agent", "stage": "report", "duration_ms": 8.99}
+{"timestamp": "2026-10-26T03:22:53.915715+00:00", "level": "INFO", "logger": "mindflow.orchestrator", "event": "pipeline.end", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "analysis_id": "18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "triage_level": "low", "report_format": "markdown"}
+{"timestamp": "2026-10-26T03:22:54.036877+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "d3612ae8-3b49-46a0-8767-6630e818181c", "method": "POST", "path": "/analysis/analyze", "status_code": 201, "duration_ms": 298.42}
+INFO:     127.0.0.1:55842 - "POST /analysis/analyze HTTP/1.1" 201 Created
+{"timestamp": "2026-10-26T03:22:54.098929+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "342c6871-f605-466c-84b5-5406c84997d9", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 39.85}
+INFO:     127.0.0.1:52635 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:22:54.140294+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "48bff0cf-8a3f-4487-aab6-a1190c73c0d1", "method": "GET", "path": "/sessions/df252ff1-4306-463d-bf21-22f936822754/analyses", "status_code": 200, "duration_ms": 46.84}
+INFO:     127.0.0.1:50590 - "GET /sessions/df252ff1-4306-463d-bf21-22f936822754/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:23:00.257261+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "39b7670c-b06b-4ee7-ba38-92b590fe0a05", "method": "GET", "path": "/reports/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "status_code": 200, "duration_ms": 38.78}
+INFO:     127.0.0.1:62209 - "GET /reports/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2 HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:23:20.453173+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "6f88e0a8-ec13-4072-b221-65da049b1939", "method": "GET", "path": "/analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "status_code": 200, "duration_ms": 22.36}
+INFO:     127.0.0.1:59469 - "GET /analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2 HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:23:21.684301+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "2a10d22c-6a90-4d8d-8232-b5c28821b4a5", "method": "GET", "path": "/analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "status_code": 200, "duration_ms": 27.25}
+INFO:     127.0.0.1:60989 - "GET /analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2 HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:23:28.167408+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "4ca12b1a-f538-4268-8e25-fffade389780", "method": "GET", "path": "/analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "status_code": 200, "duration_ms": 28.49}
+INFO:     127.0.0.1:62354 - "GET /analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2 HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:23:31.016843+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "01d63176-a172-4195-80e4-e791d8a3d443", "method": "GET", "path": "/analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "status_code": 200, "duration_ms": 29.7}
+INFO:     127.0.0.1:60264 - "GET /analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2 HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:23:31.893306+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "5b7e3d0d-102b-4169-8892-58be24ff4b44", "method": "GET", "path": "/analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "status_code": 200, "duration_ms": 23.09}
+INFO:     127.0.0.1:49879 - "GET /analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2 HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:24:00.869962+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "f3124a4d-27f2-46af-9f41-29b66f7d5695", "method": "POST", "path": "/auth/login", "status_code": 200, "duration_ms": 776.92}
+INFO:     127.0.0.1:58529 - "POST /auth/login HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:24:01.009438+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "ba968ddf-5053-4a18-80ac-d03754b2a0c2", "method": "GET", "path": "/auth/me", "status_code": 200, "duration_ms": 28.34}
+INFO:     127.0.0.1:55147 - "GET /auth/me HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:24:01.031321+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "f06ad39d-a232-4a32-9b39-c07486c28aae", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 36.53}
+INFO:     127.0.0.1:55736 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:24:01.103588+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "850c2067-c42b-41c0-9122-58ede4837815", "method": "GET", "path": "/sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses", "status_code": 200, "duration_ms": 28.09}
+INFO:     127.0.0.1:52558 - "GET /sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:24:04.623160+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "bd6155bc-6bf0-41dc-ba7e-8a53d6e82324", "method": "GET", "path": "/analysis/fd863ff0-c678-4218-af9f-17c856af3d5f", "status_code": 200, "duration_ms": 27.63}
+INFO:     127.0.0.1:58417 - "GET /analysis/fd863ff0-c678-4218-af9f-17c856af3d5f HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:24:06.453204+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "35d21dc3-4ac2-4909-8191-1ea6d5cd822c", "method": "GET", "path": "/analysis/fd863ff0-c678-4218-af9f-17c856af3d5f", "status_code": 200, "duration_ms": 28.18}
+INFO:     127.0.0.1:55556 - "GET /analysis/fd863ff0-c678-4218-af9f-17c856af3d5f HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:25:57.033699+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "9e8eb7da-bc96-41ff-b429-4430d1540720", "method": "POST", "path": "/sessions", "status_code": 201, "duration_ms": 82.55}
+INFO:     127.0.0.1:61898 - "POST /sessions HTTP/1.1" 201 Created
+{"timestamp": "2026-10-26T03:25:57.108440+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "aa3c43e8-7fce-4cb7-b42f-408e09a05c86", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 43.43}
+INFO:     127.0.0.1:57021 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:25:57.125802+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "32ac393e-963b-4a4f-badd-e8493e4f1c1c", "method": "GET", "path": "/sessions/33af5c84-968a-499a-8f0d-8971275adc32/analyses", "status_code": 200, "duration_ms": 45.54}
+INFO:     127.0.0.1:57023 - "GET /sessions/33af5c84-968a-499a-8f0d-8971275adc32/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:25:59.033216+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "ec262548-a9b3-4bd7-974c-0b5500521032", "method": "POST", "path": "/sessions", "status_code": 201, "duration_ms": 79.89}
+INFO:     127.0.0.1:50062 - "POST /sessions HTTP/1.1" 201 Created
+{"timestamp": "2026-10-26T03:25:59.152412+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "472a0c8f-66c0-4228-9b43-c649be7ced4b", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 95.4}
+INFO:     127.0.0.1:50158 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:25:59.173147+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "01d55c18-8593-4c94-a3bc-887b716f0353", "method": "GET", "path": "/sessions/47f64624-ea1d-4e0d-8775-f82e9df0ffc8/analyses", "status_code": 200, "duration_ms": 102.72}
+INFO:     127.0.0.1:50159 - "GET /sessions/47f64624-ea1d-4e0d-8775-f82e9df0ffc8/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:00.005592+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "1763e7c3-0a8e-42ae-87a3-68a94d5adfd4", "method": "POST", "path": "/sessions", "status_code": 201, "duration_ms": 75.66}
+INFO:     127.0.0.1:53170 - "POST /sessions HTTP/1.1" 201 Created
+{"timestamp": "2026-10-26T03:26:00.113041+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "437c81c4-7018-46b0-8ee8-6d6f50b4e292", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 55.59}
+INFO:     127.0.0.1:63170 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:00.143409+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "5c810a3f-adbf-4ce0-844a-b5f087b8be76", "method": "GET", "path": "/sessions/1ec257e8-dae8-45e5-a90b-c623f231f4f7/analyses", "status_code": 200, "duration_ms": 71.9}
+INFO:     127.0.0.1:63172 - "GET /sessions/1ec257e8-dae8-45e5-a90b-c623f231f4f7/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:01.739111+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "54b4634f-e822-4abb-a7c7-c116817f2532", "method": "GET", "path": "/sessions/47f64624-ea1d-4e0d-8775-f82e9df0ffc8/analyses", "status_code": 200, "duration_ms": 36.27}
+INFO:     127.0.0.1:53617 - "GET /sessions/47f64624-ea1d-4e0d-8775-f82e9df0ffc8/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:05.456192+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "69a74a15-fca0-4ebf-bd88-2fe29838b1f4", "method": "GET", "path": "/sessions/33af5c84-968a-499a-8f0d-8971275adc32/analyses", "status_code": 200, "duration_ms": 28.45}
+INFO:     127.0.0.1:63207 - "GET /sessions/33af5c84-968a-499a-8f0d-8971275adc32/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:06.039892+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "5db5b867-c270-4b43-bb23-7b0f244679bc", "method": "GET", "path": "/sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses", "status_code": 200, "duration_ms": 30.71}
+INFO:     127.0.0.1:57181 - "GET /sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:07.017778+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "7f0f82a0-dbef-46e8-9277-f9daed16b4e5", "method": "GET", "path": "/analysis/fd863ff0-c678-4218-af9f-17c856af3d5f", "status_code": 200, "duration_ms": 29.13}
+INFO:     127.0.0.1:60057 - "GET /analysis/fd863ff0-c678-4218-af9f-17c856af3d5f HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:23.248193+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "5012ed13-c6f2-4224-b69d-5ede34fc7f15", "method": "POST", "path": "/auth/login", "status_code": 200, "duration_ms": 863.4}
+INFO:     127.0.0.1:57333 - "POST /auth/login HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:23.378075+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "9e20f941-1a18-42e4-b89d-57f0eaa7f29a", "method": "GET", "path": "/auth/me", "status_code": 200, "duration_ms": 38.83}
+INFO:     127.0.0.1:59549 - "GET /auth/me HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:23.393913+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "e9c02dbd-3f33-4973-91db-8ec77d600972", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 40.52}
+INFO:     127.0.0.1:59550 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:23.448767+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "21245a29-5e51-4465-9f76-99c852e57116", "method": "GET", "path": "/sessions/df252ff1-4306-463d-bf21-22f936822754/analyses", "status_code": 200, "duration_ms": 25.97}
+INFO:     127.0.0.1:50497 - "GET /sessions/df252ff1-4306-463d-bf21-22f936822754/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:24.677360+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "1639bb2a-bf5e-4d35-ab89-e6f75caae425", "method": "GET", "path": "/analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "status_code": 200, "duration_ms": 32.21}
+INFO:     127.0.0.1:56466 - "GET /analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2 HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:35.623175+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "35ae041c-d5f0-4b89-920d-d7c4e1b0b270", "method": "POST", "path": "/auth/login", "status_code": 200, "duration_ms": 1168.18}
+INFO:     127.0.0.1:50386 - "POST /auth/login HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:35.733602+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "6b5c15bd-b61d-44d0-8d94-77f17474cec0", "method": "GET", "path": "/auth/me", "status_code": 200, "duration_ms": 38.96}
+INFO:     127.0.0.1:52662 - "GET /auth/me HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:35.747921+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "820a8d98-8d63-4b7f-b1fe-c55991bd810d", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 46.23}
+INFO:     127.0.0.1:52663 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:35.798537+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "ce41e6ea-e262-4402-b08a-f7c925247eff", "method": "GET", "path": "/sessions/1ec257e8-dae8-45e5-a90b-c623f231f4f7/analyses", "status_code": 200, "duration_ms": 26.76}
+INFO:     127.0.0.1:56143 - "GET /sessions/1ec257e8-dae8-45e5-a90b-c623f231f4f7/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:38.441211+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "3d8fc0e1-1c0d-4a0f-ba6c-9d582ee02d4e", "method": "GET", "path": "/sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses", "status_code": 200, "duration_ms": 35.13}
+INFO:     127.0.0.1:59292 - "GET /sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:26:39.595259+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "f4fc680d-ebae-4f78-a1cf-ef91bd06d444", "method": "GET", "path": "/analysis/fd863ff0-c678-4218-af9f-17c856af3d5f", "status_code": 200, "duration_ms": 27.08}
+INFO:     127.0.0.1:61243 - "GET /analysis/fd863ff0-c678-4218-af9f-17c856af3d5f HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:19.166891+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "0c81df98-1224-4e17-b3b0-122c1c9f79d6", "method": "POST", "path": "/auth/login", "status_code": 200, "duration_ms": 900.43}
+INFO:     127.0.0.1:51263 - "POST /auth/login HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:19.289826+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "bf8f5146-7a6d-4706-9fad-02629ee62eff", "method": "GET", "path": "/auth/me", "status_code": 200, "duration_ms": 55.28}
+INFO:     127.0.0.1:49933 - "GET /auth/me HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:19.317156+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "61867e0a-a548-422e-9ad5-60f1f3690c02", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 62.39}
+INFO:     127.0.0.1:49934 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:19.381525+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "0cc5b84b-57fc-4204-b485-548304961475", "method": "GET", "path": "/sessions/1ec257e8-dae8-45e5-a90b-c623f231f4f7/analyses", "status_code": 200, "duration_ms": 34.93}
+INFO:     127.0.0.1:55762 - "GET /sessions/1ec257e8-dae8-45e5-a90b-c623f231f4f7/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:21.647073+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "6b3c6bb3-e6d9-4b1c-aa9f-5424d2f24fb1", "method": "GET", "path": "/sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses", "status_code": 200, "duration_ms": 32.86}
+INFO:     127.0.0.1:59619 - "GET /sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:23.121322+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "7a6acf52-57b6-4851-8047-722b3085afa8", "method": "GET", "path": "/analysis/fd863ff0-c678-4218-af9f-17c856af3d5f", "status_code": 200, "duration_ms": 22.87}
+INFO:     127.0.0.1:50336 - "GET /analysis/fd863ff0-c678-4218-af9f-17c856af3d5f HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:30.211327+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "e3d726ad-bca4-424d-b713-1fb9987b4907", "method": "GET", "path": "/sessions/33af5c84-968a-499a-8f0d-8971275adc32/analyses", "status_code": 200, "duration_ms": 27.03}
+INFO:     127.0.0.1:64011 - "GET /sessions/33af5c84-968a-499a-8f0d-8971275adc32/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:30.769210+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "36e0da1d-f713-4be7-8178-15f51c8e4b59", "method": "GET", "path": "/sessions/47f64624-ea1d-4e0d-8775-f82e9df0ffc8/analyses", "status_code": 200, "duration_ms": 31.82}
+INFO:     127.0.0.1:51119 - "GET /sessions/47f64624-ea1d-4e0d-8775-f82e9df0ffc8/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:31.337455+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "9b733128-f06a-4968-bd91-1748efafcaaf", "method": "GET", "path": "/sessions/1ec257e8-dae8-45e5-a90b-c623f231f4f7/analyses", "status_code": 200, "duration_ms": 26.39}
+INFO:     127.0.0.1:55374 - "GET /sessions/1ec257e8-dae8-45e5-a90b-c623f231f4f7/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:32.296673+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "444b03ed-7ba7-4638-914d-a85e35c497e8", "method": "GET", "path": "/sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses", "status_code": 200, "duration_ms": 21.32}
+INFO:     127.0.0.1:59610 - "GET /sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:33.171588+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "f1ef77fc-f859-44b6-bb5d-4be3e5e52625", "method": "GET", "path": "/analysis/fd863ff0-c678-4218-af9f-17c856af3d5f", "status_code": 200, "duration_ms": 47.4}
+INFO:     127.0.0.1:56005 - "GET /analysis/fd863ff0-c678-4218-af9f-17c856af3d5f HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:45.231609+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "b9dadc73-15bb-4a0a-85b5-c627aac22b2b", "method": "POST", "path": "/auth/login", "status_code": 200, "duration_ms": 858.27}
+INFO:     127.0.0.1:58808 - "POST /auth/login HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:45.346640+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "6cc1b699-470d-4549-8349-1e75c8377988", "method": "GET", "path": "/auth/me", "status_code": 200, "duration_ms": 40.01}
+INFO:     127.0.0.1:51647 - "GET /auth/me HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:45.356950+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "a36ab3fe-91b4-43ab-9847-27863f982c70", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 60.48}
+INFO:     127.0.0.1:51646 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:45.424862+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "56bea60e-1a08-4801-8bcd-832f5b0c3216", "method": "GET", "path": "/sessions/df252ff1-4306-463d-bf21-22f936822754/analyses", "status_code": 200, "duration_ms": 26.34}
+INFO:     127.0.0.1:61679 - "GET /sessions/df252ff1-4306-463d-bf21-22f936822754/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:31:46.708312+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "285b14b7-09fc-44e2-892b-61a47be32594", "method": "GET", "path": "/analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2", "status_code": 200, "duration_ms": 32.97}
+INFO:     127.0.0.1:57769 - "GET /analysis/18f25d21-4790-4f1e-8cd3-fbb017f7a5c2 HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:33:42.781671+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "0fa46387-ed83-4496-8c4e-58c48583d191", "method": "POST", "path": "/auth/login", "status_code": 200, "duration_ms": 898.92}
+INFO:     127.0.0.1:55626 - "POST /auth/login HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:33:42.906919+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "47fbffe3-4b1b-42d9-9453-3c522228794d", "method": "GET", "path": "/auth/me", "status_code": 200, "duration_ms": 45.26}
+INFO:     127.0.0.1:52251 - "GET /auth/me HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:33:42.919160+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "3eda7ef7-99e6-4cd5-98b2-8994637938c0", "method": "GET", "path": "/sessions", "status_code": 200, "duration_ms": 55.68}
+INFO:     127.0.0.1:52252 - "GET /sessions HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:33:42.976688+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "4f9ab323-0b8f-4582-937d-6eb2f2b27ac6", "method": "GET", "path": "/sessions/1ec257e8-dae8-45e5-a90b-c623f231f4f7/analyses", "status_code": 200, "duration_ms": 32.96}
+INFO:     127.0.0.1:51614 - "GET /sessions/1ec257e8-dae8-45e5-a90b-c623f231f4f7/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:33:45.031074+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "fe980886-d6f1-4213-9d8b-7095416c491b", "method": "GET", "path": "/sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses", "status_code": 200, "duration_ms": 82.09}
+INFO:     127.0.0.1:64266 - "GET /sessions/be76ede6-ea68-4f2b-a1d8-7d4364a5d7e3/analyses HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:33:45.876762+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "74ebfa58-b55d-4a6c-93f2-0704d9013149", "method": "GET", "path": "/analysis/fd863ff0-c678-4218-af9f-17c856af3d5f", "status_code": 200, "duration_ms": 23.46}
+INFO:     127.0.0.1:54871 - "GET /analysis/fd863ff0-c678-4218-af9f-17c856af3d5f HTTP/1.1" 200 OK

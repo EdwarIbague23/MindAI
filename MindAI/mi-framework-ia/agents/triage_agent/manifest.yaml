@@ -1,0 +1,19 @@
+name: triage_agent
+version: 1.0.0
+description: Clasifica el nivel de atencion sugerido sin diagnostico ni prescripcion.
+role: triage
+owner: team-clinical-ai
+pii_policy: anonymized_only
+skills_required: []
+permissions:
+  allowed_skills: []
+  pii_access: anonymized_only
+model_policy:
+  provider: "env:LLM_PROVIDER"
+  structured_output: true
+input_schema:
+  type: object
+  required: [analysis, anonymized]
+output_schema:
+  type: object
+  required: [triage_level, justification]

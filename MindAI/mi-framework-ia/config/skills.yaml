@@ -1,5 +1,121 @@
-active_skills:
-  - web_search
-  - code_executor
-  - db_query
-  - document_generator
+skills:
+  - name: document_generator
+    version: "1.0.0"
+    description: >
+      Genera reportes en Markdown a partir de datos ya estructurados y
+      validados; nunca recibe texto clinico sin procesar.
+    category: document_generator
+    entrypoint: "skills.document_generator.skill:DocumentGeneratorSkill"
+    sandboxed: false
+    input_schema:
+      type: object
+      required: [analysis_id, emotions, distortions, guiding_questions]
+      properties:
+        analysis_id: { type: string, format: uuid }
+        emotions: { type: array }
+        distortions: { type: array }
+        guiding_questions: { type: array }
+    output_schema:
+      type: object
+      required: [file_path, format]
+      properties:
+        file_path: { type: string }
+        format: { type: string, enum: [markdown] }
+    permissions:
+      requires_network: false
+      pii_access: forbidden
+      data_scope: own_session
+      allowed_domains: []
+    timeout_seconds: 15
+    rate_limit_per_minute: 30
+    retryable: true
+    audit_level: standard
+
+  - name: web_search
+    version: "1.0.0"
+    description: >
+      Busqueda de referencias publicas no clinicas (lineas de atencion en crisis).
+      Prohibido transmitir PII o texto clinico en las consultas.
+    category: web_search
+    entrypoint: "skills.web_search.skill:WebSearchSkill"
+    sandboxed: false
+    input_schema:
+      type: object
+      required: [query]
+      properties:
+        query: { type: string, maxLength: 200 }
+    output_schema:
+      type: object
+      required: [results]
+      properties:
+        results: { type: array }
+    permissions:
+      requires_network: true
+      pii_access: forbidden
+      data_scope: none
+      allowed_domains:
+        - "minsalud.gov.co"
+        - "lineasdeatencion.gov.co"
+    timeout_seconds: 8
+    rate_limit_per_minute: 20
+    retryable: true
+    audit_level: standard
+
+  - name: db_query
+    version: "1.0.0"
+    description: >
+      Consultas estructuradas de lectura/escritura controlada sobre la base de
+      datos cifrada, con validacion de ownership obligatoria.
+    category: db_query
+    entrypoint: "skills.db_query.skill:DbQuerySkill"
+    sandboxed: false
+    input_schema:
+      type: object
+      required: [query_type, session_id]
+      properties:
+        query_type: { type: string, enum: [read_analysis, write_analysis, list_reports] }
+        session_id: { type: string, format: uuid }
+    output_schema:
+      type: object
+      required: [rows]
+      properties:
+        rows: { type: array }
+    permissions:
+      requires_network: false
+      pii_access: forbidden
+      data_scope: own_session
+      allowed_domains: []
+    timeout_seconds: 5
+    rate_limit_per_minute: 120
+    retryable: true
+    audit_level: elevated
+
+  - name: code_executor
+    version: "1.0.0"
+    description: >
+      Ejecucion de codigo no clinico en subproceso restringido, deshabilitada
+      por defecto mediante ENABLE_CODE_EXECUTOR.
+    category: code_executor
+    entrypoint: "skills.code_executor.skill:CodeExecutorSkill"
+    sandboxed: true
+    input_schema:
+      type: object
+      required: [code]
+      properties:
+        code: { type: string, maxLength: 4000 }
+        language: { type: string, enum: [python] }
+    output_schema:
+      type: object
+      required: [stdout, stderr]
+      properties:
+        stdout: { type: string }
+        stderr: { type: string }
+    permissions:
+      requires_network: false
+      pii_access: forbidden
+      data_scope: none
+      allowed_domains: []
+    timeout_seconds: 10
+    rate_limit_per_minute: 10
+    retryable: false
+    audit_level: elevated

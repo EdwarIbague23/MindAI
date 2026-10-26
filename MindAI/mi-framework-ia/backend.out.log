@@ -1,0 +1,6 @@
+{"timestamp": "2026-10-26T02:55:42.100149+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "eb10d8c4-693f-4789-934f-8cf66956adae", "method": "GET", "path": "/health", "status_code": 200, "duration_ms": 7.07}
+INFO:     127.0.0.1:54744 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:12:39.550911+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "fd09a2eb-7adc-4bda-b5bd-8238d2add693", "method": "GET", "path": "/health", "status_code": 200, "duration_ms": 9.9}
+INFO:     127.0.0.1:54923 - "GET /health HTTP/1.1" 200 OK
+{"timestamp": "2026-10-26T03:19:57.993313+00:00", "level": "INFO", "logger": "mindflow.http", "event": "http.request.completed", "request_id": "1b4b2e4f-10aa-490e-88c8-5fa0aa0f39d7", "method": "GET", "path": "/health", "status_code": 200, "duration_ms": 8.19}
+INFO:     127.0.0.1:55526 - "GET /health HTTP/1.1" 200 OK

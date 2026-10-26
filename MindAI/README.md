@@ -1,196 +1,226 @@
-
 # MindFlow AI — Copiloto de Triaje y Análisis Emocional para Terapeutas
-=======
-<div align="center">
-
-# 🧠 MindFlow AI
-### Copiloto de Triaje y Análisis Emocional para Terapeutas
->>>>>>> ac7cafa7a0d3fb4d4fc5c778c68c6640aa5f0c49
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Estado](https://img.shields.io/badge/Estado-En_Desarrollo-yellow)](https://github.com/EdwarIbague23/Electiva_IA-/graphs/activity)
 [![Curso](https://img.shields.io/badge/UNIMINUTO-Electiva_IA_2026--2-green)](https://uniminuto.edu)
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115.0-009688.svg)](https://fastapi.tiangolo.com/)
-[![LangChain](https://img.shields.io/badge/LangChain-0.3.15-orange.svg)](https://python.langchain.com/)
-[![SpaCy](https://img.shields.io/badge/SpaCy-3.7.2-green.svg)](https://spacy.io/)
+[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115.4-009688.svg)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB.svg)](https://reactjs.org/)
-<<<<<<< HEAD
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.38.0-FF5A5F.svg)](https://streamlit.io/)
-=======
 
-</div>
+## Visión del Proyecto
 
----
-
-## 📋 Tabla de contenido
-
-- [Visión del proyecto](#-visión-del-proyecto)
-- [Alcance del MVP](#-alcance-del-mvp)
-- [Estructura del repositorio](#️-estructura-del-repositorio-mi-framework-ia)
-- [Documentación técnica](#-documentación-técnica)
-- [Equipo](#-equipo)
-- [Disclaimer ético](#️-disclaimer-ético)
-- [Soporte](#-soporte)
->>>>>>> ac7cafa7a0d3fb4d4fc5c778c68c6640aa5f0c49
-
----
-
-## 📌 Visión del Proyecto
-<<<<<<< HEAD
-MindFlow AI es un copiloto inteligente diseñado para optimizar el análisis de notas clínicas en salud mental. Mediante modelos avanzados de Procesamiento de Lenguaje Natural (NLP), la plataforma transforma transcripciones en mapas visuales de emociones, detecta distorsiones cognitivas y sugiere enfoques para la siguiente consulta. Proyecto desarrollado para la **Electiva CPC Integración IA** (UNIMINUTO Ibagué, 2026‑2). **Esta herramienta actúa exclusivamente como apoyo analítico y no sustituye el juicio profesional.**
-
----
-
-## 🎯 Alcance del MVP (Demostración Sesión 16)
-
-| Lo que **SE DEMUESTRA** en 3 minutos | Lo que queda **EXPLÍCITAMENTE FUERA** |
-| :--- | :--- |
-| **Entrada:** Carga/pegado de notas clínicas o transcripción anónima de consulta. | Diagnóstico clínico automatizado o emisión de recetas médicas. |
-| **Procesamiento:** Extracción en tiempo real de estados de ánimo y distorsiones cognitivas (*pensamiento todo‑o‑nada*, *catastrofismo*). | Chat en vivo de interacción directa con el paciente o terapia presencial. |
-| **Salida:** Dashboard con gráfico de emociones, hallazgos clave y 3 preguntas sugeridas para la próxima sesión. | Integración con sistemas de historias clínicas complejas (EHR). |
-
----
-
-## 🗺️ Matriz de Integración de IA (7 Fases del SDLC)
-
-| Fase del Proyecto | Tarea Concreta | Herramienta Candidata | Riesgo a Vigilar |
-| :--- | :--- | :--- | :--- |
-| **1. Ideación y Diseño** | Definición de prompts de análisis psicológico y taxonomía de distorsiones | Claude 3.5 Sonnet / GPT‑4o | Respuestas ambiguas o diagnósticos clínicos no solicitados |
-| **2. Datos / Conocimiento** | Ingestión de texto clínico y anonimización de datos personales (PII) | Python / Regex / SpaCy | Infiltración de datos personales o sensibles del paciente |
-| **3. Desarrollo Core** | API de extracción de entidades emocionales y estructuración JSON | FastAPI / LangChain | Latencia en el procesamiento de textos largos |
-| **4. Interfaz / UX** | Dashboard visual con gráficos de radar de emociones y métricas | v0.dev / Streamlit / React | Visualización confusa para el terapeuta |
-| **5. Testing y Validación** | Pruebas con notas clínicas ficticias y casos de prueba | PyTest / GitHub Copilot | Falsos positivos en la detección de distorsiones cognitivas |
-| **6. Despliegue / Ops** | Despliegue en la nube con cifrado de datos | Vercel / Render | Vulnerabilidades de privacidad/seguridad de datos de salud |
-| **7. Documentación** | Guion del pitch y estructuración del README inicial | Gamma / Claude | No enfatizar el disclaimer ético de asistencia al profesional |
-
----
-
-## 📂 Estructura del Repositorio
-
-```text
-mindflow-ai/
-├── docs/                # Documentación del proyecto y acta de nacimiento
-├── backend/             # API en Python (FastAPI + LangChain)
-├── frontend/            # Interfaz de usuario (Streamlit / React)
-├── prompts/             # Plantillas de prompts y taxonomía de distorsiones
-├── .gitignore           # Archivos excluidos del control de versiones
-└── README.md            # Descripción principal del proyecto
-=======
-
-**MindFlow AI** es un framework y copiloto inteligente diseñado para optimizar el análisis de notas clínicas en salud mental y triaje emocional. Mediante modelos avanzados de Procesamiento de Lenguaje Natural (NLP), la plataforma transforma transcripciones en mapas visuales de emociones, detecta distorsiones cognitivas y sugiere enfoques terapéuticos.
+**MindFlow AI** es un copiloto inteligente para optimizar el análisis de notas clínicas en salud mental y el triaje emocional. Mediante NLP, transforma transcripciones anonimizadas en mapas visuales de emociones, detecta distorsiones cognitivas y sugiere preguntas guía para la siguiente sesión terapéutica.
 
 Proyecto desarrollado para la **Electiva CPC Integración IA** (UNIMINUTO Ibagué, 2026-2).
 
-> ⚠️ **Esta herramienta actúa exclusivamente como apoyo analítico y no sustituye el juicio profesional.**
+> **Esta herramienta actúa exclusivamente como apoyo analítico y no sustituye el juicio profesional.**
 
 ---
 
-## 🎯 Alcance del MVP
+## Alcance del MVP
 
-| ✅ Lo que **SE DEMUESTRA** en el MVP | 🚫 Lo que queda **EXPLÍCITAMENTE FUERA** |
-|---|---|
-| **Entrada:** Carga/pegado de notas clínicas o transcripción anónima de consulta. | Diagnóstico clínico automatizado o emisión de recetas médicas. |
-| **Procesamiento:** Extracción en tiempo real de estados de ánimo y distorsiones cognitivas (*pensamiento todo-o-nada*, *catastrofismo*). | Chat en vivo de interacción directa con el paciente o terapia presencial. |
-| **Salida:** Dashboard con gráfico de emociones, hallazgos clave y preguntas sugeridas para la próxima sesión. | Integración con sistemas complejos de historias clínicas (EHR). |
+| Lo que **SE DEMUESTRA** | Lo que queda **EXPLÍCITAMENTE FUERA** |
+| :--- | :--- |
+| **Entrada:** carga o pegado de notas clínicas anonimizadas. | Diagnóstico clínico automatizado o emisión de recetas médicas. |
+| **Procesamiento:** pipeline multi-agente para emociones, distorsiones cognitivas y triaje. | Chat en vivo con el paciente o terapia presencial. |
+| **Salida:** dashboard con radar emocional, hallazgos, preguntas guía y reporte Markdown descargable. | Integración con sistemas complejos de historias clínicas (EHR). |
 
 ---
 
-## 🗂️ Estructura del Repositorio (`mi-framework-ia`)
+## Arquitectura
 
-El proyecto está organizado bajo una arquitectura modular y escalable de framework de IA:
+Flujo principal:
+
+```
+Terapeuta -> React (Vite) -> FastAPI
+                              -> PII Pipeline (anonimización obligatoria)
+                              -> Orquestador multi-agente
+                                   emotion_analysis -> cognitive_distortion -> triage -> report
+                              -> LLM Gateway (mock | OpenAI | Anthropic)
+                              -> PostgreSQL / SQLite (cifrado AES-256-GCM en reposo)
+```
+
+Componentes clave:
+
+- **Core**: orquestador, LLM Gateway, seguridad, observabilidad, reportes y base de datos.
+- **Agentes**: `emotion_analysis_agent`, `cognitive_distortion_agent`, `triage_agent`, `report_agent`.
+- **Skills**: `document_generator`, `db_query`, `web_search`, `code_executor` (deshabilitada por defecto).
+- **Interfaces**: API REST (FastAPI) y frontend (React 18 + Vite + TanStack Query).
+
+---
+
+## Estructura del Repositorio
 
 ```text
-mi-framework-ia/
-├── agents/                  # Definición de agentes especializados y lógica de ejecución
-├── config/                  # Configuraciones del framework
-│   ├── environments/        # Variables de entorno y ajustes por ambiente
-│   ├── agents.yaml          # Manifiesto de configuración de agentes
-│   └── skills.yaml          # Manifiesto de configuración de habilidades
-├── core/                    # Núcleo del framework (orquestador, memoria, LLM gateway)
-├── docs/                    # Documentación técnica (architecture.md, manifest_schema.md)
-├── evaluations/             # Pruebas de rendimiento, precisión y casos de validación
-├── interfaces/              # Capas de presentación y puntos de entrada (API / Frontend)
-├── skills/                  # Habilidades modulares atómicas
-│   ├── code_executor/       # Ejecución segura de código
-│   ├── db_query/            # Consultas estructuradas
-│   ├── document_generator/  # Generación de reportes clínicos
-│   └── web_search/          # Búsqueda y recuperación de información externa
-├── tools/                   # Utilidades externas e integraciones
-│   ├── github_client.py     # Cliente para automatización y control de versiones
-│   └── slack_client.py      # Cliente de notificaciones y alertas
-├── .gitignore                # Archivos excluidos del control de versiones
-├── Proyecto_MindFlow_AI.pdf   # Documento oficial del proyecto técnico
-└── README.md                  # Descripción principal del proyecto
->>>>>>> ac7cafa7a0d3fb4d4fc5c778c68c6640aa5f0c49
+MindIA/
+├── .env.example                 # Variables de entorno de referencia
+├── docker-compose.yml           # PostgreSQL 15
+└── mi-framework-ia/
+    ├── agents/                  # Agentes especializados y manifiestos
+    ├── alembic/                 # Migraciones de base de datos
+    ├── config/
+    │   ├── agents.yaml          # Manifiesto de agentes
+    │   └── skills.yaml          # Manifiesto de skills
+    ├── core/
+    │   ├── agent_base/          # BaseAgent + registro de agentes
+    │   ├── db/                  # Modelos, repositorios y sesión async
+    │   ├── llm_gateway/         # Gateway multi-proveedor (mock/OpenAI/Anthropic)
+    │   ├── observability/       # Logging JSON y trazas request_id/analysis_id
+    │   ├── orchestrator/        # Planner, router, executor y orquestador
+    │   ├── reporting/           # Generación y resolución segura de reportes
+    │   ├── schemas/             # DTOs Pydantic
+    │   └── security/            # PII, guardrails, JWT, cifrado, permisos
+    ├── docs/                    # Arquitectura, requerimientos y manifiestos
+    ├── evaluations/             # Pruebas y benchmarks de agentes/skills
+    ├── interfaces/
+    │   ├── api/                 # FastAPI (rutas, deps, middleware)
+    │   └── frontend/            # React + Vite
+    ├── skills/                  # Skills atómicas
+    ├── tests/                   # Suite pytest
+    ├── tools/                   # Integraciones externas (GitHub, Slack)
+    └── pyproject.toml
 ```
 
 ---
 
+## Requisitos
 
-## 👥 Roles del Equipo
-
-- **Product Owner / Lead AI Architect** – Edwar Ibagué  
-- **Full‑Stack Developer** – (Daniel Felipe Andrade)  
-- **NLP Engineer** – Nicol Sneider Murillo 
-- **Frontend Developer** – Interfaz Streamlit / React  
-- **QA / Tester** – Validación de prompts y casos clínicos  
-- **DevOps** – Despliegue Docker, Render / Vercel  
+- Python 3.12+
+- Node.js 20+
+- PostgreSQL 15 (opcional; hay fallback SQLite para desarrollo/tests)
+- Docker + Docker Compose (opcional)
 
 ---
 
+## Puesta en Marcha
 
-## ⚠️ Disclaimer Ético
+### 1. Variables de entorno
 
-> **MindFlow AI es una herramienta de apoyo analítico para profesionales de la salud mental.**  
-> - **No emite diagnósticos clínicos** ni sustituye la evaluación profesional.  
-> - **No almacena datos de identificación personal (PII)** sin el consentimiento explícito del paciente y el cumplimiento de normativas locales (HIPAA, LGPD, etc.).  
-> - Los resultados (emociones, distorsiones cognitivas, preguntas sugeridas) deben ser **validados y reinterpretados por el terapeuta** antes de ser incorporados a la historia clínica.  
-> - El uso indebido de la herramienta para tomar decisiones médicas por cuenta propia está **estrictamente prohibido**.
+Copia `.env.example` a `.env` en la raíz del repositorio (`MindIA/.env`):
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Variables relevantes: `DATABASE_URL`, `JWT_SECRET_KEY`, `AES_KEY`, `LLM_MODE` (`mock` o `real`), `LLM_PROVIDER`, `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `REPORTS_DIR`.
+
+### 2. Base de datos
+
+```powershell
+docker compose up -d db
+```
+
+Si PostgreSQL no está disponible, la aplicación usa automáticamente SQLite (`ALLOW_SQLITE_FALLBACK=true`).
+
+### 3. Backend
+
+```powershell
+cd MindAI/mi-framework-ia
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+uvicorn interfaces.api.main:app --reload
+```
+
+- API: `http://localhost:8000`
+- Swagger: `http://localhost:8000/docs`
+
+### 4. Frontend
+
+```powershell
+cd MindAI/mi-framework-ia/interfaces/frontend
+npm install
+npm run dev
+```
+
+- App: `http://localhost:5173` (proxy `/api` hacia el backend)
 
 ---
 
-*¿Tienes dudas? Revisa la sección de [Issues](https://github.com/EdwarIbague23/Electiva_IA-/issues) o abre un nuevo reporte.*
-=======
-## 📚 Documentación Técnica
+## Endpoints Principales
+
+| Método | Ruta | Descripción |
+| :--- | :--- | :--- |
+| `GET` | `/health` | Estado del servicio, DB y modo LLM. |
+| `POST` | `/auth/register` | Registro de terapeuta. |
+| `POST` | `/auth/login` | Login y emisión de JWT. |
+| `GET` | `/auth/me` | Usuario autenticado. |
+| `POST` | `/sessions` | Crear sesión. |
+| `GET` | `/sessions` | Listar sesiones del usuario. |
+| `GET` | `/sessions/{id}/analyses` | Análisis de una sesión. |
+| `POST` | `/analysis/analyze` | Anonimiza la nota y ejecuta el pipeline multi-agente. |
+| `GET` | `/analysis/{analysis_id}` | Recuperar un análisis (solo dueño). |
+| `POST` | `/analysis/{analysis_id}/report` | Regenerar reporte Markdown. |
+| `GET` | `/reports/{analysis_id}` | Descargar el reporte Markdown (JWT + ownership). |
+
+`POST /analysis/analyze` devuelve `report_url` relativa (`/reports/{analysis_id}`); el frontend la consume con el `baseURL` de la API y descarga el archivo con el header de autenticación.
+
+---
+
+## Testing y Verificación
+
+```powershell
+cd MindIA/mi-framework-ia
+python -m compileall -q .
+python -m pytest -q
+```
+
+```powershell
+cd MindIA/mi-framework-ia/interfaces/frontend
+npm run build
+```
+
+La suite usa `LLM_MODE=mock`, SQLite temporal y un `REPORTS_DIR` temporal (ver `tests/conftest.py`).
+
+---
+
+## Seguridad y Privacidad
+
+- Anonimización obligatoria de PII antes de invocar al LLM (regex + spaCy).
+- Cifrado AES-256-GCM de notas y resultados en reposo.
+- Guardrails que prohíben campos diagnósticos o de prescripción.
+- JWT para autenticación y verificación de ownership en análisis y reportes.
+- Reportes servidos con validación anti path traversal y sin exponer rutas absolutas.
+- Logs estructurados en JSON que redactan cualquier campo clínico sensible.
+
+---
+
+## Documentación Técnica
 
 | Documento | Contenido |
-|---|---|
-| [`docs/architecture.md`](./docs/architecture.md) | Capas del sistema, infraestructura compartida (memoria, LLM Gateway, seguridad, observabilidad) y diagrama de flujo de datos. |
-| [`docs/manifest_schema.md`](./docs/manifest_schema.md) | Especificación formal de los campos obligatorios/opcionales de `agents.yaml` y `skills.yaml`. |
+| :--- | :--- |
+| [`docs/architecture.md`](./docs/architecture.md) | Capas del sistema, infraestructura compartida y flujo de datos. |
+| [`docs/manifest_schema.md`](./docs/manifest_schema.md) | Especificación de `agents.yaml` y `skills.yaml`; validador implementado. |
+| [`docs/02_requerimientos_rf_rnf.md`](./docs/02_requerimientos_rf_rnf.md) | Requerimientos funcionales y no funcionales. |
+| [`docs/03_historias_de_usuario.md`](./docs/03_historias_de_usuario.md) | Historias de usuario. |
 
 ---
 
-## 👥 Equipo
+## Equipo
 
 | Rol | Integrante |
-|---|---|
+| :--- | :--- |
 | Product Owner / Lead AI Architect | Edwar Esteban Ibagué |
 | Backend Developer | Daniel Felipe Andrade |
 | NLP Engineer & Frontend | Nicol Sneider Murillo |
 
 ---
 
-## ⚠️ Disclaimer Ético
+## Disclaimer Ético
 
 **MindFlow AI** es una herramienta de apoyo analítico para profesionales de la salud mental:
 
-- ❌ **No** emite diagnósticos clínicos ni sustituye la evaluación profesional.
-- 🔒 **No** almacena datos de identificación personal (PII) sin el consentimiento explícito del paciente y el cumplimiento de normativas de privacidad.
-- 👩‍⚕️ Los resultados (emociones, distorsiones cognitivas, preguntas sugeridas) **deben ser validados y reinterpretados** por el terapeuta antes de ser incorporados a la historia clínica.
-- 🚫 El uso indebido de la herramienta para tomar decisiones médicas por cuenta propia está **estrictamente prohibido**.
+- **No** emite diagnósticos clínicos ni sustituye la evaluación profesional.
+- **No** almacena PII sin consentimiento explícito y cumplimiento normativo.
+- Los resultados (emociones, distorsiones, preguntas sugeridas) **deben ser validados y reinterpretados** por el terapeuta antes de incorporarse a la historia clínica.
+- El uso indebido para tomar decisiones médicas por cuenta propia está **estrictamente prohibido**.
 
 ---
 
-## 💬 Soporte
+## Soporte
 
-¿Tienes dudas? Revisa la sección de [**Issues**](https://github.com/EdwarIbague23/Electiva_IA-/issues) o abre un nuevo reporte.
+¿Dudas o problemas? Revisa la sección de [Issues](https://github.com/EdwarIbague23/Electiva_IA-/issues) o abre un nuevo reporte.
 
 ---
 
-<div align="center">
-
-Distribuido bajo licencia **MIT**. Ver [`LICENSE`](./LICENSE) para más información.
-
-</div>
->>>>>>> ac7cafa7a0d3fb4d4fc5c778c68c6640aa5f0c49
+Distribuido bajo licencia **MIT**.

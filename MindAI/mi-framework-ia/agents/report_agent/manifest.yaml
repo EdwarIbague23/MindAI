@@ -1,0 +1,19 @@
+name: report_agent
+version: 1.0.0
+description: Compone un reporte Markdown sin PII con aviso de revision profesional.
+role: report_generation
+owner: team-clinical-ai
+pii_policy: anonymized_only
+skills_required: [document_generator]
+permissions:
+  allowed_skills: [document_generator]
+  pii_access: anonymized_only
+model_policy:
+  provider: "env:LLM_PROVIDER"
+  structured_output: false
+input_schema:
+  type: object
+  required: [analysis]
+output_schema:
+  type: object
+  required: [file_path, format]

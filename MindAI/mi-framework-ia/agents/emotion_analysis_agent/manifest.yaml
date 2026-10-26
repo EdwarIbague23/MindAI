@@ -1,0 +1,19 @@
+name: emotion_analysis_agent
+version: 1.0.0
+description: Analiza texto clinico anonimizado para emociones, distorsiones y preguntas guia.
+role: emotion_analysis
+owner: team-clinical-ai
+pii_policy: anonymized_only
+skills_required: [document_generator, db_query]
+permissions:
+  allowed_skills: [document_generator, db_query]
+  pii_access: anonymized_only
+model_policy:
+  provider: "env:LLM_PROVIDER"
+  structured_output: true
+input_schema:
+  type: object
+  required: [text, anonymized]
+output_schema:
+  type: object
+  required: [emotions, distortions, guiding_questions, triage_level, summary]
