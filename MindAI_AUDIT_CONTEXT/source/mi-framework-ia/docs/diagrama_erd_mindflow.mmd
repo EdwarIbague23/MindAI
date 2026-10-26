@@ -1,0 +1,76 @@
+erDiagram
+    %% Definición de Entidades Principales y Tablas Clínicas (PostgreSQL v16)
+    
+    users {
+        UUID id PK
+        VARCHAR email "unique"
+        VARCHAR name
+        VARCHAR role "therapist, admin"
+        VARCHAR hashed_password
+        Boolean is_therapist
+        TIMESTAMP created_at
+        TIMESTAMP last_login
+    }
+
+    clinical_notes {
+        UUID id PK
+        UUID therapist_id FK
+        CHAR patient_hash "SHA-256"
+        TEXT note_text
+        VARCHAR language "es"
+        INTEGER word_count
+        TIMESTAMP created_at
+    }
+
+    analyses {
+        UUID id PK
+        UUID clinical_note_id FK
+        VARCHAR status "pending, completed, error"
+        VARCHAR ia_model
+        FLOAT processing_time
+        TIMESTAMP created_at
+    }
+
+    emotion_scores {
+        UUID id PK
+        UUID analysis_id FK
+        VARCHAR emotion_name
+        FLOAT score
+        FLOAT confidence
+        TIMESTAMP timestamp
+    }
+
+    cognitive_distortions {
+        UUID id PK
+        UUID analysis_id FK
+        VARCHAR distortion_type
+        VARCHAR severity
+        TEXT description
+        TIMESTAMP detected_at
+    }
+
+    guiding_questions {
+        UUID id PK
+        UUID analysis_id FK
+        TEXT question_text
+        VARCHAR category
+        INTEGER priority
+        TIMESTAMP created_at
+    }
+
+    reports {
+        UUID id PK
+        UUID analysis_id FK
+        VARCHAR format "pdf"
+        TEXT generated_content
+        TIMESTAMP generated_at
+        INTEGER word_count
+    }
+
+    %% Relaciones y Cardinalidades del Negocio
+    users ||--o{ clinical_notes : "1:N (crea notas)"
+    clinical_notes ||--o{ analyses : "1:N (genera análisis)"
+    analyses ||--o{ emotion_scores : "1:N (registra emociones)"
+    analyses ||--o{ cognitive_distortions : "1:N (detecta distorsiones)"
+    analyses ||--o{ guiding_questions : "1:N (sugiere preguntas)"
+    analyses ||--|| reports : "1:1 (consolida reporte)"

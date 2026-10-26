@@ -1,0 +1,305 @@
+[
+  {
+    "file": "CHANGELOG_Hybrid_Update.md",
+    "signals": [
+      "agent",
+      "claude",
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "README.md",
+    "signals": [
+      "agent",
+      "claude",
+      "langchain",
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/agents/emotion_analysis_agent/prompts/analisis_emocional.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/agents/emotion_analysis_agent/prompts/legacy_bateria_08_10.md",
+    "signals": [
+      "langchain",
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/alembic/versions/20260921_initial_schema.py",
+    "signals": [
+      "claude"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/config/environments/dev.yaml",
+    "signals": [
+      "claude"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/config/environments/prod.yaml",
+    "signals": [
+      "claude"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/core/prompts_seguridad_cripto.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/core/prompt_llm_gateway.md",
+    "signals": [
+      "langchain",
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/core/llm_gateway/provider_router.py",
+    "signals": [
+      "claude",
+      "llm"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/core/observability/tracer.py",
+    "signals": [
+      "llm"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/core/security/prompts_anonimizacion_pii.md",
+    "signals": [
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/core/security/prompts_pii_anonymizer_origen.md",
+    "signals": [
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/deployment/prompts_devops.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/deployment/prompts_infraestructura_devops_origen.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/docs/02_requerimientos_rf_rnf.md",
+    "signals": [
+      "llm"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/docs/03_historias_de_usuario.md",
+    "signals": [
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/docs/architecture.md",
+    "signals": [
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/docs/decision_tecnologica.md",
+    "signals": [
+      "llm"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/docs/diagrama_componentes_mindflow.drawio",
+    "signals": [
+      "agent"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/docs/diagrama_componentes_mindflow.mmd",
+    "signals": [
+      "claude",
+      "llm"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/docs/diagrama_erd_mindflow.drawio",
+    "signals": [
+      "agent"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/docs/manifest_schema.md",
+    "signals": [
+      "agent",
+      "llm"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/docs/prompt_01_arquitectura.md",
+    "signals": [
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/evaluations/prompts_client_testing.md",
+    "signals": [
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/evaluations/prompts_testing_unitario_mock.md",
+    "signals": [
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/evaluations/agent_benchmarks/emotion_analysis_agent.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/evaluations/agent_benchmarks/README.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/interfaces/api/prompts_api_dominio_v1.md",
+    "signals": [
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/interfaces/api/prompts_contratos_y_seguridad.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/interfaces/api/prompts_schemas_openapi.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/interfaces/api/prompts_seguridad_api.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/interfaces/frontend/prompts_export_pdf_origen.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/interfaces/frontend/prompts_report_pdf.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/interfaces/frontend/prompts_ui_react.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/interfaces/frontend/prompts_ui_roles_react.md",
+    "signals": [
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/interfaces/mobile/prompts_mobile_react_native.md",
+    "signals": [
+      "llm",
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/models/analyses.py",
+    "signals": [
+      "claude"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/models/prompts_base_de_datos_origen.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/models/prompts_modelado_datos.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "mi-framework-ia/skills/document_generator/prompts_document_generator.md",
+    "signals": [
+      "prompt"
+    ]
+  },
+  {
+    "file": "MindFlow_Audit_Kit/audit_mindflow.py",
+    "signals": [
+      "agent",
+      "anthropic",
+      "claude",
+      "embedding",
+      "embeddings",
+      "gemini",
+      "langchain",
+      "llamaindex",
+      "llm",
+      "openai",
+      "prompt",
+      "rag",
+      "vector"
+    ]
+  },
+  {
+    "file": "MindFlow_Audit_Kit/README.md",
+    "signals": [
+      "claude",
+      "gemini",
+      "rag"
+    ]
+  },
+  {
+    "file": "MindFlow_Audit_Kit/UNIVERSAL_AI_AUDIT_INSTRUCTION.md",
+    "signals": [
+      "embeddings",
+      "rag"
+    ]
+  }
+]

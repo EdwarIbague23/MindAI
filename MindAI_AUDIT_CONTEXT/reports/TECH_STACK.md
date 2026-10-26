@@ -1,0 +1,22 @@
+# Detected Technology Stack
+
+- **Python** — signals: Pipfile, manage.py, pyproject.toml, requirements.txt
+- **Django** — signals: django
+- **FastAPI** — signals: fastapi
+- **Flask** — signals: flask
+- **Node.js** — signals: package-lock.json, package.json, pnpm-lock.yaml, yarn.lock
+- **React** — signals: react
+- **Next.js** — signals: next
+- **Vue** — signals: vue
+- **Angular** — signals: @angular
+- **Express** — signals: express
+- **NestJS** — signals: @nestjs
+- **PHP** — signals: artisan, composer.json
+- **Laravel** — signals: artisan
+- **Java** — signals: build.gradle, gradlew, pom.xml
+- **Spring** — signals: spring-boot
+- **Go** — signals: go.mod
+- **Rust** — signals: Cargo.toml
+- **Flutter/Dart** — signals: pubspec.yaml
+- **React Native** — signals: react-native
+- **Docker** — signals: Dockerfile, compose.yml, docker-compose.yml

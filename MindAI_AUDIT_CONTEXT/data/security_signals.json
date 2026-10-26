@@ -1,0 +1,7 @@
+[
+  {
+    "type": "hardcoded_url",
+    "file": "README.md",
+    "note": "Potential sensitive/configuration finding; value intentionally omitted."
+  }
+]

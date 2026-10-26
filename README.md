@@ -74,13 +74,13 @@ El inventario siguiente se regenera localmente al crear, modificar, renombrar o 
 
 <!-- README-AUTO:START -->
 ```text
-MindFlow AI/
+MindAI-1/
 |-- .vscode/
+|   |-- settings.json
 |   `-- tasks.json
 |-- mi-framework-ia/
 |   |-- agents/
 |   |   |-- coding_agent/
-|   |   |   |-- prompts/
 |   |   |   |-- agent.py
 |   |   |   `-- manifest.yaml
 |   |   |-- emotion_analysis_agent/
@@ -89,13 +89,10 @@ MindFlow AI/
 |   |   |   |   `-- legacy_bateria_08_10.md
 |   |   |   `-- manifest.yaml
 |   |   |-- research_agent/
-|   |   |   |-- prompts/
 |   |   |   |-- agent.py
 |   |   |   `-- manifest.yaml
 |   |   `-- __init__.py
 |   |-- alembic/
-|   |   |-- alembic/
-|   |   |   `-- versions/
 |   |   |-- versions/
 |   |   |   `-- 20260921_initial_schema.py
 |   |   `-- env.py
@@ -149,18 +146,16 @@ MindFlow AI/
 |   |   |-- 01_contexto_y_entrevista.md
 |   |   |-- 02_requerimientos_rf_rnf.md
 |   |   |-- 03_historias_de_usuario.md
-|   |   |-- AI_CODEGEN_PLAYBOOK.md
 |   |   |-- architecture.md
 |   |   |-- decision_tecnologica.md
+|   |   |-- Diagrama_casos_uso_mindflow.mmd
 |   |   |-- diagrama_componentes_mindflow.drawio
 |   |   |-- diagrama_componentes_mindflow.mmd
+|   |   |-- diagrama_de_clases_mindflow.mmd
 |   |   |-- diagrama_erd_mindflow.drawio
 |   |   |-- diagrama_erd_mindflow.mmd
 |   |   |-- manifest_schema.md
-|   |   |-- prompt_01_arquitectura.md
-|   |   |-- STITCH_FULL_PROTOTYPE_SPEC.md
-|   |   |-- STITCH_MOBILE_PROTOTYPE_SPEC.md
-|   |   `-- STITCH_WEB_PROTOTYPE_SPEC.md
+|   |   `-- prompt_01_arquitectura.md
 |   |-- evaluations/
 |   |   |-- agent_benchmarks/
 |   |   |   |-- emotion_analysis_agent.md
@@ -219,9 +214,174 @@ MindFlow AI/
 |   |   `-- slack_client.py
 |   |-- .gitignore
 |   `-- alembic.ini
+|-- MindAI_AUDIT_CONTEXT/
+|   |-- data/
+|   |   |-- ai_signals.json
+|   |   |-- api_routes.json
+|   |   |-- dependencies.json
+|   |   |-- excluded_files.json
+|   |   |-- inventory.json
+|   |   `-- security_signals.json
+|   |-- reports/
+|   |   |-- AUDIT_README.md
+|   |   |-- PROJECT_TREE.md
+|   |   `-- TECH_STACK.md
+|   |-- source/
+|   |   |-- mi-framework-ia/
+|   |   |   |-- agents/
+|   |   |   |   |-- coding_agent/
+|   |   |   |   |   |-- agent.py
+|   |   |   |   |   `-- manifest.yaml
+|   |   |   |   |-- emotion_analysis_agent/
+|   |   |   |   |   |-- prompts/
+|   |   |   |   |   |   |-- analisis_emocional.md
+|   |   |   |   |   |   `-- legacy_bateria_08_10.md
+|   |   |   |   |   `-- manifest.yaml
+|   |   |   |   |-- research_agent/
+|   |   |   |   |   |-- agent.py
+|   |   |   |   |   `-- manifest.yaml
+|   |   |   |   `-- __init__.py
+|   |   |   |-- alembic/
+|   |   |   |   |-- versions/
+|   |   |   |   |   `-- 20260921_initial_schema.py
+|   |   |   |   `-- env.py
+|   |   |   |-- config/
+|   |   |   |   |-- environments/
+|   |   |   |   |   |-- dev.yaml
+|   |   |   |   |   `-- prod.yaml
+|   |   |   |   |-- agents.yaml
+|   |   |   |   `-- skills.yaml
+|   |   |   |-- core/
+|   |   |   |   |-- agent_base/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- agent_registry.py
+|   |   |   |   |   `-- base_agent.py
+|   |   |   |   |-- llm_gateway/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- cost_tracker.py
+|   |   |   |   |   `-- provider_router.py
+|   |   |   |   |-- memory/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- long_term.py
+|   |   |   |   |   |-- memory_manager.py
+|   |   |   |   |   `-- short_term.py
+|   |   |   |   |-- observability/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- logger.py
+|   |   |   |   |   `-- tracer.py
+|   |   |   |   |-- orchestrator/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- executor.py
+|   |   |   |   |   |-- planner.py
+|   |   |   |   |   `-- router.py
+|   |   |   |   |-- security/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- guardrails.py
+|   |   |   |   |   |-- permissions.py
+|   |   |   |   |   |-- prompts_anonimizacion_pii.md
+|   |   |   |   |   `-- prompts_pii_anonymizer_origen.md
+|   |   |   |   |-- skill_base/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- base_skill.py
+|   |   |   |   |   `-- skill_registry.py
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- base.py
+|   |   |   |   |-- prompt_llm_gateway.md
+|   |   |   |   `-- prompts_seguridad_cripto.md
+|   |   |   |-- deployment/
+|   |   |   |   |-- prompts_devops.md
+|   |   |   |   `-- prompts_infraestructura_devops_origen.md
+|   |   |   |-- docs/
+|   |   |   |   |-- 01_contexto_y_entrevista.md
+|   |   |   |   |-- 02_requerimientos_rf_rnf.md
+|   |   |   |   |-- 03_historias_de_usuario.md
+|   |   |   |   |-- architecture.md
+|   |   |   |   |-- decision_tecnologica.md
+|   |   |   |   |-- Diagrama_casos_uso_mindflow.mmd
+|   |   |   |   |-- diagrama_componentes_mindflow.drawio
+|   |   |   |   |-- diagrama_componentes_mindflow.mmd
+|   |   |   |   |-- diagrama_de_clases_mindflow.mmd
+|   |   |   |   |-- diagrama_erd_mindflow.drawio
+|   |   |   |   |-- diagrama_erd_mindflow.mmd
+|   |   |   |   |-- manifest_schema.md
+|   |   |   |   `-- prompt_01_arquitectura.md
+|   |   |   |-- evaluations/
+|   |   |   |   |-- agent_benchmarks/
+|   |   |   |   |   |-- emotion_analysis_agent.md
+|   |   |   |   |   `-- README.md
+|   |   |   |   |-- skill_tests/
+|   |   |   |   |   `-- README.md
+|   |   |   |   `-- prompts_client_testing.md
+|   |   |   |-- interfaces/
+|   |   |   |   |-- api/
+|   |   |   |   |   |-- main.py
+|   |   |   |   |   |-- prompts_api_dominio_v1.md
+|   |   |   |   |   |-- prompts_contratos_y_seguridad.md
+|   |   |   |   |   |-- prompts_schemas_openapi.md
+|   |   |   |   |   `-- prompts_seguridad_api.md
+|   |   |   |   |-- chat_ui/
+|   |   |   |   |   `-- README.md
+|   |   |   |   |-- cli/
+|   |   |   |   |   `-- main.py
+|   |   |   |   |-- frontend/
+|   |   |   |   |   |-- prompts_export_pdf_origen.md
+|   |   |   |   |   |-- prompts_report_pdf.md
+|   |   |   |   |   |-- prompts_ui_react.md
+|   |   |   |   |   `-- prompts_ui_roles_react.md
+|   |   |   |   `-- mobile/
+|   |   |   |       `-- prompts_mobile_react_native.md
+|   |   |   |-- models/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- analyses.py
+|   |   |   |   |-- cognitive_distortions.py
+|   |   |   |   |-- emotion_scores.py
+|   |   |   |   |-- guiding_questions.py
+|   |   |   |   |-- prompts_base_de_datos_origen.md
+|   |   |   |   |-- prompts_modelado_datos.md
+|   |   |   |   |-- reports.py
+|   |   |   |   `-- users.py
+|   |   |   |-- skills/
+|   |   |   |   |-- code_executor/
+|   |   |   |   |   |-- manifest.yaml
+|   |   |   |   |   `-- skill.py
+|   |   |   |   |-- db_query/
+|   |   |   |   |   |-- manifest.yaml
+|   |   |   |   |   `-- skill.py
+|   |   |   |   |-- document_generator/
+|   |   |   |   |   |-- manifest.yaml
+|   |   |   |   |   |-- prompts_document_generator.md
+|   |   |   |   |   `-- skill.py
+|   |   |   |   |-- web_search/
+|   |   |   |   |   |-- manifest.yaml
+|   |   |   |   |   `-- skill.py
+|   |   |   |   `-- __init__.py
+|   |   |   |-- tools/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- github_client.py
+|   |   |   |   `-- slack_client.py
+|   |   |   |-- .gitignore
+|   |   |   `-- alembic.ini
+|   |   |-- MindFlow_Audit_Kit/
+|   |   |   |-- .gitignore
+|   |   |   |-- audit_mindflow.py
+|   |   |   |-- README.md
+|   |   |   `-- UNIVERSAL_AI_AUDIT_INSTRUCTION.md
+|   |   |-- scripts/
+|   |   |   |-- update_readme.ps1
+|   |   |   `-- watch_readme.ps1
+|   |   |-- CHANGELOG_Hybrid_Update.md
+|   |   `-- README.md
+|   `-- manifest.json
+|-- MindFlow_Audit_Kit/
+|   |-- .gitignore
+|   |-- audit_mindflow.py
+|   |-- README.md
+|   `-- UNIVERSAL_AI_AUDIT_INSTRUCTION.md
 |-- scripts/
 |   |-- update_readme.ps1
 |   `-- watch_readme.ps1
+|-- CHANGELOG_Hybrid_Update.md
+|-- MindFlow_Audit_Kit.zip
 `-- README.md
 ```
 _Este inventario se genera localmente desde los archivos del repositorio._

@@ -1,0 +1,758 @@
+[
+  {
+    "path": "CHANGELOG_Hybrid_Update.md",
+    "size_bytes": 2823,
+    "extension": ".md",
+    "sha256": "8f7f55e495d99b25957a7f78263631aa46d8f2ae6ed1ae9acb2fa5ee2e1511e6",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "README.md",
+    "size_bytes": 10918,
+    "extension": ".md",
+    "sha256": "5408aa1e2f1e68aaf41a7d0ed0f58d8a1135ccff78e583604c4e64cdb747e05a",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/.gitignore",
+    "size_bytes": 49,
+    "extension": "",
+    "sha256": "777835d0e2f6c402e69ee6e6c0003706dc80321335ff9299a0193ea6e228570b",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/alembic.ini",
+    "size_bytes": 363,
+    "extension": ".ini",
+    "sha256": "a3d601161c4acad56036f44c1b9e9a2fe7dd55df8bd7cae8b92c9dd11144f244",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/agents/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/agents/coding_agent/agent.py",
+    "size_bytes": 236,
+    "extension": ".py",
+    "sha256": "b5e77e78f9cd0cfa3242e1c4754878d12e4a8455516b9f792f40d99d76c1f596",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/agents/coding_agent/manifest.yaml",
+    "size_bytes": 624,
+    "extension": ".yaml",
+    "sha256": "d6de0b7ba8a58a93fbc60d661d8c9dfef77c7d2e1bb51bf7f0a17b530a05e7ac",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/agents/emotion_analysis_agent/manifest.yaml",
+    "size_bytes": 1625,
+    "extension": ".yaml",
+    "sha256": "89f7bb7bd7b14fb4f874ecbe87573b20458951427f6c1b8f67e49ef4d85df9a6",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/agents/emotion_analysis_agent/prompts/analisis_emocional.md",
+    "size_bytes": 1347,
+    "extension": ".md",
+    "sha256": "5745570be7ee6f93890dfea33b44395ccfbbb82d7375e146da5d8d38cc846faf",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/agents/emotion_analysis_agent/prompts/legacy_bateria_08_10.md",
+    "size_bytes": 6584,
+    "extension": ".md",
+    "sha256": "611ad0eda6386f456807afb4efe05aa49c4d7b7d1e40555157fd251e3a3a9816",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/agents/research_agent/agent.py",
+    "size_bytes": 265,
+    "extension": ".py",
+    "sha256": "e7d51013ab455a88b48896482f67c198c4e4554e8b2ccf840ac26d92f6e0d941",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/agents/research_agent/manifest.yaml",
+    "size_bytes": 709,
+    "extension": ".yaml",
+    "sha256": "6c5356bfb3ee0638f589b3a8e9e0534c4a01c5e1804970429451562d6f8bab03",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/alembic/env.py",
+    "size_bytes": 1354,
+    "extension": ".py",
+    "sha256": "b17997987a41aa3694d1db7e91044072d54830db56f1228b6636f1c39e72473d",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/alembic/versions/20260921_initial_schema.py",
+    "size_bytes": 6974,
+    "extension": ".py",
+    "sha256": "ce95019f26d83068eaca1eba18bb4ab594097df9e68c4b8eecd71325c3f92e4d",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/config/agents.yaml",
+    "size_bytes": 54,
+    "extension": ".yaml",
+    "sha256": "ed7b85d83b47ba374ca2cf30b2525f23022ee8e0826ae620968c3eef7ed8a871",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/config/skills.yaml",
+    "size_bytes": 89,
+    "extension": ".yaml",
+    "sha256": "a4b148cfa3ef1f3d073e4e85111211d90c6341872126b75680ec45d360e501a8",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/config/environments/dev.yaml",
+    "size_bytes": 40,
+    "extension": ".yaml",
+    "sha256": "27c9fe4035544a657ab5bdaec5d02ff8757daac6dfdd38f41a0bcebe9c9af3b3",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/config/environments/prod.yaml",
+    "size_bytes": 39,
+    "extension": ".yaml",
+    "sha256": "2480fffdaddc44db1f3b2a712e73b7c8180deef51ab8dc0e0fea1feaf3eab521",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/base.py",
+    "size_bytes": 699,
+    "extension": ".py",
+    "sha256": "db1ef693d8ef8958b9bce81ab007e236f0da78d97d3171b320fe42b3c9e55232",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/prompts_seguridad_cripto.md",
+    "size_bytes": 2523,
+    "extension": ".md",
+    "sha256": "5f487c2730ff8ba2b77341df41ac43c0942abdebe4f6c770480df3f5c08d27f2",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/prompt_llm_gateway.md",
+    "size_bytes": 1677,
+    "extension": ".md",
+    "sha256": "9c0fdb3c245038c7a20805ec3447608742bb7872da3eba433c024d379923429c",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/agent_base/agent_registry.py",
+    "size_bytes": 203,
+    "extension": ".py",
+    "sha256": "4fb99b7e6d35ff1bf2c3353bbecbb33185b13447f68fbf99d10bfb36031bd50b",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/agent_base/base_agent.py",
+    "size_bytes": 430,
+    "extension": ".py",
+    "sha256": "f2c05a967f1f5e9e3927847c72b0b3727237141316a5ee28b33697f58df09f79",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/agent_base/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/llm_gateway/cost_tracker.py",
+    "size_bytes": 68,
+    "extension": ".py",
+    "sha256": "f72795984aafa26094061ed72369e9a96e6789dccd9fdff9ab132fd8b0406588",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/llm_gateway/provider_router.py",
+    "size_bytes": 87,
+    "extension": ".py",
+    "sha256": "2a451009125f87169a2aafe39d0ddeeff89ce9f2e6fafcb765c693af4201aa5e",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/llm_gateway/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/memory/long_term.py",
+    "size_bytes": 66,
+    "extension": ".py",
+    "sha256": "59bfd6c0ff34ecca595045f66bf35a96641e333210b2f71223213ab9a3f7f957",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/memory/memory_manager.py",
+    "size_bytes": 217,
+    "extension": ".py",
+    "sha256": "023b0564ceab63a0ec8bdf1da046c36801e50b79fd0fa0f195448285bbe5cf5a",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/memory/short_term.py",
+    "size_bytes": 75,
+    "extension": ".py",
+    "sha256": "82a2970c65891dc63b25144f09ed545623404dd80931849c825b249ff8ed021a",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/memory/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/observability/logger.py",
+    "size_bytes": 42,
+    "extension": ".py",
+    "sha256": "96f4638e2fe6ca9950490a0fdef5b0712a76b6ebaed5f3a4d55feda3fa029434",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/observability/tracer.py",
+    "size_bytes": 72,
+    "extension": ".py",
+    "sha256": "a3726b592b2c805979782a70b3f2adca3f08d15864841b9b73b29ca82fe1f236",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/observability/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/orchestrator/executor.py",
+    "size_bytes": 67,
+    "extension": ".py",
+    "sha256": "c91a6d8107d06e1cdf1fb5f75399fafc7f0ffafc203bbf0d58c2f71faf592f01",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/orchestrator/planner.py",
+    "size_bytes": 60,
+    "extension": ".py",
+    "sha256": "0b8b427a1a6e33e013d454eb44e6d88b20c1f68149289187e0bb16f8a0ddc8f0",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/orchestrator/router.py",
+    "size_bytes": 54,
+    "extension": ".py",
+    "sha256": "bad31d18f180ab8020f1182d175e63ff4118436e5eda9b9990039f0c88798a73",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/orchestrator/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/security/guardrails.py",
+    "size_bytes": 63,
+    "extension": ".py",
+    "sha256": "e341a83033821bfe4031f84c5f6ecbbae643b52e97c1137fbe1a57a5ab50a32e",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/security/permissions.py",
+    "size_bytes": 84,
+    "extension": ".py",
+    "sha256": "dcc716bd1a3bf3a62c45ee78c04da77c5d40b5b03201305f2509d32f61e396d4",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/security/prompts_anonimizacion_pii.md",
+    "size_bytes": 1897,
+    "extension": ".md",
+    "sha256": "f17387b7e02e25478631cf76fd179e5cea65d94b97a3f3941de2a866843398c6",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/security/prompts_pii_anonymizer_origen.md",
+    "size_bytes": 2802,
+    "extension": ".md",
+    "sha256": "ee2858b7339f17fa4e0e0ed994cbcf3f666c1fd41944da3e2d0337b4752c0d2b",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/security/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/skill_base/base_skill.py",
+    "size_bytes": 350,
+    "extension": ".py",
+    "sha256": "42f519a29ac2909a100948d050a070cc99b989b6453fa11d754b08f367f21da7",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/skill_base/skill_registry.py",
+    "size_bytes": 199,
+    "extension": ".py",
+    "sha256": "23fdd3682132037b889922e28c32c624e7285d4dc9e2939f94493d01208a8f95",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/core/skill_base/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/deployment/prompts_devops.md",
+    "size_bytes": 1299,
+    "extension": ".md",
+    "sha256": "cf1bf1c7ce3a006c45d252a0c1b58ab64bf32e2351e7ad24a0261ae920ba4653",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/deployment/prompts_infraestructura_devops_origen.md",
+    "size_bytes": 5153,
+    "extension": ".md",
+    "sha256": "1f255a2e1cbaa5ca32caa025bd8a7a73ab5e1fd277d93241f67af90b9d832c37",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/01_contexto_y_entrevista.md",
+    "size_bytes": 5132,
+    "extension": ".md",
+    "sha256": "87d99c28e1959624b6ebb2e7d90aa1faf299a5b2eb8d8cc0be6f7da3c1366c27",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/02_requerimientos_rf_rnf.md",
+    "size_bytes": 6641,
+    "extension": ".md",
+    "sha256": "bc5b85abc61b316f299a34ea295561c6ef91f4489d67288792e6f69e9890e580",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/03_historias_de_usuario.md",
+    "size_bytes": 9291,
+    "extension": ".md",
+    "sha256": "1fcd29af8edf0dca39dee5bb5114e78d10ebe360ad8d1c41c8db327b410740d3",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/architecture.md",
+    "size_bytes": 14975,
+    "extension": ".md",
+    "sha256": "4f5388333a1cea0683b066b27ab2c96601b98f95f6515001d6464a9803cd8a8a",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/decision_tecnologica.md",
+    "size_bytes": 7301,
+    "extension": ".md",
+    "sha256": "a36b826dbab36443a64b11124eec7ed6049e11073563f9301652a2cdf0ae334c",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/Diagrama_casos_uso_mindflow.mmd",
+    "size_bytes": 2916,
+    "extension": ".mmd",
+    "sha256": "902ad7ad972553428d4e45751a381e1cb4ff632b0bee529c2ae0b737eba08fed",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/diagrama_componentes_mindflow.drawio",
+    "size_bytes": 17482,
+    "extension": ".drawio",
+    "sha256": "b580a485b9bf4a8383a8eac8c1840cc5787b5c128255772ade9d0894ce0da3e5",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/diagrama_componentes_mindflow.mmd",
+    "size_bytes": 2098,
+    "extension": ".mmd",
+    "sha256": "f83509412e4403b707979565a602f0410ba5b0901c1472bb2c8e5ce12cc2ae41",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/diagrama_de_clases_mindflow.mmd",
+    "size_bytes": 1826,
+    "extension": ".mmd",
+    "sha256": "dcb1a8b1f270f4e4eccfc01c2ba14146a077cce86f913827ac86276c5234bb48",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/diagrama_erd_mindflow.drawio",
+    "size_bytes": 14226,
+    "extension": ".drawio",
+    "sha256": "e90729df2dfcb954855141ff3992b07d68091728e9c67b91986d39fdd729d47b",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/diagrama_erd_mindflow.mmd",
+    "size_bytes": 2010,
+    "extension": ".mmd",
+    "sha256": "a980654e9141819f89901140c48db39d623374417d4206f6fd078ec5a91b202e",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/manifest_schema.md",
+    "size_bytes": 4818,
+    "extension": ".md",
+    "sha256": "ac431ab7c0cb51ee2617da5b3510860b643208b7917c61ad4cffa649d6f421d7",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/docs/prompt_01_arquitectura.md",
+    "size_bytes": 4166,
+    "extension": ".md",
+    "sha256": "b2e76d38e1e3b9bd4948d6a7effa874fc7b5c5a8f21104ae1d8c0a7a5e513050",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/evaluations/prompts_client_testing.md",
+    "size_bytes": 1671,
+    "extension": ".md",
+    "sha256": "5cfdcc5d4a59f6b669ae9b21343b5679caef732c870054f3b3d68e689e48faf4",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/evaluations/prompts_testing_unitario_mock.md",
+    "size_bytes": 3520,
+    "extension": ".md",
+    "sha256": "f48434c326eb7bdf2aabc6c723928068cd3e733e3f611ad73f8fd5e7b38dc1b6",
+    "likely_sensitive_data_name": true
+  },
+  {
+    "path": "mi-framework-ia/evaluations/agent_benchmarks/emotion_analysis_agent.md",
+    "size_bytes": 1193,
+    "extension": ".md",
+    "sha256": "9f392bd680d99e9b16f55d9645cae66b555acf58a822cfe35b14a8be0136e8b7",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/evaluations/agent_benchmarks/README.md",
+    "size_bytes": 146,
+    "extension": ".md",
+    "sha256": "a42e1a9f6caf9f6ae056e7d2d1861ec661f1707d928ca199000a94d14088d606",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/evaluations/skill_tests/README.md",
+    "size_bytes": 95,
+    "extension": ".md",
+    "sha256": "c9e968c5d250d17073c05e93c770df61ce1d21d534b6766ef0e57cefd9b27254",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/api/main.py",
+    "size_bytes": 79,
+    "extension": ".py",
+    "sha256": "f1111eee9c67536ca39a640c89ed7f625bae78ee4a0e4604203054b52ae50056",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/api/prompts_api_dominio_v1.md",
+    "size_bytes": 4319,
+    "extension": ".md",
+    "sha256": "528192c4929f72b6e50436bd7421948be03b3c134ce0b5dee7e7eff3df9ecb90",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/api/prompts_contratos_y_seguridad.md",
+    "size_bytes": 4751,
+    "extension": ".md",
+    "sha256": "2fe01e50cfecf3b017169c751f993c7cc59fce9594c78986c9763c45558d8e0b",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/api/prompts_schemas_openapi.md",
+    "size_bytes": 1866,
+    "extension": ".md",
+    "sha256": "2a731475f05706aef44274499802b32f6e41f170a42ec8ba7dcbfa3443cb0fe1",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/api/prompts_seguridad_api.md",
+    "size_bytes": 1973,
+    "extension": ".md",
+    "sha256": "72daf971dd13f29628ff6811432ed2b1b683aa967e65eca8d954d2e42389f599",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/chat_ui/README.md",
+    "size_bytes": 86,
+    "extension": ".md",
+    "sha256": "d5686ece91d46acee6a71d1f1efeeb6114bed23c86f7c5653ba0deaad40b8bbc",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/cli/main.py",
+    "size_bytes": 69,
+    "extension": ".py",
+    "sha256": "f0a790e36aaf121d01c0e9159c1508e7ab8ee98222227ce20e66295689e662b0",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/frontend/prompts_export_pdf_origen.md",
+    "size_bytes": 2455,
+    "extension": ".md",
+    "sha256": "3884a500f173b3044f2ecc64b394056341ee040a3d738825e18bdbd56257068f",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/frontend/prompts_report_pdf.md",
+    "size_bytes": 1031,
+    "extension": ".md",
+    "sha256": "fb413a85edb81262e8cf0080619e65e9347e2d68f1a84c38def2363b3d57af59",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/frontend/prompts_ui_react.md",
+    "size_bytes": 6050,
+    "extension": ".md",
+    "sha256": "d4f3c0dd62237dddbc90a92838dc9795e962da68e893b12926f0481dfd440b35",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/frontend/prompts_ui_roles_react.md",
+    "size_bytes": 2353,
+    "extension": ".md",
+    "sha256": "5159dd8da011032d25305621cf492bab5b8b2e79cd699b95d8c146c943587db4",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/interfaces/mobile/prompts_mobile_react_native.md",
+    "size_bytes": 3810,
+    "extension": ".md",
+    "sha256": "0dd74a519726346dc186bfde619937ce7d4b1499a83c185bc1f7ee464c4362e2",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/models/analyses.py",
+    "size_bytes": 921,
+    "extension": ".py",
+    "sha256": "1a6d8fd5283b29464aa9bd634f95228162eaa942c6b98bae21402bd67119f258",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/models/clinical_notes.py",
+    "size_bytes": 882,
+    "extension": ".py",
+    "sha256": "43bb48894547163d1dfec203273cbc8bb2e2a4c2bc68e65c8ba0ef690ff5daae",
+    "likely_sensitive_data_name": true
+  },
+  {
+    "path": "mi-framework-ia/models/cognitive_distortions.py",
+    "size_bytes": 1079,
+    "extension": ".py",
+    "sha256": "5858a3a54830791c087e50298a1c7adf55d860f0ce7db0d23b52e06b56c17d86",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/models/emotion_scores.py",
+    "size_bytes": 882,
+    "extension": ".py",
+    "sha256": "abaa15610df05374655e8fb55e4c3d81c63db7ce9ed4acf0141c2f85d5d84bb2",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/models/guiding_questions.py",
+    "size_bytes": 900,
+    "extension": ".py",
+    "sha256": "f6fb6bdb81155199e1333dad7b726255a2202a1757771b6eae2169d319905a36",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/models/prompts_base_de_datos_origen.md",
+    "size_bytes": 5822,
+    "extension": ".md",
+    "sha256": "934c0753b2bcbfd44b21cc65a770aa9ddaf11360a5f583110f7dfb686f4daf29",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/models/prompts_modelado_datos.md",
+    "size_bytes": 2949,
+    "extension": ".md",
+    "sha256": "fdb4475f52ae5a7fab623699059d7de703ab3fa5a766937a194b8608458c515f",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/models/reports.py",
+    "size_bytes": 923,
+    "extension": ".py",
+    "sha256": "f6f5f5a423de3f8f6397f2b377a2cf84d8ac1f8340c13979a5e1e1e9abd39878",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/models/users.py",
+    "size_bytes": 917,
+    "extension": ".py",
+    "sha256": "b62c0fb86076d3a4e80a359c9584225b8c1a0f5905521f979d0bdd547a1dfb2b",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/models/__init__.py",
+    "size_bytes": 744,
+    "extension": ".py",
+    "sha256": "f42ca007cb2e1e14c76da2eedf9ebaa567bc7b36e6e4f72607a3a1096811b758",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/skills/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/skills/code_executor/manifest.yaml",
+    "size_bytes": 791,
+    "extension": ".yaml",
+    "sha256": "e5c5841c19ba4c87e03624c72faba40f7add6b57ddae1b50bada7215d867cb17",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/skills/code_executor/skill.py",
+    "size_bytes": 259,
+    "extension": ".py",
+    "sha256": "f7366840a3840fd4f6d69230bd89096364dd8cc856fea9d398fc525b04f67726",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/skills/db_query/manifest.yaml",
+    "size_bytes": 711,
+    "extension": ".yaml",
+    "sha256": "ba6178bf7424f2efc27745a411206edee9444d105cc453fa5129aff408b75ba2",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/skills/db_query/skill.py",
+    "size_bytes": 231,
+    "extension": ".py",
+    "sha256": "0cbe3e41c1fb5449c1b8eca86112a2dbe809aa0166a42fcc51fc282740f08204",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/skills/document_generator/manifest.yaml",
+    "size_bytes": 853,
+    "extension": ".yaml",
+    "sha256": "40c21ab5e806dc5ad2ff6e066a39faea90208a0899ef0ae319434e720ce32f43",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/skills/document_generator/prompts_document_generator.md",
+    "size_bytes": 1084,
+    "extension": ".md",
+    "sha256": "f15806f57d61def4979f4ce18bfb9e29d157e5f9098ee3c82eb7ffb9082f06e5",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/skills/document_generator/skill.py",
+    "size_bytes": 265,
+    "extension": ".py",
+    "sha256": "2350cd4ccd73f76b4a29e15dc80ddcef57c4b6f65944a86706565350cd51ced6",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/skills/web_search/manifest.yaml",
+    "size_bytes": 683,
+    "extension": ".yaml",
+    "sha256": "230be49a01c34c0e55165c0189b3e6cc02b33b26c871ee44abe74fe5f74fec07",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/skills/web_search/skill.py",
+    "size_bytes": 223,
+    "extension": ".py",
+    "sha256": "4f58fc2972d14bcfa6cd82eb0f253950ff3c2c5710268b6f15d5bbf3d622c7c2",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/tools/github_client.py",
+    "size_bytes": 71,
+    "extension": ".py",
+    "sha256": "1dd1131b922c80a5568c284e0dd4fcadc886075302fc1fc1e9ca6970ea8f8dfa",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/tools/slack_client.py",
+    "size_bytes": 70,
+    "extension": ".py",
+    "sha256": "4fc51e4ac44416c6dca47090db049b88ec7426bc4ec3216d4e8e47775672b108",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "mi-framework-ia/tools/__init__.py",
+    "size_bytes": 0,
+    "extension": ".py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "MindFlow_Audit_Kit/.gitignore",
+    "size_bytes": 100,
+    "extension": "",
+    "sha256": "a4c9b4f10b5142c42015167005a2991ea639685e4bd5c90cb070a26b57b32665",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "MindFlow_Audit_Kit/audit_mindflow.py",
+    "size_bytes": 14260,
+    "extension": ".py",
+    "sha256": "010650bce3608ddca7611dac60f9c3f6bdef4272ae3ed666164d799353f038db",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "MindFlow_Audit_Kit/README.md",
+    "size_bytes": 1792,
+    "extension": ".md",
+    "sha256": "f0cc8f02e19c83b998327ab72037bd05fdb07b8918e4faf924b261087818796e",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "MindFlow_Audit_Kit/UNIVERSAL_AI_AUDIT_INSTRUCTION.md",
+    "size_bytes": 2423,
+    "extension": ".md",
+    "sha256": "afaad4cd38a33ef69afedcb8d4aaeba169dcc8307544d5180f2db9a0e1263b08",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "scripts/update_readme.ps1",
+    "size_bytes": 2710,
+    "extension": ".ps1",
+    "sha256": "655c18189d49be39386bce0aa6dbc36645c07d4527ca29fb1fc9d13abb923386",
+    "likely_sensitive_data_name": false
+  },
+  {
+    "path": "scripts/watch_readme.ps1",
+    "size_bytes": 2814,
+    "extension": ".ps1",
+    "sha256": "5f8abb969d75de5109c849c640490c5ac8faefab7c3493b3e51f1a023edba67c",
+    "likely_sensitive_data_name": false
+  }
+]

@@ -1,0 +1,89 @@
+%% Use Case Diagram - MindFlow AI V1
+%% Based on historias de usuario 03_historias_de_usuario.md
+
+usecaseDiagram
+    %% Actors
+    actor "Paciente" as p
+    actor "Profesional/Terapeuta" as t
+    actor "Administrador" as a
+
+    %% Use Cases grouped by subsystem
+    %% Authentication subsystem
+    package "Sistema de Autenticación" {
+        usecase "US-001: Registro y autenticación" as uc001
+        usecase "US-002: Directorio y profesional verificado" as uc002
+    }
+
+    %% Scheduling subsystem
+    package "Agenda y Citas" {
+        usecase "US-003: Disponibilidad y reserva de cita" as uc003
+        usecase "US-004: Cancelación, reprogramación e historial" as uc004
+        usecase "US-005: Notificaciones de cita" as uc005
+    }
+
+    %% Clinical Notes subsystem
+    package "Notas Clínicas" {
+        usecase "US-006: Notas clínicas y permisos" as uc006
+    }
+
+    %% Risk Management subsystem
+    package "Gestión de Riesgo" {
+        usecase "US-007: Autorreporte de riesgo y escalamiento humano" as uc007
+    }
+
+    %% AI Analysis subsystem
+    package "Análisis Asistido por IA" {
+        usecase "US-008: Análisis asistido por IA para el terapeuta" as uc008
+    }
+
+    %% Mobile flows subsystem
+    package "Flujos Móviles" {
+        usecase "US-009: Uso móvil por paciente y profesional" as uc009
+    }
+
+    %% Relationships
+    %% Paciente uses cases
+    p --> uc001 : "registra y autentica"
+    p --> uc002 : "busca profesionales"
+    p --> uc003 : "ver reservas y agenda"
+    p --> uc004 : "cancel/reprograma consulta"
+    p --> uc005 : "recibe recordatorios"
+    p --> uc007 : "indica riesgo y ayuda"
+    p --> uc009 : "usa app móvil"
+
+    %% Terapeuta uses cases
+    t --> uc001 : "accede con segundo factor"
+    t --> uc002 : "solo perfiles verificados"
+    t --> uc003 : "reserva y gestiona agenda"
+    t --> uc004 : "modifica sus citas"
+    t --> uc005 : "recibe recordatorios"
+    t --> uc006 : "crea y consulta notas"
+    t --> uc008 : "envía notas para análisis IA"
+    t --> uc009 : "usa app móvil"
+
+    %% Admin uses cases
+    a --> uc001 : "gestiona roles y verificación"
+    a --> uc002 : "aprova profesional"
+    a --> uc004 : "ve/modifica historial"
+    a --> uc007 : "recibe alertas y escalamiento"
+    a --> uc009 : "usa app móvil"
+
+    %% System boundaries
+    skinparam actorFontSize 12
+    skinparam usecaseFontSize 10
+    skinparam packageStyle rect
+    skinparam shadowing false
+
+    %% Styles
+    style p fill:#e3f2fd,color:#0d47a1
+    style t fill:#e8f5e9,color:#1b5e20
+    style a fill:#fff3e0,color:#e65100
+    style uc001 fill:#bbdefb
+    style uc002 fill:#bbdefb
+    style uc003 fill:#bbdefb
+    style uc004 fill:#bbdefb
+    style uc005 fill:#bbdefb
+    style uc006 fill:#bbdefb
+    style uc007 fill:#bbdefb
+    style uc008 fill:#bbdefb
+    style uc009 fill:#bbdefb

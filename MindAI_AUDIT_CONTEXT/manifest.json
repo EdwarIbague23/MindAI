@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-10-05T20:31:35.773753+00:00",
+  "repository": "MindAI-1",
+  "source_path": "C:\\Users\\DANY-\\OneDrive - uniminuto.edu\\Documentos\\Documentos importantes\\2026\\8 SEMESTRE\\MindAI-1",
+  "file_count_scanned": 109,
+  "text_files_indexed": 108,
+  "include_source": true,
+  "git": {
+    "is_git_repo": true,
+    "branch": "main",
+    "remote": "origin\thttps://github.com/EdwarIbague23/MindAI.git (fetch)\norigin\thttps://github.com/EdwarIbague23/MindAI.git (push)",
+    "last_commit": "82b903dc023618d49b376aa35442a5b36064b55f|2026-10-05 09:46:19 -0500|feat: general update - hybrid project structure with PostgreSQL + SQLAlchemy + Alembic + Redis v7 dual stack + 4 Mermaid diagrams",
+    "commit_count": "31"
+  },
+  "stack": {
+    "Python": [
+      "Pipfile",
+      "manage.py",
+      "pyproject.toml",
+      "requirements.txt"
+    ],
+    "Django": [
+      "django"
+    ],
+    "FastAPI": [
+      "fastapi"
+    ],
+    "Flask": [
+      "flask"
+    ],
+    "Node.js": [
+      "package-lock.json",
+      "package.json",
+      "pnpm-lock.yaml",
+      "yarn.lock"
+    ],
+    "React": [
+      "react"
+    ],
+    "Next.js": [
+      "next"
+    ],
+    "Vue": [
+      "vue"
+    ],
+    "Angular": [
+      "@angular"
+    ],
+    "Express": [
+      "express"
+    ],
+    "NestJS": [
+      "@nestjs"
+    ],
+    "PHP": [
+      "artisan",
+      "composer.json"
+    ],
+    "Laravel": [
+      "artisan"
+    ],
+    "Java": [
+      "build.gradle",
+      "gradlew",
+      "pom.xml"
+    ],
+    "Spring": [
+      "spring-boot"
+    ],
+    "Go": [
+      "go.mod"
+    ],
+    "Rust": [
+      "Cargo.toml"
+    ],
+    "Flutter/Dart": [
+      "pubspec.yaml"
+    ],
+    "React Native": [
+      "react-native"
+    ],
+    "Docker": [
+      "Dockerfile",
+      "compose.yml",
+      "docker-compose.yml"
+    ]
+  },
+  "security_signal_count": 1,
+  "api_route_signal_count": 0,
+  "ai_signal_file_count": 44,
+  "excluded_count": 1
+}

@@ -1,0 +1,73 @@
+classDiagram
+    class User {
+        +UUID id
+        +VARCHAR email
+        +VARCHAR name
+        +VARCHAR role
+        +VARCHAR hashed_password
+        +Boolean is_therapist
+        +TIMESTAMP created_at
+        +TIMESTAMP last_login
+    }
+
+    class ClinicalNote {
+        +UUID id
+        +UUID therapist_id
+        +CHAR patient_hash
+        +TEXT note_text
+        +VARCHAR language
+        +INTEGER word_count
+        +TIMESTAMP created_at
+    }
+
+    class Analysis {
+        +UUID id
+        +UUID clinical_note_id
+        +VARCHAR status
+        +VARCHAR ia_model
+        +FLOAT processing_time
+        +TIMESTAMP created_at
+    }
+
+    class EmotionScore {
+        +UUID id
+        +UUID analysis_id
+        +VARCHAR emotion_name
+        +FLOAT score
+        +FLOAT confidence
+        +TIMESTAMP timestamp
+    }
+
+    class CognitiveDistortion {
+        +UUID id
+        +UUID analysis_id
+        +VARCHAR distortion_type
+        +VARCHAR severity
+        +TEXT description
+        +TIMESTAMP detected_at
+    }
+
+    class GuidingQuestion {
+        +UUID id
+        +UUID analysis_id
+        +TEXT question_text
+        +VARCHAR category
+        +INTEGER priority
+        +TIMESTAMP created_at
+    }
+
+    class Report {
+        +UUID id
+        +UUID analysis_id
+        +VARCHAR format
+        +TEXT generated_content
+        +TIMESTAMP generated_at
+        +INTEGER word_count
+    }
+
+    User "1" --> "*" ClinicalNote : "therapist generates"
+    ClinicalNote "1" --> "*" Analysis : "has analyses"
+    Analysis "1" --> "*" EmotionScore : "emotions detected"
+    Analysis "1" --> "*" CognitiveDistortion : "distortions detected"
+    Analysis "1" --> "*" GuidingQuestion : "questions suggested"
+    Analysis "1" --> "1" Report : "generates report"
