@@ -61,7 +61,7 @@ La plataforma emplea una arquitectura **Híbrida Web + Mobile** distribuida en l
 | **Database** | PostgreSQL v16 + SQLAlchemy 2.x + Alembic | Transacciones ACID para datos clínicos sensibles, RLS/schemas para aislamiento de tenant, y migraciones versionadas. Cifrado pgcrypto AES-256-GCM para historias clínicas. |
 | **Cache** | Redis v7 | Acceso O(1) para sesiones activas, TTL automático para contexto conversacional en tiempo real, reduce latencia en respuestas del copiloto. |
 | **Mobile** | React Native | Aplicación multiplataforma (Android/iOS) consumiendo la misma API REST/OpenAPI que la web. |
-| **IA / LLM** | Claude 3.5 Sonnet | Proveedor principal a través del LLM Gateway para extracción de factores de riesgo psicoemocional. |
+| **IA / LLM** | openai (modo mock) / gpt-4o-mini | Configuración por defecto: respuestas simuladas para desarrollo. Provedor configurable via LLM Gateway (ver config/.env.example). En producción se conecta a Claude 3.5 Sonnet u otro modelo seleccionado. |
 | **Processing** | SpaCy + LLM Gateway | Anonimización estructurada PII y procesamiento sintomático inicial para el ámbito psicológico. |
 
 ---
@@ -100,6 +100,13 @@ La plataforma emplea una arquitectura **Híbrida Web + Mobile** distribuida en l
 | **Registro/consentimiento informado**, agenda y búsqueda unificada de profesionales de salud mental. | Videollamadas integradas, pasarela de pagos, interoperabilidad EHR/HL7 FHIR compleja. |
 | **Copiloto Clínico**: Alertas de riesgo emocional/ansiedad/depresión, análisis de fichas de seguimiento y preguntas guía. | Diagnóstico automatizado, prescripción farmacológica directa o decisiones clínicas autónomas. |
 | Cuestionarios de hábitos, registro de estado de ánimo y síntomas prevalentes transversales. | Recomendación automática de especialistas sin validación del terapeuta tratante. |
+
+---
+
+### Aclaración de interfaces
+
+* **App funcional (branch `version-final`)**: Interfaz mínima pero **operativa** conectada al backend FastAPI. Incluye login, carga de nota y panel con radar emocional, distorsiones y preguntas guía. Esta es la aplicación documentada en `backend.md`, `frontend.md` y `DOCUMENTACION_TECNICA_COMPLETA.md`. Datos reales, endpoints reales, pruebas pasando (20/20).
+* **Prototipo de diseño (branch `main`)**: Portal con 11 vistas que usa **datos simulados** y no se conecta a ninguna API real. Documentado en la rama `main` con diagramas y arquitectura, pero **no** debe describirse como comportamiento real en el manual de usuario. Interfaz de diseño, no implementación.
 
 ---
 
