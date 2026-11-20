@@ -54,7 +54,7 @@ La plataforma emplea una arquitectura **hibrida Web + Móvil** con las siguiente
 | **Base de Datos** | **PostgreSQL v16 + SQLAlchemy 2.x + Alembic** | Transacciones ACID para datos sensibles, consultas complejas para análisis clínico, integridad referencial, aislamiento de tenant (schemas/RLS), y migraciones versionadas. Configurado via Alembic con soporte pgcrypto para cifrado AES-256-GCM de notas clínicas. |
 | **Caché** | **Redis** | Acceso O(1) para sesiones activas, TTL automático para contexto de conversación, reduce latencia en respuestas del copiloto |
 | **Móvil** | **React Native** | Aplicación Android/iOS que consume la misma API REST/OpenAPI que la web |
-| **IA / LLM** | **Claude 3.5 Sonnet** | Proveedor principal a través del LLM Gateway |
+| **IA / LLM** | openai (modo mock) / gpt-4o-mini | Configuración por defecto: respuestas simuladas para desarrollo. Provedor configurable via LLM Gateway. Documentación técnica ver `config/.env.example`. |
 | **Procesamiento** | **SpaCy + LLM Gateway** | Anonimización y análisis estructurado; LangChain queda sujeto a necesidad comprobada |
 
 ---
@@ -67,6 +67,12 @@ La plataforma emplea una arquitectura **hibrida Web + Móvil** con las siguiente
 | Copiloto profesional: señales emocionales/cognitivas, evidencia textual y preguntas guía para revisión. | Diagnóstico, prescripción, recomendación automática de especialistas o decisiones clínicas autónomas. |
 
 ---
+
+### Aclaración de interfaces
+
+* **App funcional (branch `version-final`)**: Aplicación operativa conectada al backend FastAPI con datos reales y endpoints reales. Documentado en `backend.md`, `frontend.md` y `DOCUMENTACION_TECNICA_COMPLETA.md`. Este es el estado funcional actual del proyecto tras la Fase 1-2 del S-SDLC.
+* **Prototipo de diseño (branch `main`)**: Estructura de documentación y diagramas arquitectónicos sin implementación de backend conectado. El branch `main` sirve como referencia de diseño y planeación, no como aplicación ejecuta.
+* **Branch `product-designer`**: Documentación de diseño y arquitectura. Contiene diagramos, historias de usuario y especificación de interfaces planeadas, pero no representa una implementación ejecutable. Sirve como base para el desarrollo futuro.
 
 ## 🗂️ Estructura del Repositorio (`mi-framework-ia`)
 
